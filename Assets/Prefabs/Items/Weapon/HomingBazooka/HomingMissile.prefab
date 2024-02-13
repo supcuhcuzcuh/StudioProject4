@@ -1,0 +1,156 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &4624674091646151630
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 100000, guid: 69fc11a3163826f4da0c0d93337f74f9, type: 3}
+      propertyPath: m_Name
+      value: HomingMissile
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 69fc11a3163826f4da0c0d93337f74f9, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 69fc11a3163826f4da0c0d93337f74f9, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 69fc11a3163826f4da0c0d93337f74f9, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 69fc11a3163826f4da0c0d93337f74f9, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 69fc11a3163826f4da0c0d93337f74f9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 69fc11a3163826f4da0c0d93337f74f9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.978
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 69fc11a3163826f4da0c0d93337f74f9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 69fc11a3163826f4da0c0d93337f74f9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.50000006
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 69fc11a3163826f4da0c0d93337f74f9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 69fc11a3163826f4da0c0d93337f74f9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 69fc11a3163826f4da0c0d93337f74f9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.49999994
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 69fc11a3163826f4da0c0d93337f74f9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 69fc11a3163826f4da0c0d93337f74f9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 69fc11a3163826f4da0c0d93337f74f9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 69fc11a3163826f4da0c0d93337f74f9, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: 69fc11a3163826f4da0c0d93337f74f9, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: 69fc11a3163826f4da0c0d93337f74f9, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 475822f8482d0fd4d861c763d1f3934c, type: 2}
+    - target: {fileID: 2300000, guid: 69fc11a3163826f4da0c0d93337f74f9, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 475822f8482d0fd4d861c763d1f3934c, type: 2}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 69fc11a3163826f4da0c0d93337f74f9, type: 3}
+--- !u!1 &4624674091646119278 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: 69fc11a3163826f4da0c0d93337f74f9, type: 3}
+  m_PrefabInstance: {fileID: 4624674091646151630}
+  m_PrefabAsset: {fileID: 0}
+--- !u!54 &641262444883553029
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4624674091646119278}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 10
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
+--- !u!136 &245006778835333427
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4624674091646119278}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.004406788
+  m_Height: 0.026775906
+  m_Direction: 2
+  m_Center: {x: 0, y: 0, z: -0.00032907925}
+--- !u!114 &-1430334578004653652
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4624674091646119278}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 946942c688e36a64aa8b0140c55346f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnParticleEffectList:
+  - particleEffectName: Explosion
+    particleEffect: {fileID: 337083441646296268, guid: 21b1b9941ec545e47bfb18f19f0cf2c7, type: 3}
+  - particleEffectName: BazookaRocketTrail
+    particleEffect: {fileID: 9086818913190528950, guid: 735931329f215a2408780c8c7e8e54ce, type: 3}
+--- !u!114 &1130427080023733412
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4624674091646119278}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebc8c442979fe45409fa0bbdd8b7fd97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeoutDelay: 20
+  weaponSource: {fileID: 0}
+  particleEffectManager: {fileID: -1430334578004653652}
+  radius: 10
+  force: 300

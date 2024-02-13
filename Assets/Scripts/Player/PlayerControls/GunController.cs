@@ -1,0 +1,156 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Pool;
+
+public interface IShootResponse
+{
+    void OnMouse1();
+    void OnMouse2();
+}
+
+public class GunController : MonoBehaviour , ISprintResponse
+{
+        private List<IShootResponse> shootResponses = new List<IShootResponse>();     
+
+        private float nextTimeToShoot;
+
+        private System.Action _onReloadEvent = null;
+        private System.Action _onSwapEvent = null;
+        private System.Action _onGrenadeEvent = null;
+
+        public Weapon currWeapon;
+
+        [SerializeField]
+        private GameObject grenade;
+
+        public PlayerStats playerStats;
+
+        public void HandleShooting()
+        {
+            if(currWeapon != null)
+            {
+                if (currWeapon.isReloading == false && Input.GetButton("Fire1") && Time.time > nextTimeToShoot)
+                {
+                    currWeapon.OnMouse1();
+                    NotifyShootResponse();
+
+                    // set cooldown delay
+                    nextTimeToShoot = Time.time + currWeapon.cooldownWindow;
+                }
+                else if (Input.GetButton("Fire2"))
+                {
+                    currWeapon.OnMouse2();
+                }
+
+                if (!Input.GetButton("Fire2"))
+                {
+                    currWeapon.OnMouse2Up();
+                }
+
+                if (Input.GetKeyDown(KeyCode.R))
+                {
+                    currWeapon.OnReload();
+                    _onReloadEvent.Invoke();
+                }
+
+                if (Input.GetKeyDown(KeyCode.Q))
+                {
+                    
+                    Camera.main.transform.DetachChildren();
+                    currWeapon.UnsetWeapon();
+                    currWeapon = null;
+                    
+                }
+            }
+           
+
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                Vector3 rayOrigin = Camera.main.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0.0f));
+                RaycastHit hit;
+                if (Physics.Raycast(rayOrigin, Camera.main.transform.forward, out hit, 1000))
+                {
+                    GameObject hitObject = hit.collider.gameObject;
+                    if (hitObject.tag == "Weapon")
+                    {
+                        Camera.main.transform.DetachChildren();
+                        if (currWeapon != null)
+                        {
+                            currWeapon.UnsetWeapon();
+                            currWeapon = null;
+                        }
+                        currWeapon = hitObject.GetComponent<Weapon>();
+
+                        //hitObject.transform.parent = Camera.main.transform;
+                        currWeapon.SetWeapon();
+                        _onSwapEvent.Invoke();
+                    }
+                }
+            }
+            if (Input.GetKeyDown(KeyCode.G) && playerStats.playerGrenades != 0)
+            {               
+                playerStats.playerGrenades -= 1;
+                _onGrenadeEvent.Invoke();
+                GameObject newGrenade = Instantiate(grenade, transform.position, transform.rotation);
+                newGrenade.GetComponent<Rigidbody>().AddForce(( (Camera.main.transform.forward * 10f) + (Camera.main.transform.up * 6f) ), ForceMode.Impulse);
+                newGrenade.GetComponent<Grenade>().StartGrenadeTimer();
+            }
+            
+        }
+
+
+        public void OnSprint()
+        {
+            if (currWeapon != null)
+            {
+                currWeapon.OnSprintAnimation();
+            }
+            
+        }
+        public void OffSprint()
+        {
+            if (currWeapon != null)
+            {
+            currWeapon.OffSprintAnimation();
+            }   
+        }
+
+        IEnumerator WaitforReloadFinish()
+        {
+            yield return new WaitForSeconds(currWeapon.reloadSpeed);
+            _onReloadEvent.Invoke();
+        }
+
+        private void NotifyShootResponse()
+        {
+            foreach (var shootResponse in shootResponses)
+            {
+                shootResponse.OnMouse1();
+            }
+
+        }
+
+        public void SubscribeShootResponse(IShootResponse shootResponse)
+        {
+            shootResponses.Add(shootResponse);
+        }
+
+        public void SubscribeReloadResponse(System.Action _reloadEvent)
+        {
+            _onReloadEvent += _reloadEvent;
+        }
+
+        public void SubscribeSwapResponse(System.Action _swapEvent)
+        {
+            _onSwapEvent += _swapEvent;
+        }
+
+        public void SubscribeGrenadeResponse(System.Action grenadeEvent)
+        {
+            _onGrenadeEvent += grenadeEvent;
+        }
+
+
+}
+
