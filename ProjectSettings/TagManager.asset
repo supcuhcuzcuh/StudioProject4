@@ -5,11 +5,12 @@ TagManager:
   serializedVersion: 2
   tags:
   - Weapon
+  - WAYPOINT
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - ENEMY
   - Water
   - UI
   - Weapon
@@ -17,7 +18,7 @@ TagManager:
   - Pickup
   - Past_Active
   - Past_Inactive
-  - 
+  - WALLS
   - 
   - 
   - 
