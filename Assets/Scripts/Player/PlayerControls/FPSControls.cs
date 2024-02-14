@@ -6,7 +6,6 @@ using UnityEngine;
 
 public class FPSControls : Entity   //Main Controller for all player movements, also derives from entity
 {
-
     private MovementControl movementControl;
     private SprintControl sprintControl;
     private JumpControl jumpControl;
@@ -55,6 +54,10 @@ public class FPSControls : Entity   //Main Controller for all player movements, 
         jumpControl.Jump();
         crouchControl.ActivateCrouch();
         gunController.HandleShooting();
+    }
+
+    private void FixedUpdate()
+    {
         movementControl.Movement();
     }
 
