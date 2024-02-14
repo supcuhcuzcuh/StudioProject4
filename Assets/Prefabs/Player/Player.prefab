@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 155ce1b5b08216446b2c53abe1fc20a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gunController: {fileID: 7817061040289372890}
+  gunController: {fileID: 0}
   snappiness: 6
   returnSpeed: 7
 --- !u!114 &7817061038203774068
@@ -160,18 +160,18 @@ GameObject:
   - component: {fileID: 7817061040289372882}
   - component: {fileID: 7817061040289372883}
   - component: {fileID: 7817061040289372884}
-  - component: {fileID: 7817061040289372885}
+  - component: {fileID: 1552708690766209131}
   - component: {fileID: 7817061040289372886}
   - component: {fileID: 7817061040289372887}
-  - component: {fileID: 7817061040289372888}
   - component: {fileID: 7817061040289372889}
-  - component: {fileID: 7817061040289372890}
-  - component: {fileID: 7817061040289372891}
+  - component: {fileID: 5530613316632514566}
+  - component: {fileID: 4086167171428667233}
   - component: {fileID: 7817061040289372892}
   - component: {fileID: 7817061040289372893}
   - component: {fileID: 7817061040289372894}
-  - component: {fileID: 7817061040289372895}
   - component: {fileID: 7817061040289372864}
+  - component: {fileID: 1732614676}
+  - component: {fileID: 1814345268431340394}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -186,7 +186,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7817061040289372865}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.63, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -320,7 +320,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &7817061040289372885
+--- !u!114 &1552708690766209131
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -329,13 +329,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 7817061040289372865}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f246660f076305f4e85ddb1abcfa6cc1, type: 3}
+  m_Script: {fileID: 11500000, guid: 279a3e934326ee048bd70376c6e7ffec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
   maxHealth: 100
-  perlinNoiseShake: {fileID: 7817061040289372892}
-  headbobShake: {fileID: 7817061040289372893}
+  perlinNoiseShake: {fileID: 0}
+  headbobShake: {fileID: 0}
   gunRecoilShake: {fileID: 0}
   gunBobShake: {fileID: 0}
   playerStatsUIManager: {fileID: 0}
@@ -352,7 +352,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44eed54116b70dc4baa3f05cfb05dc2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerStats: {fileID: 11400000, guid: 9ef780fe5faa6ab4e81704a29a08ce8e, type: 2}
+  playerStats: {fileID: 11400000, guid: 503b5eec73e498c4a89956c9a104709f, type: 2}
 --- !u!114 &7817061040289372887
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -365,23 +365,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eaf02b605d7c8e64aa7f8a659aaa4bf9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerStats: {fileID: 11400000, guid: 9ef780fe5faa6ab4e81704a29a08ce8e, type: 2}
---- !u!114 &7817061040289372888
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7817061040289372865}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9756fb7c1fde7464cbea158fec51df76, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerStats: {fileID: 11400000, guid: 9ef780fe5faa6ab4e81704a29a08ce8e, type: 2}
-  headbobShake: {fileID: 7817061040289372893}
-  gunbobShake: {fileID: 0}
-  audioManager: {fileID: 7817061040289372864}
+  playerStats: {fileID: 11400000, guid: 503b5eec73e498c4a89956c9a104709f, type: 2}
 --- !u!114 &7817061040289372889
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -396,8 +380,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shakeDuration: 1
   frequency: 25
-  playerStats: {fileID: 0}
---- !u!114 &7817061040289372890
+  playerStats: {fileID: 11400000, guid: 503b5eec73e498c4a89956c9a104709f, type: 2}
+--- !u!114 &5530613316632514566
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -406,13 +390,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 7817061040289372865}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 013129fbb084acd4dab942125b04d59b, type: 3}
+  m_Script: {fileID: 11500000, guid: 70c208820b1766546954facc43aa62f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   currWeapon: {fileID: 0}
   grenade: {fileID: 3159714310125344141, guid: a3299f05c8813aa4a82c2ed5f29232b4, type: 3}
-  playerStats: {fileID: 11400000, guid: 9ef780fe5faa6ab4e81704a29a08ce8e, type: 2}
---- !u!114 &7817061040289372891
+  playerStats: {fileID: 11400000, guid: 503b5eec73e498c4a89956c9a104709f, type: 2}
+--- !u!114 &4086167171428667233
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -421,7 +405,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7817061040289372865}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f99593fa652c83d4693da4f8340e85fa, type: 3}
+  m_Script: {fileID: 11500000, guid: d9c5d26c2c2f1924db69063a1d182314, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   mouseSensitivity: 2
@@ -454,7 +438,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shakeDuration: 1
   frequency: 1
-  playerStats: {fileID: 11400000, guid: 9ef780fe5faa6ab4e81704a29a08ce8e, type: 2}
+  playerStats: {fileID: 11400000, guid: 503b5eec73e498c4a89956c9a104709f, type: 2}
 --- !u!114 &7817061040289372894
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -467,20 +451,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e63d0be7c73fdac48bbeb3e17fd92ed5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerStats: {fileID: 11400000, guid: 9ef780fe5faa6ab4e81704a29a08ce8e, type: 2}
---- !u!114 &7817061040289372895
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7817061040289372865}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e817f851dbae164a81022847946a2d1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerStats: {fileID: 11400000, guid: 9ef780fe5faa6ab4e81704a29a08ce8e, type: 2}
+  playerStats: {fileID: 11400000, guid: 503b5eec73e498c4a89956c9a104709f, type: 2}
 --- !u!114 &7817061040289372864
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -496,3 +467,32 @@ MonoBehaviour:
   soundEffectsList:
   - soundEffectName: Walk
     soundEffectClip: {fileID: 8300000, guid: 5ed470dcded69c94d804df9d130d5f89, type: 3}
+--- !u!114 &1732614676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7817061040289372865}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b58de2866a8dc2644b899e0b480ebaf2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerStats: {fileID: 11400000, guid: 503b5eec73e498c4a89956c9a104709f, type: 2}
+  headbobShake: {fileID: 7817061040289372889}
+  gunbobShake: {fileID: 0}
+  audioManager: {fileID: 7817061040289372864}
+--- !u!114 &1814345268431340394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7817061040289372865}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 376df9f3cd966674eb0b16093587cba1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerStats: {fileID: 11400000, guid: 503b5eec73e498c4a89956c9a104709f, type: 2}

@@ -11,7 +11,6 @@ public class FPSControls : Entity   //Main Controller for all player movements, 
     private SprintControl sprintControl;
     private JumpControl jumpControl;
     private CrouchControl crouchControl;
-    private TimeTravelControl timetravelControl;
     private GunController gunController;
 
     [SerializeField]
