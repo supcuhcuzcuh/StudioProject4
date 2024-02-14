@@ -45,10 +45,12 @@ public class MovementControl : MonoBehaviour
 
         if ((horizontalInput > 0 || verticalInput > 0))
         {
+            playerStats.currState = PlayerStats.PLAYERSTATES.WALK;
             audioManager.PlaySoundEffectLoop("Walk");
         }
         else if((horizontalInput <= 0 && verticalInput <= 0))
         {
+            playerStats.currState = PlayerStats.PLAYERSTATES.IDLE;
             audioManager.StopSoundEffect();
         }
     }
