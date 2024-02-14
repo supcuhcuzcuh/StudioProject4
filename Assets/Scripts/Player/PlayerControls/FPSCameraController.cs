@@ -27,7 +27,7 @@ public class FPSCameraController : MonoBehaviour
         HandleCameraRotation();
         if (Input.GetKeyDown("escape"))
         {
-            if(debugLock == false)
+            if (debugLock == false)
             {
                 debugLock = true;
             }
@@ -35,13 +35,13 @@ public class FPSCameraController : MonoBehaviour
             {
                 debugLock = false;
             }
-            
+
         }
     }
 
     private void HandleCameraRotation()
     {
-        if(debugLock == false)
+        if (debugLock == false)
         {
             float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity;
             horizontalRotation += mouseX;
@@ -54,5 +54,5 @@ public class FPSCameraController : MonoBehaviour
 
         }
     }
-   
+
 }
