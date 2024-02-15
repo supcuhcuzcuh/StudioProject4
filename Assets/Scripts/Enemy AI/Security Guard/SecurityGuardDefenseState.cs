@@ -31,7 +31,7 @@ public class SecurityGuardDefenseState : State
         else
         {
             // Logic code for this state
-            _destinationTracker.agent.SetDestination(new Vector3(0, 0, 0));
+            //_destinationTracker.agent.SetDestination(new Vector3(0, 0, 0));
             transform.root.LookAt(target.transform);
             if (_enemyRef != null)
             {

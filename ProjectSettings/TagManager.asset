@@ -3,20 +3,22 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Weapon
+  - WAYPOINT
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - ENEMY
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Weapon
+  - Player
+  - Pickup
+  - Past
+  - Present
+  - WALLS
   - 
   - 
   - 

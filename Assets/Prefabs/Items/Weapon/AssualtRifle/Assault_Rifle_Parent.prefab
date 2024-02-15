@@ -90,7 +90,7 @@ MonoBehaviour:
   clipSizeCurr: 50
   reloadSpeed: 1
   isReloading: 0
-  playerStat: {fileID: 11400000, guid: 9ef780fe5faa6ab4e81704a29a08ce8e, type: 2}
+  playerStat: {fileID: 11400000, guid: 503b5eec73e498c4a89956c9a104709f, type: 2}
   recoilStrength: 7
   recoilMultiplier: 1
   setWeaponPosition: {x: 0.35, y: -0.2, z: 0.4}
@@ -135,7 +135,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnParticleEffectList:
   - particleEffectName: MuzzleFlash
-    particleEffect: {fileID: 8844906819936223225, guid: f06cb0b214950a441a9d1f54153df71f, type: 3}
+    particleEffect: {fileID: 8844906819936223225, guid: f06cb0b214950a441a9d1f54153df71f,
+      type: 3}
 --- !u!54 &6030487326878818276
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -367,51 +368,63 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6030487326878818275}
     m_Modifications:
-    - target: {fileID: -8679921383154817045, guid: 46f41875d6de88548bedde7321134240, type: 3}
+    - target: {fileID: -8679921383154817045, guid: 46f41875d6de88548bedde7321134240,
+        type: 3}
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 46f41875d6de88548bedde7321134240, type: 3}
+    - target: {fileID: -8679921383154817045, guid: 46f41875d6de88548bedde7321134240,
+        type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 46f41875d6de88548bedde7321134240, type: 3}
+    - target: {fileID: -8679921383154817045, guid: 46f41875d6de88548bedde7321134240,
+        type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 46f41875d6de88548bedde7321134240, type: 3}
+    - target: {fileID: -8679921383154817045, guid: 46f41875d6de88548bedde7321134240,
+        type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 46f41875d6de88548bedde7321134240, type: 3}
+    - target: {fileID: -8679921383154817045, guid: 46f41875d6de88548bedde7321134240,
+        type: 3}
       propertyPath: m_LocalRotation.w
       value: 0.7071068
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 46f41875d6de88548bedde7321134240, type: 3}
+    - target: {fileID: -8679921383154817045, guid: 46f41875d6de88548bedde7321134240,
+        type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 46f41875d6de88548bedde7321134240, type: 3}
+    - target: {fileID: -8679921383154817045, guid: 46f41875d6de88548bedde7321134240,
+        type: 3}
       propertyPath: m_LocalRotation.y
       value: 0.7071068
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 46f41875d6de88548bedde7321134240, type: 3}
+    - target: {fileID: -8679921383154817045, guid: 46f41875d6de88548bedde7321134240,
+        type: 3}
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 46f41875d6de88548bedde7321134240, type: 3}
+    - target: {fileID: -8679921383154817045, guid: 46f41875d6de88548bedde7321134240,
+        type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 46f41875d6de88548bedde7321134240, type: 3}
+    - target: {fileID: -8679921383154817045, guid: 46f41875d6de88548bedde7321134240,
+        type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 90
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 46f41875d6de88548bedde7321134240, type: 3}
+    - target: {fileID: -8679921383154817045, guid: 46f41875d6de88548bedde7321134240,
+        type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: 46f41875d6de88548bedde7321134240, type: 3}
+    - target: {fileID: 919132149155446097, guid: 46f41875d6de88548bedde7321134240,
+        type: 3}
       propertyPath: m_Name
       value: Assault_Rifle_Model
       objectReference: {fileID: 0}
@@ -419,6 +432,7 @@ PrefabInstance:
   m_SourcePrefab: {fileID: 100100000, guid: 46f41875d6de88548bedde7321134240, type: 3}
 --- !u!4 &6069199974601288919 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 46f41875d6de88548bedde7321134240, type: 3}
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 46f41875d6de88548bedde7321134240,
+    type: 3}
   m_PrefabInstance: {fileID: 6030487327234984764}
   m_PrefabAsset: {fileID: 0}
