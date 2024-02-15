@@ -142,7 +142,7 @@ MonoBehaviour:
   clipSizeCurr: 5
   reloadSpeed: 3
   isReloading: 0
-  playerStat: {fileID: 11400000, guid: 9ef780fe5faa6ab4e81704a29a08ce8e, type: 2}
+  playerStat: {fileID: 11400000, guid: 503b5eec73e498c4a89956c9a104709f, type: 2}
   recoilStrength: 20
   recoilMultiplier: 1
   setWeaponPosition: {x: 0.6, y: 0, z: 0.4}
