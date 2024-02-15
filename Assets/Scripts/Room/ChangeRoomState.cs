@@ -5,7 +5,11 @@ using UnityEngine;
 public class ChangeRoomState : MonoBehaviour, ITimeTravelResponse
 {
      GameObject presentObjects;
-     GameObject pastObjects;      
+     GameObject pastObjects;
+
+    private List<Collider> pastObjectCols = new List<Collider>();
+    private List<Collider> presentObjectCols = new List<Collider>();
+
     enum ROOMSTATE
     {
         PAST,
@@ -19,27 +23,41 @@ public class ChangeRoomState : MonoBehaviour, ITimeTravelResponse
     {
         presentObjects = transform.GetChild(0).gameObject;
         pastObjects = transform.GetChild(1).gameObject;
-        presentObjects.SetActive(true);
-        pastObjects.SetActive(false);
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        for(int i = 0; i < pastObjects.transform.childCount; i++)
+        {
+            pastObjectCols.Add(pastObjects.transform.GetChild(i).GetComponent<Collider>());
+        }
+
+        for (int i = 0; i < presentObjects.transform.childCount; i++)
+        {
+            presentObjectCols.Add(presentObjects.transform.GetChild(i).GetComponent<Collider>());
+        }
     }
 
     public void OnTimeTravel()
     {
         currRoomState = ROOMSTATE.PAST;
-        presentObjects.SetActive(false);
-        pastObjects.SetActive(true);
+        foreach(Collider col in pastObjectCols)
+        {
+            col.isTrigger = false;
+        }
+        foreach (Collider col in presentObjectCols)
+        {
+            col.isTrigger = true;
+        }
     }
 
     public void OffTimeTravel()
     {
         currRoomState = ROOMSTATE.PRESENT;
-        presentObjects.SetActive(true);
-        pastObjects.SetActive(false);
+        foreach (Collider col in pastObjectCols)
+        {
+            col.isTrigger = true;
+        }
+        foreach (Collider col in presentObjectCols)
+        {
+            col.isTrigger = false;
+        }
     }
 }

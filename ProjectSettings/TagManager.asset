@@ -16,8 +16,8 @@ TagManager:
   - Weapon
   - Player
   - Pickup
-  - Past_Active
-  - Past_Inactive
+  - Past
+  - Present
   - WALLS
   - 
   - 
