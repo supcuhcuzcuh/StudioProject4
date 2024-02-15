@@ -4035,11 +4035,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2204153357883587267, guid: 7dd00037b82186448afc7ded97521105, type: 3}
   m_PrefabInstance: {fileID: 1657301389}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &1661279116 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7817061038685098574, guid: 3a1a880e125ebc945b50d4722dea3538, type: 3}
-  m_PrefabInstance: {fileID: 2084089089}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1691357265
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4117,32 +4112,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70c208820b1766546954facc43aa62f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1732614683
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1481735002}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1dd077842b8394843a391555e5bc517a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  whatIsWall:
-    serializedVersion: 2
-    m_Bits: 2048
-  whatIsGround:
-    serializedVersion: 2
-    m_Bits: 4096
-  wallRunForce: 40
-  wallClimbSpeed: 20
-  maxWallRunTime: 5
-  upwardsRunKey: 304
-  downwardsRunKey: 306
-  wallCheckDistance: 1
-  minJumpHeight: 1
-  orientation: {fileID: 1661279116}
 --- !u!1 &1849653074
 GameObject:
   m_ObjectHideFlags: 0
