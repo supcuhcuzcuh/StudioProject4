@@ -126,16 +126,16 @@ public abstract class Weapon : MonoBehaviour, IShootResponse
         audioManager.PlaySoundEffect("Reload");
         isReloading = true;     
         yield return new WaitForSeconds(reloadSpeed);
-        if (playerStat.playerAmmo == 0)
+        if (playerStat.playerAmmo == 0)     //Player has No ammo
         {
-
+            Debug.Log("Here");
         }
-        else if (playerStat.playerAmmo < clipSizeMax)
+        else if (playerStat.playerAmmo < clipSizeMax)   //Player has less ammo than clip size   
         {
             clipSizeCurr = playerStat.playerAmmo;
             playerStat.playerAmmo = 0;
         }
-        else
+        else     //Regular Reload
         {
             int diff = clipSizeMax - clipSizeCurr;
             playerStat.playerAmmo -= diff;
