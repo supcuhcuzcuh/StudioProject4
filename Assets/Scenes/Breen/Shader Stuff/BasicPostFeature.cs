@@ -7,7 +7,10 @@ using UnityEngine.Rendering.Universal;
 [System.Serializable]
 public class BasicPostFeature : ScriptableRendererFeature
 {
-    BasicPostPass basicPostPass;
+    private BasicPostPass basicPostPass;
+
+    // Materials
+    private Material mat;
 
     public override void AddRenderPasses(ScriptableRenderer renderer, ref RenderingData renderingData)
     {
