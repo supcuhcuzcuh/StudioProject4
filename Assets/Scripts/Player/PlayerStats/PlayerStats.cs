@@ -15,7 +15,6 @@ public class PlayerStats : ScriptableObject
 
     public enum PLAYERSTATES
     {
-        IDLE,
         WALK,
         SPRINT,
         JUMP,

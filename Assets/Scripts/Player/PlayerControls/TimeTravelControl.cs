@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Animations.Rigging;
+
 
 public interface ITimeTravelResponse
 {
@@ -17,14 +17,6 @@ public class TimeTravelControl : MonoBehaviour
     private List<ITimeTravelResponse> ontimetravelResponses = new List<ITimeTravelResponse>();
     private List<ITimeTravelResponse> offtimetravelResponses = new List<ITimeTravelResponse>();
 
-    bool activatetimeTravelAnim = false;
-    bool reverseAnim = false;
-
-    [SerializeField] private GameObject timetravelDevice;
-    [SerializeField] private Rig fingers;
-    [SerializeField] private TwoBoneIKConstraint armMover;
-    [SerializeField] private TwoBoneIKConstraint thumbMover2;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -33,53 +25,18 @@ public class TimeTravelControl : MonoBehaviour
 
    public void TimeTravel()
    {
-        if (Input.GetKeyDown(KeyCode.F) && activatetimeTravelAnim == false)
+        if (Input.GetKeyDown(KeyCode.F))
         {
-                timetravelDevice.SetActive(true);
-                fingers.weight = 1;
-                activatetimeTravelAnim = true;                             
-        }
-
-        if(activatetimeTravelAnim == true)
-        {
-            if (armMover.weight < 1)
+            if (inPresent)
             {
-                armMover.weight += 2.0f * Time.deltaTime;
-            }
-            else if (thumbMover2.weight < 1)
-            {
-                thumbMover2.weight += 2.0f * Time.deltaTime;
+                inPresent = false;
+                NotifyOnTimeTravelResponse();
             }
             else
             {
-                reverseAnim = true;
-                activatetimeTravelAnim = false;
-                if (inPresent)
-                {
-                    inPresent = false;
-                    NotifyOnTimeTravelResponse();
-                }
-                else
-                {
-                    inPresent = true;
-                    NotifyOffTimeTravelResponse();
-                }
+                inPresent = true;
             }
         }
-        else if (reverseAnim == true)
-        {            
-            if (armMover.weight > 0)
-            {
-                armMover.weight -= 3.0f * Time.deltaTime;
-            }
-            else
-            {
-                timetravelDevice.SetActive(false);
-                fingers.weight = 0;
-                thumbMover2.weight = 0;
-                reverseAnim = false;
-            }       
-        }   
    }
 
 
@@ -100,7 +57,7 @@ public class TimeTravelControl : MonoBehaviour
     {
         foreach (var offtimetravelResponse in offtimetravelResponses)
         {
-            offtimetravelResponse.OffTimeTravel();
+            offtimetravelResponse.OnTimeTravel();
         }
     }
 
