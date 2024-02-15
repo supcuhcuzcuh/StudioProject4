@@ -58,15 +58,15 @@ MonoBehaviour:
   clipSizeCurr: 20
   reloadSpeed: 0.5
   isReloading: 0
-  playerStat: {fileID: 11400000, guid: 9ef780fe5faa6ab4e81704a29a08ce8e, type: 2}
+  playerStat: {fileID: 11400000, guid: 503b5eec73e498c4a89956c9a104709f, type: 2}
   recoilStrength: 10
   recoilMultiplier: 1
   setWeaponPosition: {x: 0.2, y: -0.1, z: 0.4}
   bulletHoleSpawner: {fileID: 0}
   audioManager: {fileID: 8463325470492072216}
   particleEffectManager: {fileID: -4515509655808393898}
-  projectilePrefab: {fileID: 3924333958530190069, guid: 23cfc8d7e9caa874aaba51c5d216e4d5, type: 3}
-  muzzleVelocity: 500
+  projectilePrefab: {fileID: 3924333958530190069, guid: 9c3390e42ab440f42a3c6dfaa71a6725, type: 3}
+  muzzleVelocity: 750
   collectionCheck: 1
   defaultCapacity: 20
   maxSize: 100

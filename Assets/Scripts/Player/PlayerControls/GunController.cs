@@ -50,8 +50,16 @@ public class GunController : MonoBehaviour , ISprintResponse
 
                 if (Input.GetKeyDown(KeyCode.R))    //Reload
                 {
-                    currWeapon.OnReload();
-                    _onReloadEvent.Invoke();
+                    if(currWeapon == null || currWeapon.clipSizeCurr == currWeapon.clipSizeMax)
+                    {
+
+                    }
+                    else
+                    {
+                        currWeapon.OnReload();
+                        _onReloadEvent.Invoke();
+                    }
+                    
                 }
 
                 if (Input.GetKeyDown(KeyCode.Q))    //Qnequip Weapon
@@ -111,7 +119,7 @@ public class GunController : MonoBehaviour , ISprintResponse
         {
             if (currWeapon != null)
             {
-            currWeapon.OffSprintAnimation();
+                currWeapon.OffSprintAnimation();
             }   
         }
 
