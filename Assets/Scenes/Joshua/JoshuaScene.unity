@@ -230,7 +230,7 @@ GameObject:
   m_Component:
   - component: {fileID: 35444786}
   - component: {fileID: 35444787}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Dead
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -484,7 +484,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 85240337}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: States
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -968,7 +968,7 @@ MonoBehaviour:
   m_Center: {x: 0, y: 2, z: 0}
   m_LayerMask:
     serializedVersion: 2
-    m_Bits: 3959
+    m_Bits: 8183
   m_UseGeometry: 0
   m_DefaultArea: 0
   m_IgnoreNavMeshAgent: 1
@@ -2661,7 +2661,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1056080920}
   - component: {fileID: 1056080921}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Defense
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2695,8 +2695,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77a4c80244d5731478a25c9ca1199014, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  target: {fileID: 1481735002}
   alertState: {fileID: 1638738757}
-  deadState: {fileID: 0}
+  deadState: {fileID: 35444787}
   isDead: 0
 --- !u!1 &1092012480
 GameObject:
@@ -2839,7 +2840,7 @@ GameObject:
   - component: {fileID: 1161400789}
   - component: {fileID: 1161400788}
   - component: {fileID: 1161400787}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3211,7 +3212,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1343417407}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: RayOrigin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3321,7 +3322,7 @@ GameObject:
   - component: {fileID: 1397301505}
   - component: {fileID: 1397301504}
   - component: {fileID: 1397301503}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Sphere (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3618,7 +3619,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1560177111}
   - component: {fileID: 1560177110}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Patrol
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3637,9 +3638,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af7a50f1b9cf9e94aa548e2665922259, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waypointControl: {fileID: 1870557594}
+  playerDetector: {fileID: 1870557596}
   alertState: {fileID: 1638738757}
-  isAlerted: 0
 --- !u!4 &1560177111
 Transform:
   m_ObjectHideFlags: 0
@@ -3830,7 +3830,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1638738758}
   - component: {fileID: 1638738757}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Alert
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3849,7 +3849,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 869eda032a1ef6948ab9b040cd233805, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerDetector: {fileID: 1870557596}
+  target: {fileID: 1481735002}
+  _timer: 0
+  toDefenseTime: 5
   patrolState: {fileID: 1560177110}
+  defenseState: {fileID: 1056080921}
   isOutOfSight: 0
 --- !u!4 &1638738758
 Transform:
@@ -4035,6 +4040,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2204153357883587267, guid: 7dd00037b82186448afc7ded97521105, type: 3}
   m_PrefabInstance: {fileID: 1657301389}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &1661279116 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7817061038685098574, guid: 3a1a880e125ebc945b50d4722dea3538, type: 3}
+  m_PrefabInstance: {fileID: 2084089089}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1691357265
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4112,6 +4122,54 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70c208820b1766546954facc43aa62f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1732614683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1481735002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1dd077842b8394843a391555e5bc517a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  whatIsWall:
+    serializedVersion: 2
+    m_Bits: 2048
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 4096
+  wallRunForce: 40
+  wallClimbSpeed: 20
+  maxWallRunTime: 5
+  upwardsRunKey: 304
+  downwardsRunKey: 306
+  wallCheckDistance: 1
+  minJumpHeight: 1
+  orientation: {fileID: 1661279116}
+--- !u!195 &1732614699
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1481735002}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.00001
+  m_Speed: 0
+  m_Acceleration: 0
+  avoidancePriority: 50
+  m_AngularSpeed: 0
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 0.00001
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &1849653074
 GameObject:
   m_ObjectHideFlags: 0
@@ -4163,7 +4221,8 @@ GameObject:
   - component: {fileID: 1870557595}
   - component: {fileID: 1870557594}
   - component: {fileID: 1870557596}
-  m_Layer: 0
+  - component: {fileID: 1870557597}
+  m_Layer: 3
   m_Name: TEST ENEMY
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4265,6 +4324,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 260cfa99cd9312741910c8016e2a90c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rb: {fileID: 1870557597}
   enemyAnimator: {fileID: 0}
 --- !u!114 &1870557593
 MonoBehaviour:
@@ -4291,6 +4351,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 088680dc04679af44a256e6f3df678d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  agent: {fileID: 1870557595}
   waypoints:
   - {fileID: 847163699}
   - {fileID: 1484554369}
@@ -4332,9 +4393,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   toIgnore:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 2176
   toStart: {fileID: 1343417407}
   toCompare: {fileID: 1481735002}
+--- !u!54 &1870557597
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1870557587}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 1
 --- !u!1001 &1932495488
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4580,6 +4657,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7817061040289372881, guid: 3a1a880e125ebc945b50d4722dea3538, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7817061040289372883, guid: 3a1a880e125ebc945b50d4722dea3538, type: 3}
+      propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7817061040289372892, guid: 3a1a880e125ebc945b50d4722dea3538, type: 3}
