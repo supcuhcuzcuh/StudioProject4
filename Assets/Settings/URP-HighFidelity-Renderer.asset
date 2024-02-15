@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5a568c93106c304cb96dc9d65246b68, type: 3}
   m_Name: BasicPostFeature
   m_EditorClassIdentifier: 
-  m_Active: 0
+  m_Active: 1
 --- !u!114 &-1878332245247344467
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -55,7 +55,8 @@ MonoBehaviour:
   - {fileID: -1878332245247344467}
   - {fileID: -8233272052196887301}
   - {fileID: 6148738671945284133}
-  m_RendererFeatureMap: adc0de57c6d2eee5fb34a7b5b08abd8d257a01a63eb55455
+  - {fileID: 7264481771512232065}
+  m_RendererFeatureMap: adc0de57c6d2eee5fb34a7b5b08abd8d257a01a63eb55455817849acae9fd064
   m_UseNativeRenderPass: 0
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
   xrSystemData: {fileID: 11400000, guid: 60e1133243b97e347b653163a8c01b64, type: 2}
@@ -107,5 +108,18 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7d84deab03570024b8fa049c88435df2, type: 3}
   m_Name: GlitchPostFeature
+  m_EditorClassIdentifier: 
+  m_Active: 0
+--- !u!114 &7264481771512232065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06063e318f0b1c64eadef6752586264b, type: 3}
+  m_Name: SecondPostFeature
   m_EditorClassIdentifier: 
   m_Active: 0
