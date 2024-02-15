@@ -13,7 +13,7 @@ public class Sniper : HitscanWeapon
     [SerializeField]
     private GameObject sniperModel;
 
-    protected override void Init()
+    void Start()
     {
         laserLine = GetComponent<LineRenderer>();
     }

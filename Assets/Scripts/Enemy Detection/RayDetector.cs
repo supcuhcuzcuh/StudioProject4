@@ -9,27 +9,28 @@ public class RayDetector : MonoBehaviour
     [SerializeField] private GameObject toCompare; // Player or any object that requires LOS detection
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.red;
-        Gizmos.DrawLine(toStart.position, toStart.position + toStart.transform.forward * 10);
+        Gizmos.DrawLine(toStart.position, transform.forward);
     }
 
     private void Update()
     {
-        //if (IsDetected())
-        //{
-        //    Debug.Log("DETECTED PLAYER");
-        //}
+        if (IsDetected())
+        {
+            Debug.Log("ONG");
+        }
+        Debug.DrawRay(toStart.position, toStart.transform.forward, Color.red);
     }
     // Update is called once per frame
     public bool IsDetected()
     {
-        if (Physics.Raycast(toStart.position, toStart.transform.forward, out RaycastHit hit, 500f, toIgnore)) // Detected Something
+        RaycastHit hit;
+        if (Physics.Raycast(toStart.position, toStart.transform.forward, out hit,  100, toIgnore)) // Detected Something
         {
-            //Debug.Log(hit.transform.gameObject.name);
+            Debug.Log(hit.transform.gameObject.name);
             if (hit.transform.gameObject == toCompare)
             {
                 // Player Detected
-                //Debug.Log("TAN");
+                Debug.Log("PLAYER DETECTED");
                 return true;
             }
             else

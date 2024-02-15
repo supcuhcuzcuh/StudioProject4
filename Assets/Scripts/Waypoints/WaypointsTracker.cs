@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class WaypointsTracker : MonoBehaviour
 {
-    public NavMeshAgent agent;
+    private NavMeshAgent _agent;
 
     [SerializeField]
     public List<GameObject> waypoints = new List<GameObject>();
@@ -13,7 +13,8 @@ public class WaypointsTracker : MonoBehaviour
 
     private void Start()
     {
-        if (agent != null)
+        _agent = GetComponent<NavMeshAgent>();
+        if (_agent != null)
         {
             Debug.Log("Successfully Attained Agent");
         }
@@ -27,7 +28,7 @@ public class WaypointsTracker : MonoBehaviour
     {
         if (waypoints.Count > 1 && !(waypoints[0] == null))
         {
-            agent.SetDestination(waypoints[_target].transform.position);
+            _agent.SetDestination(waypoints[_target].transform.position);
         }
     }
 
@@ -44,7 +45,7 @@ public class WaypointsTracker : MonoBehaviour
 
             if (waypoints[_target] != null)
             {
-                agent.SetDestination(waypoints[_target].transform.position);
+                _agent.SetDestination(waypoints[_target].transform.position);
             }
             else
             {

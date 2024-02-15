@@ -33,21 +33,24 @@ public class MovementControl : MonoBehaviour
 
     public void Movement()
     {
-        if (GetComponent<WallRunning>().pm) return;
-
+       
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
 
         Vector3 moveDirection = (Camera.main.transform.forward * verticalInput + Camera.main.transform.right * horizontalInput).normalized;
         moveDirection.y = 0;
         rb.MovePosition(transform.position + moveDirection * (playerStats.moveSpeed * playerStats.moveSpeedMultiplier) * Time.deltaTime);
+        //Vector3 force = moveDirection * (playerStats.moveSpeed * playerStats.moveSpeedMultiplier);
+        //rb.AddForce(force, ForceMode.Force);
 
         if ((horizontalInput > 0 || verticalInput > 0))
         {
+            playerStats.currState = PlayerStats.PLAYERSTATES.WALK;
             audioManager.PlaySoundEffectLoop("Walk");
         }
         else if((horizontalInput <= 0 && verticalInput <= 0))
         {
+            playerStats.currState = PlayerStats.PLAYERSTATES.IDLE;
             audioManager.StopSoundEffect();
         }
     }

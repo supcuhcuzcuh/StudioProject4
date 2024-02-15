@@ -30,8 +30,7 @@ public class WallRunning : MonoBehaviour
 
     [Header("References")]
     public Transform orientation;
-    public Transform cameraTransform; // Reference to your camera transform
-    [HideInInspector] public bool pm;
+    private bool pm;
     private Rigidbody rb;
 
     private void Start()
@@ -42,27 +41,14 @@ public class WallRunning : MonoBehaviour
 
     private void Update()
     {
-       
-      
-       
+        CheckForWall();
+        StateMachine();
     }
 
     private void FixedUpdate()
     {
-        StateMachine();
-        CheckForWall();
         if (pm)
-        {
             WallRunningMovement();
-            // Rotate the camera based on wall running direction
-            RotateCamera();
-        }
-
-        // Check for wall jump input
-        if (Input.GetButtonDown("Jump") && pm)
-        {
-            WallJump();
-        }
     }
 
     private void CheckForWall()
@@ -74,31 +60,6 @@ public class WallRunning : MonoBehaviour
     private bool AboveGround()
     {
         return !Physics.Raycast(transform.position, Vector3.down, minJumpHeight, whatIsGround);
-    }
-
-    private void RotateCamera()
-    {
-        Quaternion targetRotation;
-
-        if (wallRight)
-        {
-            // Rotate based on mouse input along the y-axis
-            float mouseY = Input.GetAxis("Mouse Y") * 2;
-            targetRotation = Quaternion.Euler(cameraTransform.rotation.eulerAngles.x, cameraTransform.rotation.eulerAngles.y + mouseY, 30f);
-        }
-        else if (wallLeft)
-        {
-            // Rotate based on mouse input along the y-axis
-            float mouseY = Input.GetAxis("Mouse Y") * 2;
-            targetRotation = Quaternion.Euler(cameraTransform.rotation.eulerAngles.x, cameraTransform.rotation.eulerAngles.y + mouseY, -30f);
-        }
-        else
-        {
-            targetRotation = Quaternion.Euler(cameraTransform.rotation.eulerAngles.x, cameraTransform.rotation.eulerAngles.y, 0f); ; // No rotation if not wall running
-        }
-
-        // Smoothly interpolate between the current rotation and the target rotation
-        cameraTransform.rotation = Quaternion.Slerp(cameraTransform.rotation, targetRotation, Time.deltaTime * 5f);
     }
 
     private void StateMachine()
@@ -114,21 +75,14 @@ public class WallRunning : MonoBehaviour
         if((wallLeft || wallRight) && verticalInput > 0 && AboveGround())
         {
             if (!pm)
-            {
                 StartWallRun();
-
-                
-            }
         }
 
         // State 3 - None
         else
         {
             if (pm)
-            {
                 StopWallRun();
-              
-            }
         }
     }
 
@@ -150,10 +104,7 @@ public class WallRunning : MonoBehaviour
             wallForward = -wallForward;
 
         // forward force
-        rb.AddForce(wallForward * wallRunForce);
-
-
-
+        rb.AddForce(wallForward * wallRunForce, ForceMode.Force);
 
         // upwards/downwards force
         if (upwardsRunning)
@@ -162,20 +113,6 @@ public class WallRunning : MonoBehaviour
             rb.velocity = new Vector3(rb.velocity.x, -wallClimbSpeed, rb.velocity.z);
 
       
-    }
-
-    private void WallJump()
-    {
-        pm = false; // Disable wall running state
-        rb.useGravity = true;
-
-        // Calculate wall jump direction (opposite of the wall normal)
-        Vector3 wallNormal = wallRight ? rightWallhit.normal : leftWallhit.normal;
-        Vector3 wallJumpDirection = wallNormal; // Opposite direction
-
-        Debug.Log("Jumped");
-        // Apply wall jump force
-        rb.AddForce(wallJumpDirection * wallRunForce * 1.5f, ForceMode.Impulse); // Adjust the multiplier as needed
     }
 
     private void StopWallRun()

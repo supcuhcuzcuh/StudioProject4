@@ -100,7 +100,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 0
+  m_AngularDrag: 10
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -154,4 +154,3 @@ MonoBehaviour:
   particleEffectManager: {fileID: -1430334578004653652}
   radius: 10
   force: 300
-  missileTarget: {fileID: 0}
