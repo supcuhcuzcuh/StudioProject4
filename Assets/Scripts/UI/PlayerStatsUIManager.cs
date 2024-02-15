@@ -35,6 +35,8 @@ public class PlayerStatsUIManager : MonoBehaviour, IShootResponse
         reloadTimerUISlider = reloadTimerUI.GetComponent<Slider>();
         reloadTimerUI.SetActive(false);
 
+        playerAmmoCount.text = playerStats.playerAmmo.ToString();
+
         UpdateAmmoUI();
         UpdateGrenadeUI();
     }

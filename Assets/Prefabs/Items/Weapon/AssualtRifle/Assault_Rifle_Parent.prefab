@@ -101,7 +101,7 @@ MonoBehaviour:
   hitForce: 10
   layermask:
     serializedVersion: 2
-    m_Bits: 119
+    m_Bits: 3711
 --- !u!114 &3603156686175513961
 MonoBehaviour:
   m_ObjectHideFlags: 0
