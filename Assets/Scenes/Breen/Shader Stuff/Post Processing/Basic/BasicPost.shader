@@ -3,28 +3,28 @@ Shader "CustomPost/BasicPost"
     Properties
     {
         _MainTex ("Main Texture", 2D) = "white" {}
-        _DistortTexture ("Distort Texture", 2D) = "white" {}
-        _Color ("Color", color) = (1,1,1,1)
-        _Intensity ("Intensity", float) = 1
-        _Ramp ("Ramp", float) = 1
-        _GlowThickness ("Glow Thickness", float) = 1
-        _GlowIntensity ("Glow Intensity", float) = 1
-        _DistortThickness ("Distort Thickness", float) = 1
+        cameraDepthTex ("Camera Depth Texture", 2D) = "gray" {}
+        size ("Size", float) = 1
+        slownessOfExpansion ("Slowness Of Expansion", float) = 10
     }
     SubShader
     {
         Tags { "RenderType" = "Opaque" }
-        LOD 100
-        Blend SrcAlpha OneMinusSrcAlpha
-        Cull Off
-        ZWrite Off
 
         Pass
         {
-            CGPROGRAM
+            HLSLPROGRAM
+
             #pragma vertex vert
             #pragma fragment frag
             #include "UnityCG.cginc"
+
+            float size;
+            float slownessOfExpansion;
+
+            sampler2D _MainTex;
+            sampler2D _CameraDepthTex;
+            float4 _MainTex_ST;
 
             struct appdata
             {
@@ -36,38 +36,47 @@ Shader "CustomPost/BasicPost"
             {
                 float2 uv : TEXCOORD0;
                 float4 vertex : SV_POSITION;
+                float depth : TEXCOORD1;
             };
-
-            sampler2D _MainTex, _DistortTexture;
-            float4 _MainTex_ST;
-
-            float4 _Color;
-            float _Intensity, _Ramp, _DistortThickness, _GlowThickness, _GlowIntensity;
 
             v2f vert (appdata v)
             {
                 v2f o;
                 o.vertex = UnityObjectToClipPos(v.vertex);
                 o.uv = TRANSFORM_TEX(v.uv, _MainTex);
+
+                // Getting depth
+                float2 screenUVs = o.vertex.xy / o.vertex.w;
+                float zRaw = tex2Dproj(_CameraDepthTex, UNITY_PROJ_COORD(screenUVs)).r;
+                o.depth = zRaw;
+
                 return o;
             }
 
             fixed4 frag (v2f i) : SV_Target
             {
-                float3 mainTex = tex2D(_MainTex, i.uv);
-                float luminance = Luminance(mainTex);
-                float3 mainColor = luminance * _Color;
-                mainColor = pow(mainColor, _Ramp) * _Intensity;
+                 float4 mainTex = tex2D(_MainTex, i.uv);
 
-                float3 distortTex = tex2D(_DistortTexture, i.uv);
-                float distortMask = abs(sin(distortTex.r * 10 + _Time.y));
-                float distortStep = step(distortMask, _DistortThickness);
+                float dist = distance(i.uv, float2(0.5, 0.5));
+                
+                // Example: darken the main texture based on depth
+                float darknessFactor = 1 - i.depth; // Adjust as needed
+                mainTex *= darknessFactor;
 
-                float glow = 1 - smoothstep(distortMask - _GlowThickness, distortMask + _GlowThickness, _DistortThickness);
-                glow *= _GlowIntensity;
-                return fixed4( mainColor + glow , distortStep);
+                // Inside the circle if the distance is less than the radius
+                if (dist < size)
+                {
+                    return float4(mainTex * (size / slownessOfExpansion));
+                }
+                else if (size != 0)
+                {
+                    return float4(mainTex * 0.01 * (size / slownessOfExpansion));
+                }
+
+                return float4(mainTex);
             }
-            ENDCG
+
+            ENDHLSL
         }
     }
 }

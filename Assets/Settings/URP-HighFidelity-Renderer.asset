@@ -109,7 +109,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5a568c93106c304cb96dc9d65246b68, type: 3}
   m_Name: BasicPostFeature
   m_EditorClassIdentifier: 
-  m_Active: 0
+  m_Active: 1
 --- !u!114 &5838545928442998230
 MonoBehaviour:
   m_ObjectHideFlags: 0

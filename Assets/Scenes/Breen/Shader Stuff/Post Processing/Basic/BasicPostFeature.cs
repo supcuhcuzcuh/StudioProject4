@@ -25,6 +25,10 @@ public class BasicPostFeature : ScriptableRendererFeature
         int tintId = Shader.PropertyToID("_Temp");
         private RenderTargetIdentifier src, tint;
 
+        [HideInInspector] public bool isActive = true;
+
+        private float sizeSet;
+
         public BasicPass()
         {
             if (!mat)
@@ -47,10 +51,29 @@ public class BasicPostFeature : ScriptableRendererFeature
             VolumeStack volume = VolumeManager.instance.stack;
 
             BasicPost basicPost = volume.GetComponent<BasicPost>();
+            mat.SetFloat("slownessOfExpansion", (float)basicPost.slownessOfExpansion);
+            mat.SetTexture("_CameraDepthTex", (Texture)basicPost.depthTex);
 
-            if (basicPost.IsActive())
+            if (!isActive)
             {
-                //mat.SetFloat("thickness", (float)basicPost.thickness);
+
+            }
+
+            if (isActive)
+            {
+                // Reset
+                if (mat.GetFloat("size") >= (float)basicPost.slownessOfExpansion)
+                {
+                    sizeSet = 0;
+                    isActive = false;
+                }
+                // Expand
+                else
+                {
+                    sizeSet += Time.deltaTime * (float)basicPost.timeScale;
+                }
+
+                mat.SetFloat("size", sizeSet);
 
                 Blit(commandBuffer, src, tint, mat, 0);
                 Blit(commandBuffer, tint, src);
