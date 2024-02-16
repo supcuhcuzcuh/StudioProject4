@@ -3,7 +3,6 @@ Shader "CustomPost/BasicPost"
     Properties
     {
         _MainTex ("Main Texture", 2D) = "white" {}
-        cameraDepthTex ("Camera Depth Texture", 2D) = "gray" {}
         size ("Size", float) = 1
         slownessOfExpansion ("Slowness Of Expansion", float) = 10
     }
@@ -23,8 +22,8 @@ Shader "CustomPost/BasicPost"
             float slownessOfExpansion;
 
             sampler2D _MainTex;
-            sampler2D _CameraDepthTex;
             float4 _MainTex_ST;
+            sampler2D _CameraDepthTexture;
 
             struct appdata
             {
@@ -36,7 +35,7 @@ Shader "CustomPost/BasicPost"
             {
                 float2 uv : TEXCOORD0;
                 float4 vertex : SV_POSITION;
-                float depth : TEXCOORD1;
+                float4 screenSpace : TEXCOORD1;
             };
 
             v2f vert (appdata v)
@@ -45,10 +44,8 @@ Shader "CustomPost/BasicPost"
                 o.vertex = UnityObjectToClipPos(v.vertex);
                 o.uv = TRANSFORM_TEX(v.uv, _MainTex);
 
-                // Getting depth
-                float2 screenUVs = o.vertex.xy / o.vertex.w;
-                float zRaw = tex2Dproj(_CameraDepthTex, UNITY_PROJ_COORD(screenUVs)).r;
-                o.depth = zRaw;
+                // Depth
+                o.screenSpace = ComputeScreenPos(o.vertex);
 
                 return o;
             }
@@ -56,21 +53,21 @@ Shader "CustomPost/BasicPost"
             fixed4 frag (v2f i) : SV_Target
             {
                  float4 mainTex = tex2D(_MainTex, i.uv);
+                
+                // Depth
+                float2 screenSpaceUV = i.screenSpace.xy / i.screenSpace.w;
+                float depth = Linear01Depth(SAMPLE_DEPTH_TEXTURE(_CameraDepthTexture, screenSpaceUV));
 
                 float dist = distance(i.uv, float2(0.5, 0.5));
-                
-                // Example: darken the main texture based on depth
-                float darknessFactor = 1 - i.depth; // Adjust as needed
-                mainTex *= darknessFactor;
 
                 // Inside the circle if the distance is less than the radius
-                if (dist < size)
+                if (dist < size * depth)
                 {
-                    return float4(mainTex * (size / slownessOfExpansion));
+                    return float4(mainTex);
                 }
                 else if (size != 0)
                 {
-                    return float4(mainTex * 0.01 * (size / slownessOfExpansion));
+                    return float4(0, 0, 0, 1);
                 }
 
                 return float4(mainTex);

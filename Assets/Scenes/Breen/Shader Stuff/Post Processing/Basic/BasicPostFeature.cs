@@ -52,7 +52,6 @@ public class BasicPostFeature : ScriptableRendererFeature
 
             BasicPost basicPost = volume.GetComponent<BasicPost>();
             mat.SetFloat("slownessOfExpansion", (float)basicPost.slownessOfExpansion);
-            mat.SetTexture("_CameraDepthTex", (Texture)basicPost.depthTex);
 
             if (!isActive)
             {
@@ -62,7 +61,7 @@ public class BasicPostFeature : ScriptableRendererFeature
             if (isActive)
             {
                 // Reset
-                if (mat.GetFloat("size") >= (float)basicPost.slownessOfExpansion)
+                if (mat.GetFloat("size") >= (float)basicPost.slownessOfExpansion * 100)
                 {
                     sizeSet = 0;
                     isActive = false;
