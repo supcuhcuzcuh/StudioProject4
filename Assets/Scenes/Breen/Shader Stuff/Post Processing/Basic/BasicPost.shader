@@ -2,29 +2,21 @@ Shader "CustomPost/BasicPost"
 {
     Properties
     {
-        _MainTex ("Main Texture", 2D) = "white" {}
-        cameraDepthTex ("Camera Depth Texture", 2D) = "gray" {}
-        size ("Size", float) = 1
-        slownessOfExpansion ("Slowness Of Expansion", float) = 10
+        _MainTex ("Texture", 2D) = "white" {}
     }
     SubShader
     {
-        Tags { "RenderType" = "Opaque" }
+        Tags { "RenderType" = "Transparent" }
+        
+        Cull Off ZWrite Off ZTest Always
 
         Pass
         {
             HLSLPROGRAM
-
             #pragma vertex vert
             #pragma fragment frag
+
             #include "UnityCG.cginc"
-
-            float size;
-            float slownessOfExpansion;
-
-            sampler2D _MainTex;
-            sampler2D _CameraDepthTex;
-            float4 _MainTex_ST;
 
             struct appdata
             {
@@ -36,8 +28,12 @@ Shader "CustomPost/BasicPost"
             {
                 float2 uv : TEXCOORD0;
                 float4 vertex : SV_POSITION;
-                float depth : TEXCOORD1;
             };
+
+            sampler2D _MainTex;
+            float4 _MainTex_ST;
+
+            float thickness;
 
             v2f vert (appdata v)
             {
@@ -45,35 +41,14 @@ Shader "CustomPost/BasicPost"
                 o.vertex = UnityObjectToClipPos(v.vertex);
                 o.uv = TRANSFORM_TEX(v.uv, _MainTex);
 
-                // Getting depth
-                float2 screenUVs = o.vertex.xy / o.vertex.w;
-                float zRaw = tex2Dproj(_CameraDepthTex, UNITY_PROJ_COORD(screenUVs)).r;
-                o.depth = zRaw;
-
                 return o;
             }
 
             fixed4 frag (v2f i) : SV_Target
             {
-                 float4 mainTex = tex2D(_MainTex, i.uv);
+                float4 result = tex2D(_MainTex, i.uv);
 
-                float dist = distance(i.uv, float2(0.5, 0.5));
-                
-                // Example: darken the main texture based on depth
-                float darknessFactor = 1 - i.depth; // Adjust as needed
-                mainTex *= darknessFactor;
-
-                // Inside the circle if the distance is less than the radius
-                if (dist < size)
-                {
-                    return float4(mainTex * (size / slownessOfExpansion));
-                }
-                else if (size != 0)
-                {
-                    return float4(mainTex * 0.01 * (size / slownessOfExpansion));
-                }
-
-                return float4(mainTex);
+                return result;
             }
 
             ENDHLSL

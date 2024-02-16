@@ -7,9 +7,7 @@ using UnityEngine.Rendering.Universal;
 [VolumeComponentMenuForRenderPipeline("Custom/BasicPost", typeof(UniversalRenderPipeline))]
 public class BasicPost : VolumeComponent
 {
-    [SerializeField] public FloatParameter timeScale = new FloatParameter(1);
-    [SerializeField] public FloatParameter slownessOfExpansion = new FloatParameter(2);
-    [SerializeField] public TextureParameter depthTex = new TextureParameter(null);
+    [SerializeField] public FloatParameter thickness = new FloatParameter(1);
 
     public bool IsActive() { return true; }
     public bool IsTileCompatible() { return true; ; }
