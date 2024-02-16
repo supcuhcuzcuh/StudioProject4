@@ -50,7 +50,7 @@ public class BasicPostFeature : ScriptableRendererFeature
 
             if (basicPost.IsActive())
             {
-                mat.SetFloat("thickness", (float)basicPost.thickness);
+                //mat.SetFloat("thickness", (float)basicPost.thickness);
 
                 Blit(commandBuffer, src, tint, mat, 0);
                 Blit(commandBuffer, tint, src);

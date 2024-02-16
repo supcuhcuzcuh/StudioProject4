@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-8233272052196887301
+--- !u!114 &-3869031250375938947
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a5a568c93106c304cb96dc9d65246b68, type: 3}
-  m_Name: BasicPostFeature
+  m_Script: {fileID: 11500000, guid: 06063e318f0b1c64eadef6752586264b, type: 3}
+  m_Name: SecondPostFeature
   m_EditorClassIdentifier: 
-  m_Active: 1
+  m_Active: 0
 --- !u!114 &-1878332245247344467
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35,7 +35,7 @@ MonoBehaviour:
     Intensity: 0.5
     DirectLightingStrength: 0.25
     Radius: 0.25
-    SampleCount: -1
+    SampleCount: 12
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -53,10 +53,10 @@ MonoBehaviour:
       type: 3}
   m_RendererFeatures:
   - {fileID: -1878332245247344467}
-  - {fileID: -8233272052196887301}
-  - {fileID: 6148738671945284133}
-  - {fileID: 7264481771512232065}
-  m_RendererFeatureMap: adc0de57c6d2eee5fb34a7b5b08abd8d257a01a63eb55455817849acae9fd064
+  - {fileID: 5838545928442998230}
+  - {fileID: -3869031250375938947}
+  - {fileID: 1883066631565999256}
+  m_RendererFeatureMap: adc0de57c6d2eee5d6eda58596ae06517dec74a893704eca98fce1de1fff211a
   m_UseNativeRenderPass: 0
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
   xrSystemData: {fileID: 11400000, guid: 60e1133243b97e347b653163a8c01b64, type: 2}
@@ -97,7 +97,20 @@ MonoBehaviour:
   m_ClusteredRendering: 0
   m_TileSize: 32
   m_IntermediateTextureMode: 0
---- !u!114 &6148738671945284133
+--- !u!114 &1883066631565999256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5a568c93106c304cb96dc9d65246b68, type: 3}
+  m_Name: BasicPostFeature
+  m_EditorClassIdentifier: 
+  m_Active: 0
+--- !u!114 &5838545928442998230
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -108,18 +121,5 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7d84deab03570024b8fa049c88435df2, type: 3}
   m_Name: GlitchPostFeature
-  m_EditorClassIdentifier: 
-  m_Active: 0
---- !u!114 &7264481771512232065
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06063e318f0b1c64eadef6752586264b, type: 3}
-  m_Name: SecondPostFeature
   m_EditorClassIdentifier: 
   m_Active: 0
