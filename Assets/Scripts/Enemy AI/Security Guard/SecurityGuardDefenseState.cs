@@ -12,14 +12,14 @@ public class SecurityGuardDefenseState : State
     public bool isDead = false;
 
     private BaseEnemy _enemyRef;
-    private Renderer _rootRenderer; // Transform root
-    private Color _defaultColor = Color.white;
+    //private Renderer _rootRenderer; // Transform root
+    //private Color _defaultColor = Color.white;
     private WaypointsTracker _destinationTracker;
 
     private void Start()
     {
         _enemyRef = transform.root.GetComponent<BaseEnemy>();
-        _rootRenderer = transform.root.GetComponent<Renderer>();
+        //_rootRenderer = transform.root.GetComponent<Renderer>();
         _destinationTracker = transform.root.GetComponent<WaypointsTracker>();
     }
     public override State PlayCurrentState()
@@ -37,7 +37,7 @@ public class SecurityGuardDefenseState : State
             {
                 _enemyRef.rb.velocity = Vector3.zero;
             }
-            _rootRenderer.material.color = Color.red;
+            //_rootRenderer.material.color = Color.red;
             return this;
         }
     }
