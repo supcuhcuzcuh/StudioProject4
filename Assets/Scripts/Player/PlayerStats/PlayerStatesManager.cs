@@ -10,7 +10,7 @@ public class PlayerStatesManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        playerStats.currState = PlayerStats.PLAYERSTATES.IDLE;
     }
 
     // Update is called once per frame
@@ -18,7 +18,18 @@ public class PlayerStatesManager : MonoBehaviour
     {
         if(playerStats.currState == PlayerStats.PLAYERSTATES.WALK)
         {
-            playerStats.moveSpeedMultiplier = 1.0f;
+            if (playerStats.currAdditionalState == PlayerStats.ADDITIONALPLAYERSTATES.CROUCH)
+            {
+                playerStats.moveSpeedMultiplier = 0.3f;
+            }
+            else if(playerStats.currAdditionalState == PlayerStats.ADDITIONALPLAYERSTATES.PRONE)
+            {
+                playerStats.moveSpeedMultiplier = 0.15f;
+            }
+            else
+            {
+                playerStats.moveSpeedMultiplier = 1.0f;
+            }        
         }
         else if(playerStats.currState == PlayerStats.PLAYERSTATES.SPRINT)
         {
@@ -27,14 +38,6 @@ public class PlayerStatesManager : MonoBehaviour
         else if (playerStats.currState == PlayerStats.PLAYERSTATES.JUMP)
         {
             playerStats.moveSpeedMultiplier = 1.0f;
-        }
-        else if(playerStats.currState == PlayerStats.PLAYERSTATES.CROUCH)
-        {
-            playerStats.moveSpeedMultiplier = 0.3f;
-        }
-        else if(playerStats.currState == PlayerStats.PLAYERSTATES.PRONE)
-        {
-            playerStats.moveSpeedMultiplier = 0.15f;
-        }
+        }      
     }
 }

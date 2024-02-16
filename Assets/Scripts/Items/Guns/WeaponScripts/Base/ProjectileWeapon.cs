@@ -18,7 +18,10 @@ public abstract class ProjectileWeapon : Weapon
 
     // extra options to control the pool capacity and maximum size
     [SerializeField] private int defaultCapacity = 20;
-    [SerializeField] private int maxSize = 100; 
+    [SerializeField] private int maxSize = 100;
+
+    protected float screenX = Screen.width / 2;
+    protected float screenY = Screen.height / 2;
 
     private float nextTimeToShoot;
 

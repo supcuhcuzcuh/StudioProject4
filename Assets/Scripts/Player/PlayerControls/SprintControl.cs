@@ -13,6 +13,7 @@ public class SprintControl : MonoBehaviour
 {
     [SerializeField]
     private PlayerStats playerStats;
+    [SerializeField] Animator animator;
 
     private List<ISprintResponse> sprintResponses = new List<ISprintResponse>();
 
@@ -21,9 +22,10 @@ public class SprintControl : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.LeftShift) && playerStats.currState == PlayerStats.PLAYERSTATES.WALK)
         {
             playerStats.currState = PlayerStats.PLAYERSTATES.SPRINT;
+            animator.SetInteger("MoveCounter", 2);
             NotifyOnSprintResponse();
         }
-        if (Input.GetKeyUp(KeyCode.LeftShift) && playerStats.currState == PlayerStats.PLAYERSTATES.SPRINT)
+        else if (Input.GetKeyUp(KeyCode.LeftShift) && playerStats.currState == PlayerStats.PLAYERSTATES.SPRINT)
         {
             playerStats.currState = PlayerStats.PLAYERSTATES.WALK;
             NotifyOffSprintResponse();

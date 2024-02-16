@@ -5,8 +5,8 @@ using UnityEngine;
 public class Sliding : MonoBehaviour
 {
     [Header("References")]
-    public Transform orientation;
-    public Transform playerObj;
+    [SerializeField]
+    private PlayerStats playerStats;
     private Rigidbody rb;
 
     [Header("Sliding")]
@@ -43,7 +43,7 @@ public class Sliding : MonoBehaviour
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
 
-        if (Input.GetKeyDown(slideKey) && (horizontalInput != 0 || verticalInput != 0))
+        if (Input.GetKeyDown(slideKey) && playerStats.currState == PlayerStats.PLAYERSTATES.SPRINT)
             StartSlide();
 
         if (Input.GetKeyUp(slideKey) && sliding)
@@ -68,7 +68,7 @@ public class Sliding : MonoBehaviour
 
     private void SlidingMovement()
     {
-        Vector3 inputDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
+        Vector3 inputDirection = Camera.main.transform.forward * verticalInput + Camera.main.transform.right * horizontalInput;
 
         // sliding normal
         if (!OnSlope() || rb.velocity.y > -0.1f)

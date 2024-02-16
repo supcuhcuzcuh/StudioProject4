@@ -45,7 +45,7 @@ public abstract class Weapon : MonoBehaviour, IShootResponse
             clipSizeCurr -= 1;
             FireWeapon();
             audioManager.PlaySoundEffect("Shot");
-            particleEffectManager.PlayParticleEffect("MuzzleFlash", muzzlePosition.position);
+            particleEffectManager.PlayParticleEffect("MuzzleFlash", muzzlePosition.position, muzzlePosition);
         }
         else
         {
