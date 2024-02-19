@@ -2,21 +2,26 @@ Shader "CustomPost/BasicPost"
 {
     Properties
     {
-        _MainTex ("Texture", 2D) = "white" {}
+        _MainTex ("Main Texture", 2D) = "white" {}
+        size ("Size", float) = 1
     }
     SubShader
     {
-        Tags { "RenderType" = "Transparent" }
-        
-        Cull Off ZWrite Off ZTest Always
+        Tags { "RenderType" = "Opaque" }
 
         Pass
         {
             HLSLPROGRAM
+
             #pragma vertex vert
             #pragma fragment frag
-
             #include "UnityCG.cginc"
+
+            float size;
+
+            sampler2D _MainTex;
+            float4 _MainTex_ST;
+            sampler2D _CameraDepthTexture;
 
             struct appdata
             {
@@ -28,12 +33,8 @@ Shader "CustomPost/BasicPost"
             {
                 float2 uv : TEXCOORD0;
                 float4 vertex : SV_POSITION;
+                float4 screenSpace : TEXCOORD1;
             };
-
-            sampler2D _MainTex;
-            float4 _MainTex_ST;
-
-            float thickness;
 
             v2f vert (appdata v)
             {
@@ -41,14 +42,37 @@ Shader "CustomPost/BasicPost"
                 o.vertex = UnityObjectToClipPos(v.vertex);
                 o.uv = TRANSFORM_TEX(v.uv, _MainTex);
 
+                // Depth
+                o.screenSpace = ComputeScreenPos(o.vertex);
+
                 return o;
             }
 
             fixed4 frag (v2f i) : SV_Target
             {
-                float4 result = tex2D(_MainTex, i.uv);
+                 float4 mainTex = tex2D(_MainTex, i.uv);
+                
+                // Depth
+                float2 screenSpaceUV = i.screenSpace.xy / i.screenSpace.w;
+                float depth = Linear01Depth(SAMPLE_DEPTH_TEXTURE(_CameraDepthTexture, screenSpaceUV));
 
-                return result;
+                float dist = distance(i.uv, float2(0.5, 0.5));
+
+                // Inside the circle if the distance is less than the radius
+                if (dist < size * depth)
+                {
+                    return float4(mainTex);
+                }
+                else if (dist > (size * depth) + 0.02)
+                {
+                    return float4(mainTex);
+                }
+                else if (size != 0)
+                {
+                    return float4(0, 0, 0, 1);
+                }
+
+                return float4(mainTex);
             }
 
             ENDHLSL
