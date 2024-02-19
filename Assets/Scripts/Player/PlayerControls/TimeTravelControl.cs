@@ -26,6 +26,7 @@ public class TimeTravelControl : MonoBehaviour
     private List<ITimeTravelResponse> ontimetravelResponses = new List<ITimeTravelResponse>();
     private List<ITimeTravelResponse> offtimetravelResponses = new List<ITimeTravelResponse>();
 
+   
     bool activatetimeTravelAnim = false;
     
     bool thumbDownAnim = false;
@@ -84,6 +85,7 @@ public class TimeTravelControl : MonoBehaviour
 
                 if (inPresent)
                 {
+
                     inPresent = false;
                     Camera.main.cullingMask &= ~(1 << 10);  //Add past layermask into camera's culling mask (so that you can see all past objects)
                     Camera.main.cullingMask |= (1 << 9);    //Remove present layermask into camera's culling mask (so that you cannot see all present objects)

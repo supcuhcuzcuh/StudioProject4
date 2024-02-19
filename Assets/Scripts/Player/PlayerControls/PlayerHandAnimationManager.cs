@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Animations.Rigging;
 
 public class PlayerHandAnimationManager : MonoBehaviour
 {
-
+    [SerializeField] private GameObject handTarget;
+    [SerializeField] private TwoBoneIKConstraint armMover;
     List<GameObject> transformTargets = new List<GameObject>();
     List<int> speed = new List<int>();
     bool startAnimation = false;
@@ -21,9 +23,10 @@ public class PlayerHandAnimationManager : MonoBehaviour
     {
         if (startAnimation == true)
         {
-            if (!TargetReached(transform.position, transformTargets[index].transform.position))
+            if (!TargetReached(handTarget.transform.position, transformTargets[index].transform.position) && TargetReached(handTarget.transform.localRotation.eulerAngles, transformTargets[index].transform.localRotation.eulerAngles))
             {
-                transform.position = Vector3.Lerp(transform.position, transformTargets[index].transform.position, 0.5f * Time.deltaTime);
+                //handTarget.transform.localRotation.eulerAngles = Vector3.Lerp(handTarget.transform.localRotation.eulerAngles, transformTargets[index].transform.localRotation.eulerAngles, 2 * Time.deltaTime);
+                handTarget.transform.position = Vector3.Lerp(handTarget.transform.position, transformTargets[index].transform.position, 2 * Time.deltaTime);
             }
             else
             {
@@ -57,10 +60,10 @@ public class PlayerHandAnimationManager : MonoBehaviour
         return false;
     }
 
-    public void PlayAnimation(List<GameObject> _gameObjects, List<int> _speeds)
+    public void PlayAnimation(List<GameObject> _gameObjects)
     {
+        armMover.weight = 1;
         transformTargets = _gameObjects;
-        speed = _speeds;
         startAnimation = true;
     }
 }
