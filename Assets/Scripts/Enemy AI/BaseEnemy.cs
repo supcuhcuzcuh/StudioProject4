@@ -4,6 +4,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public abstract class BaseEnemy : MonoBehaviour
 {
+    public PlayerStats enemyStats;
     public Weapon enemyWeapon;
     public Rigidbody rb;
     public Animator enemyAnimator;

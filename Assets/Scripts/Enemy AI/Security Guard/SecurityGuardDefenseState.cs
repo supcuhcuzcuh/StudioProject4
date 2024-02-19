@@ -18,6 +18,7 @@ public class SecurityGuardDefenseState : State
 
     [Header("DEBUG")]
     public TMPro.TMP_Text distFromPlayerText;
+
     private void Start()
     {
         _enemyRef = transform.root.GetComponent<BaseEnemy>();
@@ -53,11 +54,16 @@ public class SecurityGuardDefenseState : State
                 _enemyRef.rb.velocity = Vector3.zero;
             }
 
-            if (distFromPlayer < 4.0f) // Check if enemy close to play, then play stand shooting animation
+            if (distFromPlayer < 7.0f) // Check if enemy close to play, then play stand shooting animation
             {
                 _destinationTracker.agent.ResetPath();
 
-                if ( Time.time > _nextTimeToShoot)     //Main action for shooting
+                if (transform.root.GetComponent<BaseEnemy>().enemyWeapon.clipSizeCurr <= 0)
+                {
+                    transform.root.GetComponent<BaseEnemy>().enemyAnimator.SetTrigger("isReload");
+                    transform.root.GetComponent<BaseEnemy>().enemyWeapon.clipSizeCurr = transform.root.GetComponent<BaseEnemy>().enemyStats.playerAmmo;
+                }
+                if ( Time.time > _nextTimeToShoot)  //Main action for shooting
                 {
                     // set cooldown delay
                     transform.root.GetComponent<BaseEnemy>().enemyWeapon.OnMouse1();
