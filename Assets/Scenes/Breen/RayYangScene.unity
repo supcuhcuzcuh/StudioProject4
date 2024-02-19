@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028331, g: 0.2257133, b: 0.3069217, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -688,7 +688,7 @@ MonoBehaviour:
   priority: 0
   blendDistance: 0
   weight: 1
-  sharedProfile: {fileID: 11400000, guid: a6560a915ef98420e9faacc1c7438823, type: 2}
+  sharedProfile: {fileID: 11400000, guid: 98d00005eccc7284288c60fcda353c9f, type: 2}
 --- !u!4 &86951540
 Transform:
   m_ObjectHideFlags: 0
@@ -15277,8 +15277,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed3146d9d84295e42b91911fc3b44e40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  helicopter: {fileID: 1810057946}
-  exitDoor: {fileID: 1432271426}
 --- !u!1 &688235759
 GameObject:
   m_ObjectHideFlags: 0
@@ -35773,6 +35771,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerStats: {fileID: 11400000, guid: 9ef780fe5faa6ab4e81704a29a08ce8e, type: 2}
+  animator: {fileID: 0}
 --- !u!114 &1443341643
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35786,6 +35785,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerStats: {fileID: 11400000, guid: 9ef780fe5faa6ab4e81704a29a08ce8e, type: 2}
+  animator: {fileID: 0}
+  rigs: {fileID: 0}
+  modelOffset: {fileID: 0}
 --- !u!65 &1443341644
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -39492,18 +39494,6 @@ Transform:
   m_Father: {fileID: 1793693412}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: -34.219, z: 0}
---- !u!114 &1810057946 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2068001391651114979, guid: 2936610a03aa9ce46a3a1fda2ca4dd24,
-    type: 3}
-  m_PrefabInstance: {fileID: 2068001391309616015}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 84189618bd6bc394c8d8b4a07e6eade9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1819359843
 GameObject:
   m_ObjectHideFlags: 0

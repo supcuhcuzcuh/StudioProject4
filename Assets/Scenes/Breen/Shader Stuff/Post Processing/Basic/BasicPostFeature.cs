@@ -25,6 +25,11 @@ public class BasicPostFeature : ScriptableRendererFeature
         int tintId = Shader.PropertyToID("_Temp");
         private RenderTargetIdentifier src, tint;
 
+        [HideInInspector] public bool isActive = true;
+
+        private float sizeSet;
+        private bool isInit = false;
+
         public BasicPass()
         {
             if (!mat)
@@ -48,9 +53,34 @@ public class BasicPostFeature : ScriptableRendererFeature
 
             BasicPost basicPost = volume.GetComponent<BasicPost>();
 
-            if (basicPost.IsActive())
+            if (!isInit)
             {
-                mat.SetFloat("thickness", (float)basicPost.thickness);
+                sizeSet = (float)basicPost.initialCircleSize;
+                isInit = true;
+            }
+
+            if (!isActive)
+            {
+                sizeSet = (float)basicPost.initialCircleSize;
+
+                mat.SetFloat("size", sizeSet);
+            }
+
+            if (isActive)
+            {
+                // Reset
+                if (mat.GetFloat("size") <= 0)
+                {
+                    sizeSet = (float)basicPost.initialCircleSize;
+                    isActive = false;
+                }
+                // Expand
+                else
+                {
+                    sizeSet -= (Time.deltaTime * (float)basicPost.timeScale);
+                }
+
+                mat.SetFloat("size", sizeSet);
 
                 Blit(commandBuffer, src, tint, mat, 0);
                 Blit(commandBuffer, tint, src);
