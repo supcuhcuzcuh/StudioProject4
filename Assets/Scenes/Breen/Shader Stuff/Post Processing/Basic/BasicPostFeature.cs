@@ -19,6 +19,11 @@ public class BasicPostFeature : ScriptableRendererFeature
         basicPass = new BasicPass();
     }
 
+    public void Trigger()
+    {
+        basicPass.isActive = true;
+    }
+
     public class BasicPass : ScriptableRenderPass
     {
         private Material mat;
@@ -38,10 +43,6 @@ public class BasicPostFeature : ScriptableRendererFeature
             renderPassEvent = RenderPassEvent.BeforeRenderingPostProcessing;
         }
 
-        public void Trigger()
-        {
-            isActive = true;
-        }
 
         public override void OnCameraSetup(CommandBuffer cmd, ref RenderingData renderingData)
         {
