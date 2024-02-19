@@ -56,7 +56,6 @@ public class GunController : MonoBehaviour , ISprintResponse
 
                 if (Input.GetKeyDown(KeyCode.Q))    //Qnequip Weapon
                 {
-                    
                     Camera.main.transform.DetachChildren();
                     currWeapon.UnsetWeapon();
                     currWeapon = null;
@@ -127,7 +126,6 @@ public class GunController : MonoBehaviour , ISprintResponse
             {
                 shootResponse.OnMouse1();
             }
-
         }
 
         public void SubscribeShootResponse(IShootResponse shootResponse)
@@ -149,7 +147,5 @@ public class GunController : MonoBehaviour , ISprintResponse
         {
             _onGrenadeEvent += grenadeEvent;
         }
-
-
 }
 

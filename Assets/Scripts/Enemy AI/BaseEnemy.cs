@@ -4,16 +4,10 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public abstract class BaseEnemy : MonoBehaviour
 {
+    public Weapon enemyWeapon;
     public Rigidbody rb;
-    [SerializeField] protected Animator enemyAnimator;
+    public Animator enemyAnimator;
 
     protected float health;
     protected float hitsToDie;
-    private void Start()
-    {
-        if (enemyAnimator != null)
-        {
-            enemyAnimator = GetComponent<Animator>();
-        }
-    }
 }

@@ -11,27 +11,15 @@ public class SecurityGuardPatrolState : State
     public SecurityGuardAlertState alertState;
 
     private WaypointsTracker _destinationTracker;
-    [SerializeField] private Transform trackerParent;
 
     private void Start()
     {
-       // _enemyAnim = GameObject.FindWithTag("ENEMY").GetComponent<Animator>();
         _destinationTracker = transform.root.GetComponent<WaypointsTracker>();
-
-        //if (_enemyAnim != null)
-        //{
-        //    _enemyAnim.SetBool("isPatrol", true);
-        //}
-        //else
-        //{
-        //    Debug.Log("jerald is lesbian | wow transgender represnstation");
-        //}
     }
     public override State PlayCurrentState()
     {
         if (playerDetector.IsDetected())    
         {
-           // _enemyAnim.SetBool("isPatrol", false);  
             _destinationTracker.enabled = false;
             return alertState; // The returned state will play in Update
         }

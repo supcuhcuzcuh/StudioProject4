@@ -63,7 +63,7 @@ public class FPSControls : Entity   //Main Controller for all player movements, 
         movementControl.Movement();
     }
 
-
+  
     public override void OnDamaged(float _damage)
     {
         health -= _damage;
