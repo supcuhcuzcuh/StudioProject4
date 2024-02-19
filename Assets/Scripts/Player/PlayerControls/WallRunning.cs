@@ -39,22 +39,15 @@ public class WallRunning : MonoBehaviour
        
     }
 
-    private void Update()
-    {
-       
-      
-       
-    }
-
     private void FixedUpdate()
     {
         StateMachine();
-        CheckForWall();
+        //CheckForWall();
         if (pm)
         {
             WallRunningMovement();
             // Rotate the camera based on wall running direction
-            RotateCamera();
+            //RotateCamera();
         }
 
         // Check for wall jump input
@@ -74,7 +67,6 @@ public class WallRunning : MonoBehaviour
             }
         }
 
-
         if (Physics.Raycast(transform.position, -Camera.main.transform.right, out leftWallhit, wallCheckDistance))
         {
             if (leftWallhit.collider.gameObject.tag == "Wall")
@@ -82,6 +74,8 @@ public class WallRunning : MonoBehaviour
                 wallLeft = true;
             }
         }
+
+        Debug.Log("Left: " + wallLeft + " Right: " + wallRight);
     }
 
     private bool AboveGround()
@@ -128,9 +122,8 @@ public class WallRunning : MonoBehaviour
         {
             if (!pm)
             {
-                StartWallRun();
-
-                
+                Debug.Log("Start wall run");
+                StartWallRun();         
             }
         }
 
@@ -139,8 +132,8 @@ public class WallRunning : MonoBehaviour
         {
             if (pm)
             {
-                StopWallRun();
-              
+                Debug.Log("Stop wall run");
+                StopWallRun();      
             }
         }
     }
@@ -171,7 +164,7 @@ public class WallRunning : MonoBehaviour
         //if (downwardsRunning)
         //    rb.velocity = new Vector3(rb.velocity.x, -wallClimbSpeed, rb.velocity.z);
 
-      
+
     }
 
     private void WallJump()
@@ -193,4 +186,34 @@ public class WallRunning : MonoBehaviour
         pm = false;
         rb.useGravity = true;
     }
+
+    void OnCollisionExit(Collision col)
+    {
+        if(col.gameObject.tag == "Wall")
+        {
+            Debug.Log("Leave wall");         
+            wallLeft = false;
+            wallRight = false;
+        }
+    }
+
+    void OnCollisionEnter(Collision col)
+    {
+        if (Physics.Raycast(transform.position, Camera.main.transform.right, out rightWallhit, wallCheckDistance))
+        {
+            if (rightWallhit.collider.gameObject.tag == "Wall")
+            {
+                wallRight = true;
+            }
+        }
+
+        if (Physics.Raycast(transform.position, -Camera.main.transform.right, out leftWallhit, wallCheckDistance))
+        {
+            if (leftWallhit.collider.gameObject.tag == "Wall")
+            {
+                wallLeft = true;
+            }
+        }
+    }
+
 }

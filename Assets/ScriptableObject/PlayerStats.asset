@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   moveSpeedMultiplier: 1
-  jumpForce: 5
+  jumpForce: 7
   canJump: 1
   playerAmmo: 802
   playerGrenades: 5
   currState: 0
-  currAdditionalState: 3
+  currAdditionalState: 0

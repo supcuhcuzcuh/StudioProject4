@@ -169,7 +169,7 @@ public class TimeTravelControl : MonoBehaviour
 
     IEnumerator DetectPressandHold()
     {
-        yield return new WaitForSeconds(0.1f);    
+        yield return new WaitForSeconds(0.4f);    
         if(Input.GetKey(KeyCode.F))
         {
             if (deviceOut == false)
