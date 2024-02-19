@@ -12,8 +12,11 @@ public class FPSControls : Entity   //Main Controller for all player movements, 
     private CrouchControl crouchControl;
     private GunController gunController;
     private TimeTravelControl timetravelControl;
-    private PlayerAnimatorController playeranimatorController;
+    private InteractablesActivator interactablesActivator;
 
+    [Header("Serialize Stats")]
+    [SerializeField]
+    private float interactionRadius = 2;
     [SerializeField]
     private PerlinNoiseShake perlinNoiseShake;
     [SerializeField]
@@ -35,17 +38,18 @@ public class FPSControls : Entity   //Main Controller for all player movements, 
         crouchControl = GetComponent<CrouchControl>();
         gunController = GetComponent<GunController>();
         sprintControl = GetComponent<SprintControl>();
-        playeranimatorController = GetComponent<PlayerAnimatorController>();
         timetravelControl = GetComponent<TimeTravelControl>();
-        playerStatsUIManager.UpdateHealthUI(health.ToString());
+        interactablesActivator = gameObject.AddComponent<InteractablesActivator>();  // Create when run
+        interactablesActivator.Init(transform, interactionRadius);  // Setting variable for InteractablesActivator 
+        //playerStatsUIManager.UpdateHealthUI(health.ToString());
 
-        gunController.SubscribeShootResponse(playerStatsUIManager);
+        //gunController.SubscribeShootResponse(playerStatsUIManager);
         gunController.SubscribeShootResponse(cameraRecoil);
 
-        gunController.SubscribeReloadResponse(playerStatsUIManager.UpdateAmmoUI);
+        //gunController.SubscribeReloadResponse(playerStatsUIManager.UpdateAmmoUI);
         gunController.SubscribeReloadResponse(playerStatsUIManager.UpdateReloadTimerUI);
 
-        gunController.SubscribeSwapResponse(playerStatsUIManager.UpdateAmmoUI);
+        //gunController.SubscribeSwapResponse(playerStatsUIManager.UpdateAmmoUI);
         gunController.SubscribeGrenadeResponse(playerStatsUIManager.UpdateGrenadeUI);
 
         sprintControl.Subscribe(gunController);
@@ -59,7 +63,7 @@ public class FPSControls : Entity   //Main Controller for all player movements, 
         crouchControl.ActivateCrouch();
         gunController.HandleShooting();
         timetravelControl.TimeTravel();
-        playeranimatorController.PlayerAnimationUpdate();
+        interactablesActivator.Handle();
     }
 
     private void FixedUpdate()
@@ -67,7 +71,7 @@ public class FPSControls : Entity   //Main Controller for all player movements, 
         movementControl.Movement();
     }
 
-
+        
     public override void OnDamaged(float _damage)
     {
         health -= _damage;
