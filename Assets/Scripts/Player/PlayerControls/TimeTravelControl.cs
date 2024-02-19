@@ -18,6 +18,9 @@ public class TimeTravelControl : MonoBehaviour
 
     [SerializeField] Camera altTimelineCam;
 
+    [Header("Shader Stuff")]
+    [SerializeField] private BasicPostFeature basicPostFeature;
+
     Coroutine pressandHold = null;
 
     private List<ITimeTravelResponse> ontimetravelResponses = new List<ITimeTravelResponse>();
@@ -77,6 +80,8 @@ public class TimeTravelControl : MonoBehaviour
             } 
             else
             {
+                basicPostFeature.TriggerShader();  // Trigger the time travel converging circle shader
+
                 if (inPresent)
                 {
                     inPresent = false;

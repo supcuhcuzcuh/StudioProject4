@@ -8,6 +8,10 @@ using UnityEngine.Rendering.Universal;
 public class BasicPostFeature : ScriptableRendererFeature
 {
     private BasicPass basicPass;
+    public void TriggerShader()
+    {
+        basicPass.isActive = true;
+    }
 
     public override void AddRenderPasses(ScriptableRenderer renderer, ref RenderingData renderingData)
     {

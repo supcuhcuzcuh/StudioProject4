@@ -15,10 +15,10 @@ MonoBehaviour:
   active: 1
   timeScale:
     m_OverrideState: 1
-    m_Value: 100
+    m_Value: 150
   initialCircleSize:
     m_OverrideState: 1
-    m_Value: 250
+    m_Value: 500
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
