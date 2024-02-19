@@ -81,7 +81,7 @@ public class TimeTravelControl : MonoBehaviour
             } 
             else
             {
-                basicPostFeature.Trigger();  // Trigger the time travel converging circle shader
+                basicPostFeature.TriggerShader();  // Trigger the time travel converging circle shader
 
                 if (inPresent)
                 {
