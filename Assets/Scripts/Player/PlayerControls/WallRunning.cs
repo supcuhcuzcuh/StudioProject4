@@ -5,7 +5,6 @@ using UnityEngine;
 public class WallRunning : MonoBehaviour
 {
     [Header("Wallrunning")]
-    public LayerMask whatIsWall;
     public LayerMask whatIsGround;
     public float wallRunForce;
     public float wallClimbSpeed;
@@ -67,8 +66,22 @@ public class WallRunning : MonoBehaviour
 
     private void CheckForWall()
     {
-        wallRight = Physics.Raycast(transform.position, orientation.right, out rightWallhit, wallCheckDistance, whatIsWall);
-        wallLeft = Physics.Raycast(transform.position, -orientation.right, out leftWallhit, wallCheckDistance, whatIsWall);
+        if (Physics.Raycast(transform.position, Camera.main.transform.right, out rightWallhit, wallCheckDistance))
+        {
+            if (rightWallhit.collider.gameObject.tag == "Wall")
+            {
+                wallRight = true;
+            }
+        }
+
+
+        if (Physics.Raycast(transform.position, -Camera.main.transform.right, out leftWallhit, wallCheckDistance))
+        {
+            if (leftWallhit.collider.gameObject.tag == "Wall")
+            {
+                wallLeft = true;
+            }
+        }
     }
 
     private bool AboveGround()
@@ -107,8 +120,8 @@ public class WallRunning : MonoBehaviour
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
 
-        upwardsRunning = Input.GetKey(upwardsRunKey);
-        downwardsRunning = Input.GetKey(downwardsRunKey);
+        //upwardsRunning = Input.GetKey(upwardsRunKey);
+        //downwardsRunning = Input.GetKey(downwardsRunKey);
 
         // State 1 - Wallrunning
         if((wallLeft || wallRight) && verticalInput > 0 && AboveGround())
@@ -146,20 +159,17 @@ public class WallRunning : MonoBehaviour
 
         Vector3 wallForward = Vector3.Cross(wallNormal, transform.up);
 
-        if ((orientation.forward - wallForward).magnitude > (orientation.forward - -wallForward).magnitude)
+        if ((Camera.main.transform.forward - wallForward).magnitude > (Camera.main.transform.forward - -wallForward).magnitude)
             wallForward = -wallForward;
 
         // forward force
         rb.AddForce(wallForward * wallRunForce);
 
-
-
-
-        // upwards/downwards force
-        if (upwardsRunning)
-            rb.velocity = new Vector3(rb.velocity.x, wallClimbSpeed, rb.velocity.z);
-        if (downwardsRunning)
-            rb.velocity = new Vector3(rb.velocity.x, -wallClimbSpeed, rb.velocity.z);
+        //// upwards/downwards force
+        //if (upwardsRunning)
+        //    rb.velocity = new Vector3(rb.velocity.x, wallClimbSpeed, rb.velocity.z);
+        //if (downwardsRunning)
+        //    rb.velocity = new Vector3(rb.velocity.x, -wallClimbSpeed, rb.velocity.z);
 
       
     }

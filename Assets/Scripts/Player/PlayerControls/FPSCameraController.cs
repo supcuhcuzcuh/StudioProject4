@@ -11,15 +11,14 @@ public class FPSCameraController : MonoBehaviour
     public float mouseSensitivity = 2.0f;
 
     [SerializeField] GameObject playerModelOffset;
+    [SerializeField] Transform headPos;
     [SerializeField] WallRunning wallRunning;
 
     //private GameObject player;
-    private bool debugLock;
-
+    private bool debugLock = false;  //debugging tool, presses escape to lock the player's view
     // Start is called before the first frame update
     void Start()
-    {
-        debugLock = false;  //debugging tool, presses escape to lock the player's view
+    {    
         Cursor.lockState = CursorLockMode.Locked;
     }
 
@@ -38,8 +37,9 @@ public class FPSCameraController : MonoBehaviour
                 debugLock = false;
             }
             
-        }
+        }       
     }
+
 
     private void HandleCameraRotation()
     {
@@ -67,9 +67,10 @@ public class FPSCameraController : MonoBehaviour
 
             transform.Rotate(0, mouseX, 0);
             Camera.main.transform.localRotation = Quaternion.Euler(verticalRotation, horizontalRotation, 0);
+            Camera.main.transform.position = Vector3.Slerp(Camera.main.transform.position, headPos.position, 10 * Time.deltaTime);
+
 
             playerModelOffset.transform.forward = new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.forward.z);
         }
     }
-   
 }

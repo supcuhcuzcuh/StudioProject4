@@ -7,12 +7,12 @@ public class Sliding : MonoBehaviour
     [Header("References")]
     [SerializeField]
     private PlayerStats playerStats;
-    private Rigidbody rb;
+    public Rigidbody rb;
 
     [Header("Sliding")]
     public float maxSlideTime;
     public float slideForce;
-    private float slideTimer;
+    public float slideTimer;
 
     public float slideYScale;
     private float startYScale;
@@ -34,65 +34,78 @@ public class Sliding : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
-
-
     }
 
-    private void Update()
+    //private void Update()
+    //{
+    //    horizontalInput = Input.GetAxisRaw("Horizontal");
+    //    verticalInput = Input.GetAxisRaw("Vertical");
+
+    //    if (Input.GetKeyDown(slideKey) && playerStats.currState == PlayerStats.PLAYERSTATES.SPRINT)
+    //        StartSlide();
+
+    //    if (Input.GetKeyUp(slideKey) && sliding)
+    //        StopSlide();
+    //}
+
+    //private void FixedUpdate()
+    //{
+    //    if (sliding)
+    //        SlidingMovement();
+    //}
+
+    private void StartSlide()
+    {
+        sliding = true;
+        slideTimer = maxSlideTime;
+        rb.AddForce(Vector3.down * 5f, ForceMode.Impulse);     
+    }
+
+    public void SlidingUpdate()
     {
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
 
-        if (Input.GetKeyDown(slideKey) && playerStats.currState == PlayerStats.PLAYERSTATES.SPRINT)
+        if (Input.GetKeyDown(slideKey))
             StartSlide();
 
         if (Input.GetKeyUp(slideKey) && sliding)
             StopSlide();
     }
 
-    private void FixedUpdate()
+    public void SlidingFixedUpdate()
     {
         if (sliding)
-            SlidingMovement();
-    }
-
-    private void StartSlide()
-    {
-        sliding = true;
-
-
-        rb.AddForce(Vector3.down * 5f, ForceMode.Impulse);
-
-        slideTimer = maxSlideTime;
-    }
-
-    private void SlidingMovement()
-    {
-        Vector3 inputDirection = Camera.main.transform.forward * verticalInput + Camera.main.transform.right * horizontalInput;
-
-        // sliding normal
-        if (!OnSlope() || rb.velocity.y > -0.1f)
         {
-            rb.AddForce(inputDirection.normalized * slideForce, ForceMode.Force);
+            Vector3 inputDirection = Camera.main.transform.forward * verticalInput + Camera.main.transform.right * horizontalInput;
 
-            slideTimer -= Time.deltaTime;
+            // sliding normal
+            if (!OnSlope() || rb.velocity.y > -0.1f)
+            {
+                rb.AddForce(inputDirection.normalized * slideForce, ForceMode.Force);
+
+                slideTimer -= Time.deltaTime;
+            }
+
+            // sliding down a slope
+            else
+            {
+                rb.AddForce(GetSlopeMoveDirection(inputDirection) * slideForce, ForceMode.Force);
+            }
+
+            if (slideTimer <= 0)
+                StopSlide();
         }
-
-        // sliding down a slope
-        else
-        {
-            rb.AddForce(GetSlopeMoveDirection(inputDirection) * slideForce, ForceMode.Force);
-        }
-
-        if (slideTimer <= 0)
-            StopSlide();
+            
     }
 
     private void StopSlide()
     {
+        if (playerStats.currAdditionalState == PlayerStats.ADDITIONALPLAYERSTATES.SLIDE)
+        {
+            playerStats.currAdditionalState = PlayerStats.ADDITIONALPLAYERSTATES.NONE;
+        }
         sliding = false;
-
-
     }
 
 

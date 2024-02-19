@@ -19,4 +19,4 @@ MonoBehaviour:
   playerAmmo: 802
   playerGrenades: 5
   currState: 0
-  currAdditionalState: 0
+  currAdditionalState: 3

@@ -16,6 +16,8 @@ public class CrouchControl : MonoBehaviour
     [SerializeField] private GameObject rigs;
     [SerializeField] private GameObject modelOffset;
 
+    private Sliding sliding;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +25,8 @@ public class CrouchControl : MonoBehaviour
         col = GetComponent<BoxCollider>();
         crouchCameraHeightMultiplier = 0.4f;
         crouchHitboxMultiplier = 1.75f;
+
+        sliding = GetComponent<Sliding>();
     }
 
     public void ActivateCrouch()
@@ -31,8 +35,7 @@ public class CrouchControl : MonoBehaviour
         {
             if(playerStats.currState == PlayerStats.PLAYERSTATES.SPRINT)
             {
-                playerStats.currAdditionalState = PlayerStats.ADDITIONALPLAYERSTATES.SLIDE;
-                animator.SetInteger("Crouch", 0);
+                playerStats.currAdditionalState = PlayerStats.ADDITIONALPLAYERSTATES.SLIDE;                     
             }
             else if (playerStats.currAdditionalState == PlayerStats.ADDITIONALPLAYERSTATES.CROUCH)
             {
@@ -79,7 +82,7 @@ public class CrouchControl : MonoBehaviour
     void Crouch()
     {
         //Move the camera down             
-        Camera.main.transform.position = new Vector3(Camera.main.transform.position.x, Camera.main.transform.position.y - crouchCameraHeightMultiplier, Camera.main.transform.position.z);
+        //Camera.main.transform.position = new Vector3(Camera.main.transform.position.x, Camera.main.transform.position.y - crouchCameraHeightMultiplier, Camera.main.transform.position.z);
         rigs.transform.position = new Vector3(rigs.transform.position.x, rigs.transform.position.y - crouchCameraHeightMultiplier, rigs.transform.position.z);
         modelOffset.transform.position = new Vector3(modelOffset.transform.position.x, modelOffset.transform.position.y + crouchCameraHeightMultiplier, modelOffset.transform.position.z);
 
@@ -91,7 +94,7 @@ public class CrouchControl : MonoBehaviour
     void Uncrouch()
     {
         //Move the camera up
-        Camera.main.transform.position = new Vector3(Camera.main.transform.position.x, Camera.main.transform.position.y + crouchCameraHeightMultiplier, Camera.main.transform.position.z); 
+        //Camera.main.transform.position = new Vector3(Camera.main.transform.position.x, Camera.main.transform.position.y + crouchCameraHeightMultiplier, Camera.main.transform.position.z); 
         rigs.transform.position = new Vector3(rigs.transform.position.x, rigs.transform.position.y + crouchCameraHeightMultiplier, rigs.transform.position.z);
         modelOffset.transform.position = new Vector3(modelOffset.transform.position.x, modelOffset.transform.position.y - crouchCameraHeightMultiplier, modelOffset.transform.position.z);
 
