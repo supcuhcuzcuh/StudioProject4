@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class AssaultRifle : HitscanWeapon
 {
-
     WaitForSeconds shotDuration = new WaitForSeconds(0.07f);
 
     private LineRenderer laserLine;
@@ -83,6 +82,5 @@ public class AssaultRifle : HitscanWeapon
 
         //Debug.Log("Current: " + transform.forward + "  Target: " + Camera.main.transform.forward);
     }
-
 }
 

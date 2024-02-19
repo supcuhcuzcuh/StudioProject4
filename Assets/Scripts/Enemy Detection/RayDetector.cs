@@ -13,13 +13,6 @@ public class RayDetector : MonoBehaviour
         Gizmos.DrawLine(toStart.position, toStart.position + toStart.transform.forward * 10);
     }
 
-    private void Update()
-    {
-        //if (IsDetected())
-        //{
-        //    Debug.Log("DETECTED PLAYER");
-        //}
-    }
     // Update is called once per frame
     public bool IsDetected()
     {
@@ -28,8 +21,6 @@ public class RayDetector : MonoBehaviour
             //Debug.Log(hit.transform.gameObject.name);
             if (hit.transform.gameObject == toCompare)
             {
-                // Player Detected
-                //Debug.Log("TAN");
                 return true;
             }
             else

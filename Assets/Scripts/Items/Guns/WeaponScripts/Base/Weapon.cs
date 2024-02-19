@@ -4,7 +4,6 @@ using UnityEngine;
 
 public abstract class Weapon : MonoBehaviour, IShootResponse
 {
-   
     [Tooltip("End point of gun where shots appear")]
     [SerializeField] protected Transform muzzlePosition;
     [Tooltip("Time between shots / smaller = higher rate of fire")]
@@ -143,6 +142,4 @@ public abstract class Weapon : MonoBehaviour, IShootResponse
         }
         isReloading = false;
     }
-
-
 }

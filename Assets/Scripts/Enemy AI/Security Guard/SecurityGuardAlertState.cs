@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-[RequireComponent(typeof(Renderer))]
+using UnityEngine.AI;
+
 public class SecurityGuardAlertState : State
 {
     [Header("Target to detect during raycast")]
@@ -17,27 +18,26 @@ public class SecurityGuardAlertState : State
     public SecurityGuardDefenseState defenseState;
     public bool isOutOfSight;
 
-    private Renderer _rootRenderer; // Transform root
-    private Color _defaultColor = Color.white;
+    private WaypointsTracker _destinationTracker;
+
     private void Start()
     {
-        _rootRenderer = transform.root.GetComponent<Renderer>();
         _timer = 0;
+        _destinationTracker = transform.root.GetComponent<WaypointsTracker>();
     }
     public override State PlayCurrentState()
     {
         if (!playerDetector.IsDetected())
         {
-            _rootRenderer.material.color = _defaultColor;
+            _timer = 0.0f;
             return patrolState;
         }   
         else
         {
-            _timer += Time.deltaTime;
-            transform.root.LookAt(target.transform);
-            transform.root.GetComponent<BaseEnemy>().rb.velocity = Vector3.zero;
-            _rootRenderer.material.color = Color.yellow;
-            if (_timer >= toDefenseTime)
+            _timer += Time.deltaTime * 2.0f;
+            _destinationTracker.agent.ResetPath(); // Stop current path
+            transform.root.GetComponent<Rigidbody>().velocity = Vector3.zero;
+            if (_timer >= toDefenseTime)    
             {
                 return defenseState;
             }

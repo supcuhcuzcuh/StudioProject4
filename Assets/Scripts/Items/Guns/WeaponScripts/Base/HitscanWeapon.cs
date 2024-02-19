@@ -11,33 +11,30 @@ public abstract class HitscanWeapon : Weapon
 
     [SerializeField] protected LayerMask layermask;
 
-    private void Start()
-    {
-        layermask = ~0;         //set layermask to all layers
-        layermask |= (1 << 7);    //remove player layer
-        layermask |= (1 << 8);    //remove pickup layer
-
-        Init();
-    }
-
-    protected virtual void Init()
-    {
-
-    }
+    //[SerializeField] protected Vector3 startFrom;
 
     protected void DoHitscan()
     {
-        Vector3 rayOrigin = Camera.main.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0.0f));
+       // Vector3 rayOrigin = Camera.main.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0.0f));
 
-        RaycastHit hit;      
+        RaycastHit hit;
 
-        if (Physics.Raycast(rayOrigin, Camera.main.transform.forward, out hit, weaponRange, layermask))
+        //if (Physics.Raycast(rayOrigin, Camera.main.transform.forward, out hit, weaponRange, layermask))
+        //{
+        //    HitscanHit(hit);
+        //}
+        //else
+        //{
+        //    HitscanMiss(rayOrigin);
+        //}
+
+        if (Physics.Raycast(muzzlePosition.transform.position, muzzlePosition.transform.up, out hit, weaponRange, layermask))
         {
             HitscanHit(hit);
         }
         else
         {
-            HitscanMiss(rayOrigin);
+            HitscanMiss(muzzlePosition.transform.position);
         }
     }
 
