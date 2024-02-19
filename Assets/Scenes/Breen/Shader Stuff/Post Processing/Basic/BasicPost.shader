@@ -4,7 +4,6 @@ Shader "CustomPost/BasicPost"
     {
         _MainTex ("Main Texture", 2D) = "white" {}
         size ("Size", float) = 1
-        slownessOfExpansion ("Slowness Of Expansion", float) = 10
     }
     SubShader
     {
@@ -19,7 +18,6 @@ Shader "CustomPost/BasicPost"
             #include "UnityCG.cginc"
 
             float size;
-            float slownessOfExpansion;
 
             sampler2D _MainTex;
             float4 _MainTex_ST;
@@ -62,6 +60,10 @@ Shader "CustomPost/BasicPost"
 
                 // Inside the circle if the distance is less than the radius
                 if (dist < size * depth)
+                {
+                    return float4(mainTex);
+                }
+                else if (dist > (size * depth) + 0.02)
                 {
                     return float4(mainTex);
                 }

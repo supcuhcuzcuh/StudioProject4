@@ -28,6 +28,7 @@ public class BasicPostFeature : ScriptableRendererFeature
         [HideInInspector] public bool isActive = true;
 
         private float sizeSet;
+        private bool isInit = false;
 
         public BasicPass()
         {
@@ -51,25 +52,32 @@ public class BasicPostFeature : ScriptableRendererFeature
             VolumeStack volume = VolumeManager.instance.stack;
 
             BasicPost basicPost = volume.GetComponent<BasicPost>();
-            mat.SetFloat("slownessOfExpansion", (float)basicPost.slownessOfExpansion);
+
+            if (!isInit)
+            {
+                sizeSet = (float)basicPost.initialCircleSize;
+                isInit = true;
+            }
 
             if (!isActive)
             {
+                sizeSet = (float)basicPost.initialCircleSize;
 
+                mat.SetFloat("size", sizeSet);
             }
 
             if (isActive)
             {
                 // Reset
-                if (mat.GetFloat("size") >= (float)basicPost.slownessOfExpansion * 100)
+                if (mat.GetFloat("size") <= 0)
                 {
-                    sizeSet = 0;
+                    sizeSet = (float)basicPost.initialCircleSize;
                     isActive = false;
                 }
                 // Expand
                 else
                 {
-                    sizeSet += Time.deltaTime * (float)basicPost.timeScale;
+                    sizeSet -= (Time.deltaTime * (float)basicPost.timeScale);
                 }
 
                 mat.SetFloat("size", sizeSet);
