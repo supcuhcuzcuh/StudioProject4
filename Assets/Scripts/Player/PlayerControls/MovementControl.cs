@@ -33,7 +33,7 @@ public class MovementControl : MonoBehaviour
 
     public void Movement()
     {
-        if (GetComponent<WallRunning>().pm) return;
+        //if (GetComponent<WallRunning>().pm) return;
 
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");

@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5986145544414883047}
-  - component: {fileID: 5455293679334990452}
+  - component: {fileID: 3132162582665501647}
   - component: {fileID: 6909677117997651027}
   - component: {fileID: 7879373456164667503}
   - component: {fileID: 6839302233831337837}
@@ -30,7 +30,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5428221024870224484}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 9.987, y: -6.352, z: 9.456}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -40,7 +40,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5455293679334990452
+--- !u!114 &3132162582665501647
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -49,7 +49,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5428221024870224484}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 38d4dd97898a87e4f86bd4acf69a3741, type: 3}
+  m_Script: {fileID: 11500000, guid: 591837f5ff20fb246a6f443d36f83dda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   muzzlePosition: {fileID: 6467824576305610701}
@@ -59,8 +59,8 @@ MonoBehaviour:
   clipSizeCurr: 10
   reloadSpeed: 1
   isReloading: 0
-  playerStat: {fileID: 11400000, guid: 9ef780fe5faa6ab4e81704a29a08ce8e, type: 2}
-  recoilStrength: 20
+  playerStat: {fileID: 11400000, guid: 503b5eec73e498c4a89956c9a104709f, type: 2}
+  recoilStrength: 0
   recoilMultiplier: 1
   setWeaponPosition: {x: 0.35, y: -0.2, z: 0.4}
   bulletHoleSpawner: {fileID: 0}
@@ -70,7 +70,7 @@ MonoBehaviour:
   hitForce: 100
   layermask:
     serializedVersion: 2
-    m_Bits: 375
+    m_Bits: 0
   sniperScopeOverlay: {fileID: 0}
   sniperModel: {fileID: 4359957985288949186}
 --- !u!114 &6909677117997651027
