@@ -52,6 +52,10 @@ public abstract class Weapon : MonoBehaviour, IShootResponse
         }
     }
 
+    protected virtual void Init()
+    {
+
+    }
 
     public Vector3 GetMuzzlePosition()
     {
