@@ -6,6 +6,7 @@ public class JumpControl : MonoBehaviour
 {
     [SerializeField]
     private PlayerStats playerStats;
+    [SerializeField] Animator animator;
 
     private Rigidbody rb;
 
@@ -17,11 +18,12 @@ public class JumpControl : MonoBehaviour
 
     public void Jump()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && playerStats.canJump == true && playerStats.currState != PlayerStats.PLAYERSTATES.CROUCH && playerStats.currState != PlayerStats.PLAYERSTATES.PRONE)
+        if (Input.GetKeyDown(KeyCode.Space) && playerStats.canJump == true && playerStats.currAdditionalState == PlayerStats.ADDITIONALPLAYERSTATES.NONE)
         {
             playerStats.canJump = false;
             rb.AddForce((transform.up)* playerStats.jumpForce, ForceMode.Impulse);
             playerStats.currState = PlayerStats.PLAYERSTATES.JUMP;
+            animator.SetInteger("MoveCounter", 3);
         }
     }
 

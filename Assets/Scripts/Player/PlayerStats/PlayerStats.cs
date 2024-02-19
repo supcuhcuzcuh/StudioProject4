@@ -18,11 +18,17 @@ public class PlayerStats : ScriptableObject
         IDLE,
         WALK,
         SPRINT,
-        JUMP,
+        JUMP
+    };
+
+    public enum ADDITIONALPLAYERSTATES
+    {
+        NONE,
         CROUCH,
-        PRONE
+        PRONE,
+        SLIDE
     };
 
     public PLAYERSTATES currState;
-
+    public ADDITIONALPLAYERSTATES currAdditionalState;
 }

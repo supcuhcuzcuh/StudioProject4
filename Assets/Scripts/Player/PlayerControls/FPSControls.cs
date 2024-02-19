@@ -12,7 +12,8 @@ public class FPSControls : Entity   //Main Controller for all player movements, 
     private CrouchControl crouchControl;
     private GunController gunController;
     private TimeTravelControl timetravelControl;
-    private PlayerAnimatorController playeranimatorController;
+    private Sliding sliding;
+   
 
     [SerializeField]
     private PerlinNoiseShake perlinNoiseShake;
@@ -35,8 +36,8 @@ public class FPSControls : Entity   //Main Controller for all player movements, 
         crouchControl = GetComponent<CrouchControl>();
         gunController = GetComponent<GunController>();
         sprintControl = GetComponent<SprintControl>();
-        playeranimatorController = GetComponent<PlayerAnimatorController>();
         timetravelControl = GetComponent<TimeTravelControl>();
+        sliding = GetComponent<Sliding>();
         playerStatsUIManager.UpdateHealthUI(health.ToString());
 
         gunController.SubscribeShootResponse(playerStatsUIManager);
@@ -57,14 +58,16 @@ public class FPSControls : Entity   //Main Controller for all player movements, 
         sprintControl.Sprint();
         jumpControl.Jump();
         crouchControl.ActivateCrouch();
+        sliding.SlidingUpdate();
         gunController.HandleShooting();
         timetravelControl.TimeTravel();
-        playeranimatorController.PlayerAnimationUpdate();
+       
     }
 
     private void FixedUpdate()
     {
         movementControl.Movement();
+        sliding.SlidingFixedUpdate();
     }
 
 

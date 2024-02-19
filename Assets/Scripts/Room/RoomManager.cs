@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RoomManager : MonoBehaviour
 {
-
+    [SerializeField]
     private TimeTravelControl timetravelControl;
    
 
@@ -13,7 +13,8 @@ public class RoomManager : MonoBehaviour
     {
         for(int i = 0; i < transform.childCount; i++)
         {
-            //timetravelControl.Subscribe(transform.GetChild(i).gameObject.GetComponent<ChangeRoomState>());
+            timetravelControl.SubscribeOnTimeTravel(transform.GetChild(i).gameObject.GetComponent<ChangeRoomState>());
+            timetravelControl.SubscribeOffTimeTravel(transform.GetChild(i).gameObject.GetComponent<ChangeRoomState>());
         }
     }
 

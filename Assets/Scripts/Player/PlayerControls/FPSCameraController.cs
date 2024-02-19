@@ -10,14 +10,15 @@ public class FPSCameraController : MonoBehaviour
     private float horizontalRotation = 0f;
     public float mouseSensitivity = 2.0f;
 
+    [SerializeField] GameObject playerModelOffset;
+    [SerializeField] Transform headPos;
+    [SerializeField] WallRunning wallRunning;
 
     //private GameObject player;
-    private bool debugLock;
-
+    private bool debugLock = false;  //debugging tool, presses escape to lock the player's view
     // Start is called before the first frame update
     void Start()
-    {
-        debugLock = false;  //debugging tool, presses escape to lock the player's view
+    {    
         Cursor.lockState = CursorLockMode.Locked;
     }
 
@@ -36,23 +37,40 @@ public class FPSCameraController : MonoBehaviour
                 debugLock = false;
             }
             
-        }
+        }       
     }
+
 
     private void HandleCameraRotation()
     {
-        if(debugLock == false)
+        //if (!debugLock && (wallRunning == null || !wallRunning.pm))
+        //{
+        //    float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity;
+        //    float mouseY = -Input.GetAxis("Mouse Y") * mouseSensitivity; // Invert Y-axis for more intuitive control
+
+        //    horizontalRotation += mouseX;
+
+        //    verticalRotation = Mathf.Clamp(verticalRotation + mouseY, -90, 90);
+
+        //    // Rotate around X and Y axes only
+        //    transform.Rotate(0, mouseX, 0);
+        //    Camera.main.transform.localRotation = Quaternion.Euler(verticalRotation, horizontalRotation, 0);
+        //    playerModelOffset.transform.forward = new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.forward.z);
+        //}
+        if (debugLock == false)
         {
             float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity;
             horizontalRotation += mouseX;
 
             verticalRotation -= Input.GetAxis("Mouse Y") * mouseSensitivity;
-            verticalRotation = Mathf.Clamp(verticalRotation, -90, 90);
+            verticalRotation = Mathf.Clamp(verticalRotation, -85, 85);
 
             transform.Rotate(0, mouseX, 0);
             Camera.main.transform.localRotation = Quaternion.Euler(verticalRotation, horizontalRotation, 0);
+            Camera.main.transform.position = Vector3.Slerp(Camera.main.transform.position, headPos.position, 10 * Time.deltaTime);
 
+
+            playerModelOffset.transform.forward = new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.forward.z);
         }
     }
-   
 }
