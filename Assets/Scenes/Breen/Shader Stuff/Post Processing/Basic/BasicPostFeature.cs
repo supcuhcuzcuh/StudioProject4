@@ -7,7 +7,7 @@ using UnityEngine.Rendering.Universal;
 [System.Serializable]
 public class BasicPostFeature : ScriptableRendererFeature
 {
-    private BasicPass basicPass;
+    [HideInInspector] public BasicPass basicPass;
 
     public override void AddRenderPasses(ScriptableRenderer renderer, ref RenderingData renderingData)
     {
@@ -19,7 +19,7 @@ public class BasicPostFeature : ScriptableRendererFeature
         basicPass = new BasicPass();
     }
 
-    class BasicPass : ScriptableRenderPass
+    public class BasicPass : ScriptableRenderPass
     {
         private Material mat;
         int tintId = Shader.PropertyToID("_Temp");
@@ -36,6 +36,11 @@ public class BasicPostFeature : ScriptableRendererFeature
                 mat = CoreUtils.CreateEngineMaterial("CustomPost/BasicPost");
 
             renderPassEvent = RenderPassEvent.BeforeRenderingPostProcessing;
+        }
+
+        public void Trigger()
+        {
+            isActive = true;
         }
 
         public override void OnCameraSetup(CommandBuffer cmd, ref RenderingData renderingData)
