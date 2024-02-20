@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class SecurityGuardPatrolState : State
 {
-    private Animator _enemyAnim;
     [SerializeField] private RayDetector playerDetector;
     [Header("Debug")]
     [Header("Potential States Of Transition")]
@@ -17,7 +16,12 @@ public class SecurityGuardPatrolState : State
         _destinationTracker = transform.root.GetComponent<WaypointsTracker>();
     }
     public override State PlayCurrentState()
-    {
+    { 
+        if (transform.root.GetComponent<BaseEnemy>().GetHealth() <= 0.0f)
+        {
+            transform.root.GetComponent<BaseEnemy>().SetHealth(0.0f);
+            return deadState;
+        }
         if (playerDetector.IsDetected())    
         {
             _destinationTracker.enabled = false;

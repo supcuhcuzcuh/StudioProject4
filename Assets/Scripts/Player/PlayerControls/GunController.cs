@@ -67,7 +67,6 @@ public class GunController : MonoBehaviour , ISprintResponse
                     Camera.main.transform.DetachChildren();
                     currWeapon.UnsetWeapon();
                     currWeapon = null;
-                    
                 }
             }
            

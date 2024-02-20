@@ -27,13 +27,20 @@ public class SecurityGuardAlertState : State
     }
     public override State PlayCurrentState()
     {
+        if (transform.root.GetComponent<BaseEnemy>().GetHealth() <= 0.0f)
+        {
+            return deadState;
+        }
         if (!playerDetector.IsDetected())
         {
+
             _timer = 0.0f;
+            transform.root.GetComponent<BaseEnemy>().enemyAnimator.SetBool("isAlert", false);
             return patrolState;
         }   
         else
         {
+            transform.root.GetComponent<BaseEnemy>().enemyAnimator.SetBool("isAlert", true);
             _timer += Time.deltaTime * 2.0f;
             _destinationTracker.agent.ResetPath(); // Stop current path
             transform.root.GetComponent<Rigidbody>().velocity = Vector3.zero;

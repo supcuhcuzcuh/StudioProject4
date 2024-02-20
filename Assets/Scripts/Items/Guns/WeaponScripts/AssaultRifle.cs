@@ -47,8 +47,12 @@ public class AssaultRifle : HitscanWeapon
         laserLine.SetPosition(1, _hit.point);
         if (_hit.collider.gameObject.GetComponent<Entity>())
         {
+            Debug.Log("NAME IS : " + _hit.transform.gameObject.name);
             _hit.collider.gameObject.GetComponent<Entity>().OnDamaged(weaponDamage);
-           
+        }
+        else if (_hit.collider.gameObject.GetComponentInParent<Entity>())
+        {
+            _hit.collider.gameObject.GetComponentInParent<Entity>().OnDamaged(weaponDamage);
         }
         bulletHoleSpawner.CreateBulletHole(_hit.point, _hit.normal, _hit.collider.gameObject.transform);
     }
