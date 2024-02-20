@@ -4,6 +4,7 @@ using UnityEngine;
 
 public abstract class Entity : MonoBehaviour
 {
+    [Header("Player Stats")]
     [SerializeField]
     protected float health;
 
@@ -30,7 +31,6 @@ public abstract class Entity : MonoBehaviour
         {
             health += _health;
         }
-       
     }
 
     public virtual void OnDamaged(float damage)

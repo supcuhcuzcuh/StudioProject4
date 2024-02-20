@@ -13,6 +13,8 @@ public class PlayerStats : ScriptableObject
     public int playerAmmo;
     public int playerGrenades;
 
+    //public int startingAmmo;
+
     public enum PLAYERSTATES
     {
         IDLE,

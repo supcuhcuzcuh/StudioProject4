@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class SecurityGuardEnemy : BaseEnemy
 {
+    [SerializeField] private TMPro.TMP_Text healthText;
+    private void Update()
+    {
+        healthText.text = "Guard Health: " + health;
+    }
+
     void TakeHit()
     {
         hitsToDie -= 1;

@@ -7,10 +7,13 @@ public class StateManager : MonoBehaviour
 {
     [SerializeField] private State defaultState;
     private State _currentState;
+    private State _deadState;
+    private StateManager _thisComponent;
 
     private void Start()
     {
         _currentState = defaultState;
+        _thisComponent = this;
     }
     // Update is called once per frame
     void Update()
@@ -20,14 +23,22 @@ public class StateManager : MonoBehaviour
 
     private void RunStateMachine()
     {
-        Debug.Log("CURRENT STATE: " + _currentState);
-        // Check if current state is null, if not play the state
-        State nextState = _currentState?.PlayCurrentState();
-        
-        if (nextState != null)
+        //Debug.Log("CURRENT STATE: " + _currentState);
+        if (_currentState == _deadState)
         {
-            // Switch to sub-state
-            SwitchStates(nextState);
+            _thisComponent.enabled = false;
+            Debug.Break();
+        }
+        else
+        {
+            // Check if current state is null, if not play the state
+            State nextState = _currentState?.PlayCurrentState();
+        
+            if (nextState != null)
+            {
+                // Switch to sub-state
+                SwitchStates(nextState);
+            }
         }
     }
 
