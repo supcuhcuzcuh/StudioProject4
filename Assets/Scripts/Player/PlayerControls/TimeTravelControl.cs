@@ -85,23 +85,22 @@ public class TimeTravelControl : MonoBehaviour
 
                 if (inPresent)
                 {
-
                     inPresent = false;
-                    Camera.main.cullingMask &= ~(1 << 10);  //Add past layermask into camera's culling mask (so that you can see all past objects)
-                    Camera.main.cullingMask |= (1 << 9);    //Remove present layermask into camera's culling mask (so that you cannot see all present objects)
-
-                    altTimelineCam.cullingMask &= ~(1 << 9);     //Do the opposite for the altTimeline camera
-                    altTimelineCam.cullingMask |= (1 << 10);
-                    NotifyOnTimeTravelResponse();
-                }
-                else
-                {
-                    inPresent = true;
                     Camera.main.cullingMask &= ~(1 << 9);   //Add present layermask into camera's culling mask (so that you can see all present objects)
                     Camera.main.cullingMask |= (1 << 10);   //Remove past layermask into camera's culling mask (so that you cannot see all past objects)
 
                     altTimelineCam.cullingMask &= ~(1 << 10);   //Do the opposite for the altTimeline camera
                     altTimelineCam.cullingMask |= (1 << 9);
+                    NotifyOnTimeTravelResponse();
+                }
+                else
+                {
+                    inPresent = true;                  
+                    Camera.main.cullingMask &= ~(1 << 10);  //Add past layermask into camera's culling mask (so that you can see all past objects)
+                    Camera.main.cullingMask |= (1 << 9);    //Remove present layermask into camera's culling mask (so that you cannot see all present objects)
+
+                    altTimelineCam.cullingMask &= ~(1 << 9);     //Do the opposite for the altTimeline camera
+                    altTimelineCam.cullingMask |= (1 << 10);
                     NotifyOffTimeTravelResponse();
                 }
 

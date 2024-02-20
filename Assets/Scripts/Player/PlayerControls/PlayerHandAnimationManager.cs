@@ -6,9 +6,12 @@ using UnityEngine.Animations.Rigging;
 public class PlayerHandAnimationManager : MonoBehaviour
 {
     [SerializeField] private GameObject handTarget;
-    [SerializeField] private TwoBoneIKConstraint armMover;
+    [SerializeField] private TwoBoneIKConstraint leftarmMover;
+    [SerializeField] private TwoBoneIKConstraint rightarmMover;
+    
     List<GameObject> transformTargets = new List<GameObject>();
     List<int> speed = new List<int>();
+    
     bool startAnimation = false;
     int index = 0;
 
@@ -23,24 +26,26 @@ public class PlayerHandAnimationManager : MonoBehaviour
     {
         if (startAnimation == true)
         {
-            if (!TargetReached(handTarget.transform.position, transformTargets[index].transform.position) && TargetReached(handTarget.transform.localRotation.eulerAngles, transformTargets[index].transform.localRotation.eulerAngles))
-            {
-                //handTarget.transform.localRotation.eulerAngles = Vector3.Lerp(handTarget.transform.localRotation.eulerAngles, transformTargets[index].transform.localRotation.eulerAngles, 2 * Time.deltaTime);
-                handTarget.transform.position = Vector3.Lerp(handTarget.transform.position, transformTargets[index].transform.position, 2 * Time.deltaTime);
-            }
-            else
-            {
-                if (index == transformTargets.Count -1)
-                {
-                    startAnimation = false;
-                    index = 0;
-                    Debug.Log("Done");
-                }
-                else
-                {
-                    index += 1;
-                }
-            }
+            handTarget.transform.forward = Vector3.Lerp(handTarget.transform.forward, transformTargets[index].transform.forward, 2 * Time.deltaTime);
+            handTarget.transform.position = Vector3.Lerp(handTarget.transform.position, transformTargets[index].transform.position, 2 * Time.deltaTime);
+            //if (!TargetReached(handTarget.transform.position, transformTargets[index].transform.position) && TargetReached(handTarget.transform.localRotation.eulerAngles, transformTargets[index].transform.localRotation.eulerAngles))
+            //{
+            //    handTarget.transform.forward = Vector3.Lerp(handTarget.transform.forward, transformTargets[index].transform.forward, 2 * Time.deltaTime);
+            //    handTarget.transform.position = Vector3.Lerp(handTarget.transform.position, transformTargets[index].transform.position, 2 * Time.deltaTime);
+            //}
+            //else
+            //{
+            //    if (index == transformTargets.Count -1)
+            //    {
+            //        startAnimation = false;
+            //        index = 0;
+            //        Debug.Log("Done");
+            //    }
+            //    else
+            //    {
+            //        index += 1;
+            //    }
+            //}
         }
     }
 
@@ -62,7 +67,7 @@ public class PlayerHandAnimationManager : MonoBehaviour
 
     public void PlayAnimation(List<GameObject> _gameObjects)
     {
-        armMover.weight = 1;
+        leftarmMover.weight = 1;
         transformTargets = _gameObjects;
         startAnimation = true;
     }

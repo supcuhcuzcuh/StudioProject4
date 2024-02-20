@@ -8,6 +8,7 @@ public class Sliding : MonoBehaviour
     [SerializeField]
     private PlayerStats playerStats;
     public Rigidbody rb;
+    [SerializeField] Animator animator;
 
     [Header("Sliding")]
     public float maxSlideTime;
@@ -106,6 +107,7 @@ public class Sliding : MonoBehaviour
             playerStats.currAdditionalState = PlayerStats.ADDITIONALPLAYERSTATES.NONE;
         }
         sliding = false;
+        animator.SetInteger("Crouch", 0);
     }
 
 

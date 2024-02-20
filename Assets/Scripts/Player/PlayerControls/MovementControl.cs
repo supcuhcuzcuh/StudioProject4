@@ -42,8 +42,10 @@ public class MovementControl : MonoBehaviour
 
         Vector3 moveDirection = (Camera.main.transform.forward * verticalInput + Camera.main.transform.right * horizontalInput).normalized;
         moveDirection.y = 0;
+
         rb.MovePosition(transform.position + moveDirection * (playerStats.moveSpeed * playerStats.moveSpeedMultiplier) * Time.deltaTime);
-      
+       
+       
 
         if (playerStats.currState != PlayerStats.PLAYERSTATES.SPRINT)
         {

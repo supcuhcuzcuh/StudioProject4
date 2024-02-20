@@ -31,11 +31,12 @@ public class CrouchControl : MonoBehaviour
 
     public void ActivateCrouch()
     {
-        if (Input.GetKeyDown(KeyCode.LeftControl) && (playerStats.currState != PlayerStats.PLAYERSTATES.JUMP || playerStats.currAdditionalState != PlayerStats.ADDITIONALPLAYERSTATES.SLIDE))
+        if (Input.GetKeyDown(KeyCode.LeftControl) && (playerStats.currAdditionalState == PlayerStats.ADDITIONALPLAYERSTATES.NONE || playerStats.currAdditionalState == PlayerStats.ADDITIONALPLAYERSTATES.CROUCH || playerStats.currAdditionalState == PlayerStats.ADDITIONALPLAYERSTATES.PRONE))
         {
             if(playerStats.currState == PlayerStats.PLAYERSTATES.SPRINT)
             {
-                playerStats.currAdditionalState = PlayerStats.ADDITIONALPLAYERSTATES.SLIDE;                     
+                playerStats.currAdditionalState = PlayerStats.ADDITIONALPLAYERSTATES.SLIDE;
+                animator.SetInteger("Crouch", 1);
             }
             else if (playerStats.currAdditionalState == PlayerStats.ADDITIONALPLAYERSTATES.CROUCH)
             {

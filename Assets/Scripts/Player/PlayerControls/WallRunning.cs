@@ -33,28 +33,41 @@ public class WallRunning : MonoBehaviour
     [HideInInspector] public bool pm;
     private Rigidbody rb;
 
+    [SerializeField]
+    private PlayerStats playerStats;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
        
     }
 
+    private void Update()
+    {
+        // Check for wall jump input
+        if (Input.GetButtonDown("Jump"))
+        {
+            if (pm)
+            {
+                WallJump();
+            }           
+        }
+        else if (playerStats.currAdditionalState == PlayerStats.ADDITIONALPLAYERSTATES.JUMP)
+        {
+             CheckForWall();
+        }
+    }
+
     private void FixedUpdate()
     {
         StateMachine();
-        //CheckForWall();
         if (pm)
         {
             WallRunningMovement();
             // Rotate the camera based on wall running direction
             //RotateCamera();
         }
-
-        // Check for wall jump input
-        if (Input.GetButtonDown("Jump") && pm)
-        {
-            WallJump();
-        }
+       
     }
 
     private void CheckForWall()
@@ -141,6 +154,7 @@ public class WallRunning : MonoBehaviour
     private void StartWallRun()
     {
         pm = true;
+        playerStats.currAdditionalState = PlayerStats.ADDITIONALPLAYERSTATES.WALLRUN;
     }
 
     private void WallRunningMovement()
@@ -179,12 +193,15 @@ public class WallRunning : MonoBehaviour
         Debug.Log("Jumped");
         // Apply wall jump force
         rb.AddForce(wallJumpDirection * wallRunForce * 1.5f, ForceMode.Impulse); // Adjust the multiplier as needed
+        playerStats.currAdditionalState = PlayerStats.ADDITIONALPLAYERSTATES.JUMP;
     }
 
     private void StopWallRun()
     {
         pm = false;
         rb.useGravity = true;
+
+        playerStats.currAdditionalState = PlayerStats.ADDITIONALPLAYERSTATES.NONE;
     }
 
     void OnCollisionExit(Collision col)
@@ -197,23 +214,23 @@ public class WallRunning : MonoBehaviour
         }
     }
 
-    void OnCollisionEnter(Collision col)
-    {
-        if (Physics.Raycast(transform.position, Camera.main.transform.right, out rightWallhit, wallCheckDistance))
-        {
-            if (rightWallhit.collider.gameObject.tag == "Wall")
-            {
-                wallRight = true;
-            }
-        }
+    //void OnCollisionEnter(Collision col)
+    //{
+    //    if (Physics.Raycast(transform.position, Camera.main.transform.right, out rightWallhit, wallCheckDistance))
+    //    {
+    //        if (rightWallhit.collider.gameObject.tag == "Wall")
+    //        {
+    //            wallRight = true;
+    //        }
+    //    }
 
-        if (Physics.Raycast(transform.position, -Camera.main.transform.right, out leftWallhit, wallCheckDistance))
-        {
-            if (leftWallhit.collider.gameObject.tag == "Wall")
-            {
-                wallLeft = true;
-            }
-        }
-    }
+    //    if (Physics.Raycast(transform.position, -Camera.main.transform.right, out leftWallhit, wallCheckDistance))
+    //    {
+    //        if (leftWallhit.collider.gameObject.tag == "Wall")
+    //        {
+    //            wallLeft = true;
+    //        }
+    //    }
+    //}
 
 }

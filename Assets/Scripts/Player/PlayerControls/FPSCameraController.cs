@@ -12,7 +12,11 @@ public class FPSCameraController : MonoBehaviour
 
     [SerializeField] GameObject playerModelOffset;
     [SerializeField] Transform headPos;
-    [SerializeField] WallRunning wallRunning;
+
+    [SerializeField]
+    private PlayerStats playerStats;
+
+    Quaternion rotation;
 
     //private GameObject player;
     private bool debugLock = false;  //debugging tool, presses escape to lock the player's view
@@ -69,8 +73,19 @@ public class FPSCameraController : MonoBehaviour
             Camera.main.transform.localRotation = Quaternion.Euler(verticalRotation, horizontalRotation, 0);
             Camera.main.transform.position = Vector3.Slerp(Camera.main.transform.position, headPos.position, 10 * Time.deltaTime);
 
+            if (playerStats.currAdditionalState != PlayerStats.ADDITIONALPLAYERSTATES.SLIDE)
+            {
+                playerModelOffset.transform.forward = new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.forward.z);
+            }
+            else        //because no sliding model exsist, have to take another model and transform it to fit
+            {
+                playerModelOffset.transform.localPosition = new Vector3(-0.6f, playerModelOffset.transform.localPosition.y, -0.255f);
 
-            playerModelOffset.transform.forward = new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.forward.z);
+                //rotation.eulerAngles = new Vector3(0, -90, 0);
+                //playerModelOffset.transform.localRotation = rotation;
+                playerModelOffset.transform.forward = new Vector3(Camera.main.transform.right.x, 0, Camera.main.transform.right.z);
+            }
+
         }
     }
 }

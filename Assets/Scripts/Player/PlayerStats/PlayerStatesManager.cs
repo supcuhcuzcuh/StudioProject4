@@ -34,10 +34,6 @@ public class PlayerStatesManager : MonoBehaviour
         else if(playerStats.currState == PlayerStats.PLAYERSTATES.SPRINT)
         {
             playerStats.moveSpeedMultiplier = 1.75f;
-        }
-        else if (playerStats.currState == PlayerStats.PLAYERSTATES.JUMP)
-        {
-            playerStats.moveSpeedMultiplier = 1.0f;
-        }      
+        }    
     }
 }

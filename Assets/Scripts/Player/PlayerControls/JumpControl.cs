@@ -21,8 +21,8 @@ public class JumpControl : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && playerStats.canJump == true && playerStats.currAdditionalState == PlayerStats.ADDITIONALPLAYERSTATES.NONE)
         {
             playerStats.canJump = false;
-            rb.AddForce((transform.up)* playerStats.jumpForce, ForceMode.Impulse);
-            playerStats.currState = PlayerStats.PLAYERSTATES.JUMP;
+            rb.AddForce((transform.up)* playerStats.jumpForce + (transform.forward * playerStats.moveSpeedMultiplier * 0.5f), ForceMode.Impulse);
+            playerStats.currAdditionalState = PlayerStats.ADDITIONALPLAYERSTATES.JUMP;
             animator.SetInteger("MoveCounter", 3);
         }
     }
@@ -31,10 +31,10 @@ public class JumpControl : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if (playerStats.canJump == false)
+        if (playerStats.canJump == false && collision.gameObject.tag != "Wall")
         {
             playerStats.canJump = true;
-            playerStats.currState = PlayerStats.PLAYERSTATES.WALK;
+            playerStats.currAdditionalState = PlayerStats.ADDITIONALPLAYERSTATES.NONE;
         }
     }
 }

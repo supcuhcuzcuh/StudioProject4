@@ -17,8 +17,7 @@ public class PlayerStats : ScriptableObject
     {
         IDLE,
         WALK,
-        SPRINT,
-        JUMP
+        SPRINT
     };
 
     public enum ADDITIONALPLAYERSTATES
@@ -26,7 +25,9 @@ public class PlayerStats : ScriptableObject
         NONE,
         CROUCH,
         PRONE,
-        SLIDE
+        SLIDE,
+        JUMP,
+        WALLRUN
     };
 
     public PLAYERSTATES currState;

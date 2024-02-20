@@ -7,6 +7,7 @@ TagManager:
   - Weapon
   - WAYPOINT
   - ENEMY
+  - Wall
   layers:
   - Default
   - TransparentFX
@@ -17,8 +18,8 @@ TagManager:
   - Weapon
   - Player
   - Pickup
-  - Past_Active
-  - Past_Inactive
+  - Present
+  - Past
   - WALLS
   - Ground
   - 
