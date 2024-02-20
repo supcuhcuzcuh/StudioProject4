@@ -30,4 +30,22 @@ public class RayDetector : MonoBehaviour
         }
         return false;
     }
+
+    // Update is called once per frame
+    //public bool IsSurroundingDetected()
+    //{
+    //    if (Physics.SphereCast(toStart.position, 10,  toStart.transform.forward, out RaycastHit hit, 500f, toIgnore)) // Detected Something
+    //    {
+    //        Debug.Log(hit.transform.gameObject.name);
+    //        if (hit.transform.gameObject == toCompare)
+    //        {
+    //            return true;
+    //        }
+    //        else
+    //        {
+    //            return false;
+    //        }
+    //    }
+    //    return false;
+    //}
 }
