@@ -77,8 +77,6 @@ public class SecurityGuardDefenseState : State
                     {
                         transform.root.GetComponent<BaseEnemy>().enemyAnimator.SetTrigger("isReload");
                         transform.root.GetComponent<BaseEnemy>().enemyWeapon.clipSizeCurr = transform.root.GetComponent<BaseEnemy>().enemyStats.playerAmmo;
-                        //transform.root.GetComponent<BaseEnemy>().enemyAnimator.SetTrigger("isReload");
-                        //transform.root.GetComponent<BaseEnemy>().enemyWeapon.clipSizeCurr = transform.root.GetComponent<BaseEnemy>().enemyStats.playerAmmo;
                         Debug.Log("ENENMY STAT PLAYER AMMO IS : " + transform.root.GetComponent<BaseEnemy>().enemyStats.playerAmmo);
                     }
                     _nextTimeToShoot = Time.time + transform.root.GetComponent<BaseEnemy>().enemyWeapon.cooldownWindow;

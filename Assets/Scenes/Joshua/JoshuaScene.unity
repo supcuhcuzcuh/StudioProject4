@@ -4902,19 +4902,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!65 &1182047445
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1182047439}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.7749541, y: 1.8189328, z: 0.26427823}
-  m_Center: {x: 0.0059030056, y: 0.0047677755, z: -0.012621254}
 --- !u!1 &1215458149
 GameObject:
   m_ObjectHideFlags: 0
@@ -7340,6 +7327,7 @@ GameObject:
   - component: {fileID: 1880712354}
   - component: {fileID: 1880712352}
   - component: {fileID: 1880712356}
+  - component: {fileID: 1880712358}
   m_Layer: 3
   m_Name: Guard Enemy
   m_TagString: ENEMY
@@ -7355,7 +7343,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1880712343}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.004, z: -0.119}
+  m_LocalPosition: {x: 0, y: -0.08, z: -0.119}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -7394,7 +7382,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.11
-  m_Speed: 3.5
+  m_Speed: 2
   m_Acceleration: 8
   avoidancePriority: 1
   m_AngularSpeed: 200
@@ -7472,6 +7460,19 @@ MonoBehaviour:
   enemyAnimator: {fileID: 1182047442}
   hitsToDie: 100
   healthText: {fileID: 397755491}
+--- !u!65 &1880712358
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1880712343}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.11, y: 2.484092, z: 0.32381606}
+  m_Center: {x: -0.010775268, y: 1.4418329, z: 0.0040279627}
 --- !u!1001 &1893018314
 PrefabInstance:
   m_ObjectHideFlags: 0
