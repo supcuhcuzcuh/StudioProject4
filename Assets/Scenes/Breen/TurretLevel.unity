@@ -270,6 +270,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 770127556}
     m_Modifications:
+    - target: {fileID: 3556801663214075072, guid: 5db75e1186d2d3f4da472fffd2ad6b1e,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 320
+      objectReference: {fileID: 0}
     - target: {fileID: 8720796819856086237, guid: 5db75e1186d2d3f4da472fffd2ad6b1e,
         type: 3}
       propertyPath: m_Name
@@ -701,8 +706,8 @@ Transform:
   - {fileID: 1030837883}
   - {fileID: 295009041}
   - {fileID: 1112832572}
-  - {fileID: 6201852806035084562}
   - {fileID: 7222755446053536459}
+  - {fileID: 6201852806035084562}
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
