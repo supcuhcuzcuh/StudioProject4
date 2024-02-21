@@ -59,12 +59,12 @@ public class FPSControls : Entity   //Main Controller for all player movements, 
     void Update()
     {
         sprintControl.Sprint();
+        interactableController.HandleInteract();
         jumpControl.Jump();
         crouchControl.ActivateCrouch();
         sliding.SlidingUpdate();
         gunController.HandleShooting();
         timetravelControl.TimeTravel();
-        interactableController.HandleInteract();
     }
 
     private void FixedUpdate()
