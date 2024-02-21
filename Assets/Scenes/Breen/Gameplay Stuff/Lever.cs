@@ -20,5 +20,6 @@ public class Lever : MonoBehaviour
 
         // Activate all activatable things attached to this lever
         foreach (Activatable activatable in Activatables) activatable.OnActivate();
+       
     }
 }

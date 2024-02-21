@@ -12,7 +12,10 @@ public class SecurityGuardEnemy : BaseEnemy
             SetHealth(0);
 
         }
-        healthText.text = "Guard Health: " + health;
+        if (healthText != null)
+        {
+            healthText.text = "Guard Health: " + health;
+        }
     }
 
     void TakeHit()

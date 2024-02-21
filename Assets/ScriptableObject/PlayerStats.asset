@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: PlayerStats
   m_EditorClassIdentifier: 
   moveSpeed: 5
-  moveSpeedMultiplier: 1
+  moveSpeedMultiplier: 0.3
   jumpForce: 7
   canJump: 1
-  playerAmmo: 802
+  playerAmmo: 798
   playerGrenades: 5
   currState: 0
-  currAdditionalState: 0
+  currAdditionalState: 1

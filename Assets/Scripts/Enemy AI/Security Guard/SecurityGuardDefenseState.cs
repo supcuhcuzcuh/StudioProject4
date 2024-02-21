@@ -29,7 +29,10 @@ public class SecurityGuardDefenseState : State
     public override State PlayCurrentState()
     {
         float distFromPlayer = Vector3.Distance(target.transform.position, transform.root.transform.position);
-        distFromPlayerText.text = "DISTANCE FROM PLAYER: " + distFromPlayer;
+        if (distFromPlayerText.text != null)
+        {
+            distFromPlayerText.text = "DISTANCE FROM PLAYER: " + distFromPlayer;
+        }
 
         if (transform.root.GetComponent<BaseEnemy>().GetHealth() <= 0.0f)
         {
@@ -51,9 +54,10 @@ public class SecurityGuardDefenseState : State
             var targetPos = target.transform.position;
             targetPos.y = transform.position.y;
             transform.root.LookAt(targetPos);
+            Debug.Log("TARGET IS : " + target.name);
+            _destinationTracker.agent.SetDestination(target.transform.position);
 
             transform.root.GetComponent<BaseEnemy>().enemyAnimator.SetBool("isDefense", true);
-            _destinationTracker.agent.SetDestination(target.transform.position);
 
             if (_rayDetector)
             {
