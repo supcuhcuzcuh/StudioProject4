@@ -6,7 +6,9 @@ using UnityEngine.UI;
 public class Options : MonoBehaviour
 {
     [Header("Serialize")]
-    [SerializeField] private Slider volumeSlider;
+    [SerializeField] private Slider volumeSliderMaster;
+    [SerializeField] private Slider volumeSliderBGM;
+    [SerializeField] private Slider volumeSliderVFX;
 
     private AudioManager[] audioManagers;
     private PlayMenuMusic playMenuMusic;
@@ -18,25 +20,62 @@ public class Options : MonoBehaviour
         playMenuMusic = FindObjectOfType<PlayMenuMusic>();
 
         // Set value on sliders
-        if (PlayerPrefs.HasKey("Volume"))
-            volumeSlider.value = PlayerPrefs.GetFloat("Volume");
+        if (PlayerPrefs.HasKey("Master"))
+            volumeSliderMaster.value = PlayerPrefs.GetFloat("Master");
         else
-            PlayerPrefs.SetFloat("Volume", 0.5f);
+            PlayerPrefs.SetFloat("Master", 0.5f);
+
+
+        if (PlayerPrefs.HasKey("BGM"))
+            volumeSliderBGM.value = PlayerPrefs.GetFloat("BGM");
+        else
+            PlayerPrefs.SetFloat("BGM", 0.5f);
+
+
+        if (PlayerPrefs.HasKey("VFX"))
+            volumeSliderMaster.value = PlayerPrefs.GetFloat("VFX");
+        else
+            PlayerPrefs.SetFloat("VFX", 0.5f);
     }
 
-    public void OnVolumeSliderChange()
+    public void OnVolumeSliderChange(string type)
     {
-        PlayerPrefs.SetFloat("Volume", volumeSlider.value);
+        Slider volumeSlider = null;
+
+        switch (type)
+        {
+            case "Master":
+                volumeSlider = volumeSliderMaster;
+                break;
+            case "BGM":
+                volumeSlider = volumeSliderBGM;
+                break;
+            default:
+                volumeSlider = volumeSliderVFX;
+                break;
+        }
+
+        PlayerPrefs.SetFloat(type, volumeSlider.value);
         UpdateVolumes();
+    }
+
+    public void OnVolumeSliderReset()
+    {
+        PlayerPrefs.SetFloat("Master", 0.5f);
+        volumeSliderMaster.value = PlayerPrefs.GetFloat("Master");
+        PlayerPrefs.SetFloat("BGM", 0.5f);
+        volumeSliderBGM.value = PlayerPrefs.GetFloat("BGM");
+        PlayerPrefs.SetFloat("VFX", 0.5f);
+        volumeSliderVFX.value = PlayerPrefs.GetFloat("VFX");
     }
 
     private void UpdateVolumes()
     {
         foreach (AudioManager audioManager in audioManagers) 
         {
-            audioManager.SetVolume(volumeSlider.value);
+            audioManager.SetVolume(volumeSliderVFX.value * volumeSliderMaster.value);
         }
 
-        playMenuMusic.SetVolume(volumeSlider.value);
+        playMenuMusic.SetVolume(volumeSliderBGM.value * volumeSliderMaster.value);
     }
 }
