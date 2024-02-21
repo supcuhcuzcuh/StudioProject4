@@ -29,7 +29,7 @@ public class BasicPostFeature : ScriptableRendererFeature
         int tintId = Shader.PropertyToID("_Temp");
         private RenderTargetIdentifier src, tint;
 
-        [HideInInspector] public bool isActive = true;
+        [HideInInspector] public bool isActive = false;
 
         private float sizeSet;
         private bool isInit = false;
