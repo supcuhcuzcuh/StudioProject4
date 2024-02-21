@@ -735,7 +735,7 @@ PrefabInstance:
     - target: {fileID: 8822282901810847413, guid: f2ee176d4eccff74288a584ce56665fa,
         type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8822282901810847413, guid: f2ee176d4eccff74288a584ce56665fa,
         type: 3}
@@ -1646,7 +1646,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Skibidi Toilet
+  m_text: Out of time
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 386777050a0d91a41aa3fd72196b9b61, type: 2}
   m_sharedMaterial: {fileID: 8727385720139441867, guid: 386777050a0d91a41aa3fd72196b9b61,
@@ -2808,7 +2808,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 109cc4ddb52b2474aabc02d126d2cc5f,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 15.19
+      value: 15.04
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 109cc4ddb52b2474aabc02d126d2cc5f,
         type: 3}
@@ -2818,7 +2818,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 109cc4ddb52b2474aabc02d126d2cc5f,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 5.31
+      value: 5.27
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 109cc4ddb52b2474aabc02d126d2cc5f,
         type: 3}
@@ -3210,7 +3210,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: cbc96534c8d455b4e9df01f5e225923b,
         type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cbc96534c8d455b4e9df01f5e225923b,
         type: 3}
