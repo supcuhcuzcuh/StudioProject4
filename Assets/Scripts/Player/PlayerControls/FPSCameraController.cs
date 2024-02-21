@@ -71,7 +71,7 @@ public class FPSCameraController : MonoBehaviour
 
             transform.Rotate(0, mouseX, 0);
             Camera.main.transform.localRotation = Quaternion.Euler(verticalRotation, horizontalRotation, 0);
-            Camera.main.transform.position = Vector3.Slerp(Camera.main.transform.position, headPos.position, 10 * Time.deltaTime);
+            Camera.main.transform.position = Vector3.Slerp(Camera.main.transform.position, headPos.position, 10 * Time.deltaTime);  
 
             if (playerStats.currAdditionalState != PlayerStats.ADDITIONALPLAYERSTATES.SLIDE)
             {

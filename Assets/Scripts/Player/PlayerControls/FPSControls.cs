@@ -39,6 +39,7 @@ public class FPSControls : Entity   //Main Controller for all player movements, 
         sprintControl = GetComponent<SprintControl>();
         timetravelControl = GetComponent<TimeTravelControl>();
         interactableController = gameObject.AddComponent<InteractableController>();
+        interactableController.Init(3);
         sliding = GetComponent<Sliding>();
         playerStatsUIManager.UpdateHealthUI(health.ToString());
 
@@ -58,12 +59,12 @@ public class FPSControls : Entity   //Main Controller for all player movements, 
     void Update()
     {
         sprintControl.Sprint();
+        interactableController.HandleInteract();
         jumpControl.Jump();
         crouchControl.ActivateCrouch();
         sliding.SlidingUpdate();
         gunController.HandleShooting();
         timetravelControl.TimeTravel();
-       
     }
 
     private void FixedUpdate()

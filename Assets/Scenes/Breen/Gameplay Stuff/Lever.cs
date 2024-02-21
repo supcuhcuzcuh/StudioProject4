@@ -16,7 +16,7 @@ public class Lever : MonoBehaviour
     virtual public void OnActivate()
     {
         anim.SetTrigger("Activate");
-        GetComponent<AudioManager>().PlaySoundEffect("OnActivate");
+        //GetComponent<AudioManager>().PlaySoundEffect("OnActivate");
 
         // Activate all activatable things attached to this lever
         foreach (Activatable activatable in Activatables) activatable.OnActivate();
