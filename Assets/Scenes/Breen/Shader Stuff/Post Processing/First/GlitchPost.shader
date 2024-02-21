@@ -44,9 +44,9 @@ Shader "CustomPost/GlitchPost"
 
                 // Lines
 
-                if (sin(15.0f + _Time.y * timeScale * 3) > 0.95f ||
-                    sin(15.0f + _Time.y * timeScale * 3) < 0.82f &&
-                    sin(15.0f + _Time.y * timeScale * 6) > 0.77f)
+                if (sin(15.0f + _Time.y * timeScale * 3) > 0.99f ||
+                    sin(15.0f + _Time.y * timeScale * 3) < 0.80f &&
+                    sin(15.0f + _Time.y * timeScale * 6) > 0.793f)
                 {
                     o.uv.x = 1 - o.uv.x * (1 / intensity);
                     o.uv.y = 1 - o.uv.y * (1.2 / intensity);
