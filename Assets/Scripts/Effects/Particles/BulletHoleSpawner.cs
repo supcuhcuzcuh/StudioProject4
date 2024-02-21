@@ -63,8 +63,6 @@ public class BulletHoleSpawner : MonoBehaviour
             if (bulletHoleObject == null)
                 return;
 
-
-            
             // align to gun barrel/muzzle position
             bulletHoleObject.transform.forward = _normal;
             bulletHoleObject.transform.SetPositionAndRotation(_hitPosition + (bulletHoleObject.transform.forward * 0.015f), bulletHoleObject.transform.rotation);

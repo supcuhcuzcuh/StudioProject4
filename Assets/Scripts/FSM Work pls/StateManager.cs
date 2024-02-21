@@ -5,14 +5,14 @@ using UnityEngine;
 // HANDLES SWITCH AND RUNNING OF STATE MACHINES
 public class StateManager : MonoBehaviour
 {
+    [HideInInspector] public State currentState;
     [SerializeField] private State defaultState;
-    private State _currentState;
     private State _deadState;
     private StateManager _thisComponent;
 
     private void Start()
     {
-        _currentState = defaultState;
+        currentState = defaultState;
         _thisComponent = this;
     }
     // Update is called once per frame
@@ -24,7 +24,7 @@ public class StateManager : MonoBehaviour
     private void RunStateMachine()
     {
         //Debug.Log("CURRENT STATE: " + _currentState);
-        if (_currentState == _deadState)
+        if (currentState == _deadState)
         {
             _thisComponent.enabled = false;
             Debug.Break();
@@ -32,7 +32,7 @@ public class StateManager : MonoBehaviour
         else
         {
             // Check if current state is null, if not play the state
-            State nextState = _currentState?.PlayCurrentState();
+            State nextState = currentState?.PlayCurrentState();
         
             if (nextState != null)
             {
@@ -44,6 +44,6 @@ public class StateManager : MonoBehaviour
 
     private void SwitchStates(State nextState)
     {
-        _currentState = nextState;
+        currentState = nextState;
     }
 }

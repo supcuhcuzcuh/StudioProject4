@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class AssaultRifle : HitscanWeapon
@@ -45,16 +44,25 @@ public class AssaultRifle : HitscanWeapon
     protected override void HitscanHit(RaycastHit _hit)
     {
         laserLine.SetPosition(1, _hit.point);
+        if (_hit.collider.gameObject.CompareTag("HEADSHOT_POINT"))
+        {
+            Debug.Log("HeaDSHOT");
+            float originalDamage = weaponDamage;
+            float newDamage = weaponDamage * 100;
+            _hit.collider.gameObject.GetComponentInParent<Entity>().OnDamaged(newDamage);
+            bulletHoleSpawner.CreateBulletHole(_hit.point, _hit.normal, _hit.collider.gameObject.transform);
+            weaponDamage = originalDamage;
+        }
         if (_hit.collider.gameObject.GetComponent<Entity>())
         {
             Debug.Log("NAME IS : " + _hit.transform.gameObject.name);
             _hit.collider.gameObject.GetComponent<Entity>().OnDamaged(weaponDamage);
+            bulletHoleSpawner.CreateBulletHole(_hit.point, _hit.normal, _hit.collider.gameObject.transform);
         }
         else if (_hit.collider.gameObject.GetComponentInParent<Entity>())
         {
             _hit.collider.gameObject.GetComponentInParent<Entity>().OnDamaged(weaponDamage);
         }
-        bulletHoleSpawner.CreateBulletHole(_hit.point, _hit.normal, _hit.collider.gameObject.transform);
     }
 
     protected override void HitscanMiss(Vector3 _rayOrigin)
