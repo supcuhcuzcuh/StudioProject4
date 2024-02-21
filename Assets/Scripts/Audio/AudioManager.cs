@@ -19,8 +19,11 @@ public class AudioManager : MonoBehaviour
         {
             if (soundEffect.soundEffectName == _soundEffectName)
             {
-                sfxAudioSrc.clip = soundEffect.soundEffectClip;
-                sfxAudioSrc.Play();
+                if (sfxAudioSrc != null)
+                {
+                    sfxAudioSrc.clip = soundEffect.soundEffectClip;
+                    sfxAudioSrc.Play();
+                }
                 return true;
             }
         }

@@ -44,7 +44,10 @@ public class WaypointsTracker : MonoBehaviour
 
             if (waypoints[_target] != null)
             {
-                agent.SetDestination(waypoints[_target].transform.position);
+                if (agent != null)
+                {
+                    agent.SetDestination(waypoints[_target].transform.position);
+                }
             }
             else
             {

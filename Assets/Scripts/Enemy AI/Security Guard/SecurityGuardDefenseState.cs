@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Threading.Tasks;
 public class SecurityGuardDefenseState : State
 {
+    [SerializeField] private WaitForReload reloadEvent;
     [Header("Target / Player")]
     [SerializeField] private GameObject target;
     [Header("Potential States Of Transition")]
@@ -25,18 +26,20 @@ public class SecurityGuardDefenseState : State
         _destinationTracker = transform.root.GetComponent<WaypointsTracker>();
         _rayDetector = GetComponent<RayDetector>();
     }
-    public void StartReload()
-    {
-
-    }
     public override State PlayCurrentState()
     {
         float distFromPlayer = Vector3.Distance(target.transform.position, transform.root.transform.position);
-        distFromPlayerText.text = "DISTANCE FROM PLAYER: " + distFromPlayer;
+        if (distFromPlayerText.text != null)
+        {
+            distFromPlayerText.text = "DISTANCE FROM PLAYER: " + distFromPlayer;
+        }
+
         if (transform.root.GetComponent<BaseEnemy>().GetHealth() <= 0.0f)
         {
             transform.root.GetComponent<BaseEnemy>().SetHealth(0.0f);
             transform.root.GetComponent<BaseEnemy>().enemyAnimator.SetBool("isDefense", false);
+            transform.root.GetComponent<BaseEnemy>().enemyWeapon.transform.parent = null;
+            transform.root.GetComponent<BaseEnemy>().EnableWeaponPhysics();
             return deadState;
         }
         else if (distFromPlayer > 25.0f)
@@ -51,9 +54,10 @@ public class SecurityGuardDefenseState : State
             var targetPos = target.transform.position;
             targetPos.y = transform.position.y;
             transform.root.LookAt(targetPos);
+            Debug.Log("TARGET IS : " + target.name);
+            _destinationTracker.agent.SetDestination(target.transform.position);
 
             transform.root.GetComponent<BaseEnemy>().enemyAnimator.SetBool("isDefense", true);
-            _destinationTracker.agent.SetDestination(target.transform.position);
 
             if (_rayDetector)
             {
@@ -65,14 +69,17 @@ public class SecurityGuardDefenseState : State
                 _enemyRef.rb.velocity = Vector3.zero;
             }
 
-            if (distFromPlayer < 7.0f) // Check if enemy close to play, then play stand shooting animation
+            if (distFromPlayer < 5.0f) // Check if enemy close to play, then play stand shooting animation
             {
-                _destinationTracker.agent.ResetPath();
+                _destinationTracker.agent.ResetPath(); // Stop enemy from moving
 
                 if ( Time.time > _nextTimeToShoot)  //Main action for shooting
                 {
                     // set cooldown delay
-                    transform.root.GetComponent<BaseEnemy>().enemyWeapon.OnMouse1();
+                    if (!reloadEvent.isReloading)
+                    {
+                        transform.root.GetComponent<BaseEnemy>().enemyWeapon.OnMouse1();
+                    }
                     if (transform.root.GetComponent<BaseEnemy>().enemyWeapon.clipSizeCurr <= 0)
                     {
                         transform.root.GetComponent<BaseEnemy>().enemyAnimator.SetTrigger("isReload");

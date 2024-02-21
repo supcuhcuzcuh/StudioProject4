@@ -29,15 +29,23 @@ public class SecurityGuardAlertState : State
     {
         if (transform.root.GetComponent<BaseEnemy>().GetHealth() <= 0.0f)
         {
+            transform.root.GetComponent<BaseEnemy>().enemyWeapon.transform.parent = null;
+            transform.root.GetComponent<BaseEnemy>().EnableWeaponPhysics();
             return deadState;
         }
-        if (!playerDetector.IsDetected())
-        {
+        //if (!playerDetector.IsDetected())
+        //{
 
+        //    _timer = 0.0f;
+        //    transform.root.GetComponent<BaseEnemy>().enemyAnimator.SetBool("isAlert", false);
+        //    return patrolState;
+        //}
+        if (!playerDetector.IsSurroundingDetected())
+        {
             _timer = 0.0f;
             transform.root.GetComponent<BaseEnemy>().enemyAnimator.SetBool("isAlert", false);
             return patrolState;
-        }   
+        }
         else
         {
             transform.root.GetComponent<BaseEnemy>().enemyAnimator.SetBool("isAlert", true);
@@ -46,6 +54,7 @@ public class SecurityGuardAlertState : State
             transform.root.GetComponent<Rigidbody>().velocity = Vector3.zero;
             if (_timer >= toDefenseTime)    
             {
+                transform.root.GetComponent<BaseEnemy>().enemyAnimator.SetBool("isDefense", true);
                 return defenseState;
             }
             return this;
