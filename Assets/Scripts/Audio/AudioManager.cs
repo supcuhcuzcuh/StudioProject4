@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class AudioManager : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class AudioManager : MonoBehaviour
     void Start()
     {
         sfxAudioSrc = GetComponent<AudioSource>();
+
+        if (PlayerPrefs.HasKey("Volume")) sfxAudioSrc.volume = PlayerPrefs.GetFloat("Volume");
     }
 
     public bool PlaySoundEffect(string _soundEffectName)
@@ -53,5 +56,11 @@ public class AudioManager : MonoBehaviour
         {
             sfxAudioSrc.Stop();
         }      
+    }
+
+    public void SetVolume(float volume)
+    {
+        if (sfxAudioSrc)
+            sfxAudioSrc.volume = volume;
     }
 }

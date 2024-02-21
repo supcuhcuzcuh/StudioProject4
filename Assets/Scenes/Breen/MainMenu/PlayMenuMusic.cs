@@ -20,4 +20,10 @@ public class PlayMenuMusic : MonoBehaviour
         audioSource.playOnAwake = true;
         audioSource.Play();
     }
+
+    public void SetVolume(float volume)
+    {
+        if (audioSource)
+            audioSource.volume = volume;
+    }
 }

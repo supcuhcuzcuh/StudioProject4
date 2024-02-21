@@ -8,7 +8,7 @@ public class ButtonUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [HideInInspector] public bool isHovering = false;
 
-    private AudioManager audioManager;
+    protected AudioManager audioManager;
 
     private void Start()
     {
@@ -17,7 +17,7 @@ public class ButtonUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     private void Update()
     {
-        if (isHovering && Input.GetMouseButton(0)) OnClick();
+        if (isHovering && Input.GetMouseButtonDown(0)) OnClick();
     }
 
     virtual public void OnClick() { }
