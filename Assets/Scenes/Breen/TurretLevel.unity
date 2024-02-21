@@ -1717,6 +1717,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   altTimelineCam: {fileID: 1812909484}
+  basicPostFeature: {fileID: 0}
   timetravelDevice: {fileID: 2064584682}
   fingers: {fileID: 1859472495}
   armMover: {fileID: 1526081494}
@@ -1762,14 +1763,11 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 609511120}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d7ba170f70fd1f948b0a7e7f8d9baf2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  whatIsWall:
-    serializedVersion: 2
-    m_Bits: 0
   whatIsGround:
     serializedVersion: 2
     m_Bits: 4096
@@ -1783,6 +1781,7 @@ MonoBehaviour:
   orientation: {fileID: 0}
   cameraTransform: {fileID: 776305014}
   pm: 0
+  playerStats: {fileID: 0}
 --- !u!114 &609511125
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1795,10 +1794,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02a1489dbb0012b4a9f9bb3ed0debcbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  orientation: {fileID: 0}
-  playerObj: {fileID: 0}
+  playerStats: {fileID: 0}
+  rb: {fileID: 0}
+  animator: {fileID: 0}
   maxSlideTime: 5
   slideForce: 50
+  slideTimer: 0
   slideYScale: 1
   slideKey: 306
   maxSlopeAngle: 45
@@ -1819,6 +1820,7 @@ MonoBehaviour:
   headbobShake: {fileID: 609511134}
   gunbobShake: {fileID: 0}
   audioManager: {fileID: 609511130}
+  animator: {fileID: 0}
 --- !u!114 &609511127
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1832,6 +1834,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerStats: {fileID: 11400000, guid: 503b5eec73e498c4a89956c9a104709f, type: 2}
+  animator: {fileID: 0}
 --- !u!114 &609511128
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1860,6 +1863,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mouseSensitivity: 2
+  playerModelOffset: {fileID: 0}
+  headPos: {fileID: 0}
+  playerStats: {fileID: 0}
 --- !u!114 &609511130
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1946,6 +1952,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerStats: {fileID: 11400000, guid: 503b5eec73e498c4a89956c9a104709f, type: 2}
+  animator: {fileID: 0}
 --- !u!114 &609511136
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1959,6 +1966,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerStats: {fileID: 11400000, guid: 503b5eec73e498c4a89956c9a104709f, type: 2}
+  animator: {fileID: 0}
+  rigs: {fileID: 0}
+  modelOffset: {fileID: 0}
 --- !u!114 &609511137
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1973,7 +1983,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 0
   maxHealth: 100
-  interactionRadius: 2
   perlinNoiseShake: {fileID: 1194404174}
   headbobShake: {fileID: 609511134}
   gunRecoilShake: {fileID: 0}
@@ -5221,6 +5230,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fc69bb1f684db042859725b0cdc3be0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  handTarget: {fileID: 0}
+  leftarmMover: {fileID: 0}
+  rightarmMover: {fileID: 0}
 --- !u!114 &1526081494
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6929,6 +6941,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba382c94486de7342aeb9db7480c7c5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timetravelControl: {fileID: 0}
 --- !u!4 &1979041105
 Transform:
   m_ObjectHideFlags: 0
@@ -7065,7 +7078,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2353d39c47494345a83ffdb0968495f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Activatables: []
 --- !u!1001 &2064584680
 PrefabInstance:
   m_ObjectHideFlags: 0
