@@ -26,12 +26,18 @@ public class ChangeRoomState : MonoBehaviour, ITimeTravelResponse
 
         for(int i = 0; i < pastObjects.transform.childCount; i++)
         {
-            pastObjectCols.Add(pastObjects.transform.GetChild(i).GetComponent<Collider>());
+            if(pastObjects.transform.GetChild(i).GetComponent<Collider>() != null)
+            {
+                pastObjectCols.Add(pastObjects.transform.GetChild(i).GetComponent<Collider>());
+            }        
         }
 
         for (int i = 0; i < presentObjects.transform.childCount; i++)
         {
-            presentObjectCols.Add(presentObjects.transform.GetChild(i).GetComponent<Collider>());        
+            if(presentObjects.transform.GetChild(i).GetComponent<Collider>() != null)
+            {
+                presentObjectCols.Add(presentObjects.transform.GetChild(i).GetComponent<Collider>());
+            }                
         }
     }
 
