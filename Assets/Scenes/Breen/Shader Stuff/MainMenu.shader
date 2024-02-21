@@ -1,8 +1,10 @@
-Shader "CustomPost/MainMenu"
+Shader "Custom/MainMenu"
 {
     Properties
     {
         _MainTex ("Texture", 2D) = "white" {}
+        _SecondaryTex ("Texture", 2D) = "white" {}
+        timeScale("Time Scale", Float) = 1
     }
     SubShader
     {
@@ -33,7 +35,9 @@ Shader "CustomPost/MainMenu"
             sampler2D _MainTex;
             float4 _MainTex_ST;
 
-            float intensity;
+            sampler2D _SecondaryTex;
+            float4 _SecondaryTex_ST;
+
             float timeScale;
 
             v2f vert (appdata v)
@@ -44,20 +48,28 @@ Shader "CustomPost/MainMenu"
 
                 // Lines
 
-                if (sin(15.0f + _Time.y * timeScale * 3) > 0.99f ||
-                    sin(15.0f + _Time.y * timeScale * 3) < 0.80f &&
-                    sin(15.0f + _Time.y * timeScale * 6) > 0.793f)
-                {
-                    o.uv.x = 1 - o.uv.x * (1 / intensity);
-                    o.uv.y = 1 - o.uv.y * (1.2 / intensity);
-                }
+                // if (sin(15.0f + _Time.y * timeScale * 3) > 0.99f ||
+                //     sin(15.0f + _Time.y * timeScale * 3) < 0.80f &&
+                //     sin(15.0f + _Time.y * timeScale * 6) > 0.793f)
+                // {
+                //     o.uv.x = 1 - o.uv.x * (1 / intensity);
+                //     o.uv.y = 1 - o.uv.y * (1.2 / intensity);
+                // }
 
                 return o;
             }
 
             fixed4 frag (v2f i) : SV_Target
             {
-                float4 result = tex2D(_MainTex, i.uv);
+                float4 result;
+
+                // Flicker
+                if (sin(15.0f + _Time.y * timeScale * 3) > 0.98f ||
+                    sin(15.0f + _Time.y * timeScale * 3) < 0.82f &&
+                    sin(15.0f + _Time.y * timeScale * 6) > 0.808f)
+                    result = tex2D(_SecondaryTex, i.uv);
+                else
+                    result = tex2D(_MainTex, i.uv);
 
                 // Vertical Transparent
                 if (sin(i.uv.y * 15 + _Time.y * timeScale) > 0.5f)
@@ -66,12 +78,6 @@ Shader "CustomPost/MainMenu"
                 // Lines
                 if (i.uv.y % 0.012f < 0.003f)
                     return result *= 0.25f;
-
-               /*  //Flicker
-                if (sin(15.0f + _Time.y * timeScale * 3) > 0.95f ||
-                    sin(15.0f + _Time.y * timeScale * 3) < 0.82f &&
-                    sin(15.0f + _Time.y * timeScale * 6) > 0.77f)
-                    return result *= 0.1f;*/
 
                 return result;
             }
