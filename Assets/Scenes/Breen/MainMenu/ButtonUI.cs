@@ -45,7 +45,7 @@ public class ButtonUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     protected IEnumerator ButtonFlash()
     {
-        float timer = 0.2f;
+        float timer = 0.1f;
         image.color = new Color(0.5f, 0, 0, 0.5f);
 
         while (timer > 0)
