@@ -28,7 +28,16 @@ public abstract class HitscanWeapon : Weapon
         //    HitscanMiss(rayOrigin);
         //}
 
-        if (Physics.Raycast(muzzlePosition.transform.position, muzzlePosition.transform.up, out hit, weaponRange, layermask))
+
+        //if (Physics.Raycast(muzzlePosition.transform.position, muzzlePosition.transform.up, out hit, weaponRange, layermask))
+        //{
+        //    HitscanHit(hit);
+        //}
+        //else
+        //{
+        //    HitscanMiss(muzzlePosition.transform.position);
+        //}
+        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, weaponRange, layermask))
         {
             HitscanHit(hit);
         }

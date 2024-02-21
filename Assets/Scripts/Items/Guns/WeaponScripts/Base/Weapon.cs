@@ -104,15 +104,18 @@ public abstract class Weapon : MonoBehaviour, IShootResponse
 
     public virtual void SetWeapon()
     {
+        Debug.Log("TRANSFORM PARENT IS : " + transform.parent);
         transform.parent = Camera.main.transform;
         transform.localPosition = setWeaponPosition;
         transform.forward = Camera.main.transform.forward;
-        GetComponent<Rigidbody>().isKinematic = true;
-        GetComponent<Collider>().enabled = false;
+        gameObject.GetComponent<Rigidbody>().useGravity = false;
+        gameObject.GetComponent<Rigidbody>().isKinematic = true;
+        gameObject.GetComponent<Collider>().enabled = false;
     }
 
     public void UnsetWeapon()
     {
+        Debug.Log("UNSETTING");
         GetComponent<Rigidbody>().isKinematic = false;
         GetComponent<Rigidbody>().AddForce(new Vector3(2, 4, 0), ForceMode.Impulse);
         GetComponent<Rigidbody>().useGravity = true;

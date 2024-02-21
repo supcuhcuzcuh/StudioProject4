@@ -77,13 +77,26 @@ public class GunController : MonoBehaviour , ISprintResponse
                         {
                             currWeapon.UnsetWeapon();
                             currWeapon = null;
-                        }
+                        }                        
                         currWeapon = hitObject.GetComponent<Weapon>();
 
                         currWeapon.SetWeapon();
                         _onSwapEvent.Invoke();
                     }
+                else if (hitObject.tag == "ENEMY_WEAPON")
+                {
+                    Camera.main.transform.DetachChildren();
+                    if (currWeapon != null)
+                    {
+                        currWeapon.UnsetWeapon();
+                        currWeapon = null;
+                    }
+                    currWeapon = hitObject.GetComponent<Weapon>();
+
+                    currWeapon.SetWeapon();
+                    _onSwapEvent.Invoke();
                 }
+            }
             }
             if (Input.GetKeyDown(KeyCode.G) && playerStats.playerGrenades != 0) //Throw grenade
             {               
@@ -95,7 +108,6 @@ public class GunController : MonoBehaviour , ISprintResponse
             }
             
         }
-
 
         public void OnSprint()
         {
@@ -109,7 +121,7 @@ public class GunController : MonoBehaviour , ISprintResponse
         {
             if (currWeapon != null)
             {
-            currWeapon.OffSprintAnimation();
+                currWeapon.OffSprintAnimation();
             }   
         }
 
