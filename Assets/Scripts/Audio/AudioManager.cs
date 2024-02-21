@@ -13,7 +13,11 @@ public class AudioManager : MonoBehaviour
     {
         sfxAudioSrc = GetComponent<AudioSource>();
 
-        if (PlayerPrefs.HasKey("Volume")) sfxAudioSrc.volume = PlayerPrefs.GetFloat("Volume");
+        // Set Volume from PlayerPrefs
+        if (PlayerPrefs.HasKey("VFX") && PlayerPrefs.HasKey("Master")) 
+            sfxAudioSrc.volume = PlayerPrefs.GetFloat("VFX") * PlayerPrefs.GetFloat("Master");
+        else
+            sfxAudioSrc.volume = 0.25f;
     }
 
     public bool PlaySoundEffect(string _soundEffectName)

@@ -15,6 +15,12 @@ public class PlayMenuMusic : MonoBehaviour
         else
             audioSource = GetComponent<AudioSource>();
 
+        // Set Volume from PlayerPrefs
+        if (PlayerPrefs.HasKey("BGM") && PlayerPrefs.HasKey("Master")) 
+            audioSource.volume = PlayerPrefs.GetFloat("BGM") * PlayerPrefs.GetFloat("Master");
+        else
+            audioSource.volume = 0.25f;
+
         audioSource.clip = soundtrack;
         audioSource.loop = true;
         audioSource.playOnAwake = true;
