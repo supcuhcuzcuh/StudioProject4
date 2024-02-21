@@ -20,9 +20,13 @@ public class FPSCameraController : MonoBehaviour
 
     //private GameObject player;
     private bool debugLock = false;  //debugging tool, presses escape to lock the player's view
+    private float playerPrefsMouseSens = 1;
     // Start is called before the first frame update
     void Start()
-    {    
+    {
+        if (PlayerPrefs.HasKey("Sensitivity"))
+            playerPrefsMouseSens = PlayerPrefs.GetFloat("Sensitivity");
+
         Cursor.lockState = CursorLockMode.Locked;
     }
 
@@ -63,10 +67,10 @@ public class FPSCameraController : MonoBehaviour
         //}
         if (debugLock == false)
         {
-            float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity;
+            float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * playerPrefsMouseSens;
             horizontalRotation += mouseX;
 
-            verticalRotation -= Input.GetAxis("Mouse Y") * mouseSensitivity;
+            verticalRotation -= Input.GetAxis("Mouse Y") * mouseSensitivity * playerPrefsMouseSens;
             verticalRotation = Mathf.Clamp(verticalRotation, -85, 85);
 
             transform.Rotate(0, mouseX, 0);

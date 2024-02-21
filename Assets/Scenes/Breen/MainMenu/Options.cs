@@ -9,6 +9,7 @@ public class Options : MonoBehaviour
     [SerializeField] private Slider volumeSliderMaster;
     [SerializeField] private Slider volumeSliderBGM;
     [SerializeField] private Slider volumeSliderVFX;
+    [SerializeField] private Slider sensitivitySliderVFX;
 
     private AudioManager[] audioManagers;
     private PlayMenuMusic playMenuMusic;
@@ -40,22 +41,25 @@ public class Options : MonoBehaviour
 
     public void OnVolumeSliderChange(string type)
     {
-        Slider volumeSlider = null;
+        Slider slider = null;
 
         switch (type)
         {
             case "Master":
-                volumeSlider = volumeSliderMaster;
+                slider = volumeSliderMaster;
                 break;
             case "BGM":
-                volumeSlider = volumeSliderBGM;
+                slider = volumeSliderBGM;
+                break;
+            case "VFX":
+                slider = volumeSliderVFX;
                 break;
             default:
-                volumeSlider = volumeSliderVFX;
+                slider = sensitivitySliderVFX;
                 break;
         }
 
-        PlayerPrefs.SetFloat(type, volumeSlider.value);
+        PlayerPrefs.SetFloat(type, slider.value);
         UpdateVolumes();
     }
 

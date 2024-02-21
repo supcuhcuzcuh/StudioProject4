@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class OptionsButton : ButtonUI
 {
@@ -11,30 +12,39 @@ public class OptionsButton : ButtonUI
     [SerializeField] private Vector3 closedPosition;
 
     private bool isOpen;
+    private bool opening;
 
     private void Start()
     {
         audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
+        image = gameObject.GetComponent<Image>();
         isOpen = false;
+        opening = false;
     }
 
     override public void OnClick()
     {
-        isOpen = !isOpen;
-        if (isOpen)
+        base.OnClick();
+
+        if (!opening)
         {
-            StopAllCoroutines();
-            StartCoroutine(SlideMenu(closedPosition));
-        }
-        else
-        {
-            StopAllCoroutines();
-            StartCoroutine(SlideMenu(openPosition));
+            isOpen = !isOpen;
+            StartCoroutine(SlideMenu());
         }
     }
 
-    private IEnumerator SlideMenu(Vector3 targetPosition)
+    private IEnumerator SlideMenu()
     {
+        Vector3 targetPosition;
+        opening = true;
+
+        // Check isOpen and go to the coresponding position
+        if (isOpen)
+            targetPosition = closedPosition;
+        else
+            targetPosition = openPosition;
+
+        // Moving
         float elapsedTime = 0f;
         Vector3 startingPosition = menuRectTransform.anchoredPosition3D;
 
@@ -52,5 +62,6 @@ public class OptionsButton : ButtonUI
 
         // Ensure final position is exact
         menuRectTransform.anchoredPosition3D = targetPosition;
+        opening = false;  // So that can't press button while it is sliding
     }
 }
