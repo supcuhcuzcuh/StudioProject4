@@ -16,7 +16,7 @@ public class InteractableController : MonoBehaviour
     private void Interact()
     {
         RaycastHit hit;
-        if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, interactionRange))
+        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, interactRange))
         {
             Activatable activatable = hit.collider.GetComponent<Activatable>();
             if (activatable != null)
