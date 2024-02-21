@@ -1,4 +1,4 @@
-Shader "CustomPost/GlitchPost"
+Shader "CustomPost/MainMenu"
 {
     Properties
     {
