@@ -26,13 +26,14 @@ public class Homingmissile : MonoBehaviour
     {
         if (elapsedtim <= beforeshoot)
         {
-          
+
 
             // Calculate the rotation to face the movement direction
             Quaternion toRotation = Quaternion.LookRotation(rb.velocity.normalized);
 
+            rb.AddForce(transform.forward * 10 * Time.deltaTime, ForceMode.Acceleration);
             // Apply rotation gradually
-            transform.rotation = Quaternion.Slerp(transform.rotation, toRotation, 40* Time.deltaTime);
+            transform.rotation = Quaternion.Slerp(transform.rotation, toRotation, 40 * Time.deltaTime);
             elapsedtim += Time.deltaTime;
         }
         if (elapsedtim >= beforeshoot)
@@ -53,9 +54,9 @@ public class Homingmissile : MonoBehaviour
                 transform.rotation = Quaternion.Slerp(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
             }
         }
-   }
+    }
 
-        void FindTarget()
+    void FindTarget()
     {
         GameObject[] targets = GameObject.FindGameObjectsWithTag(targetTag);
 
@@ -73,5 +74,42 @@ public class Homingmissile : MonoBehaviour
                 }
             }
         }
+    }
+
+
+    public float explosionRadius = 5f;
+    public float explosionDamage = 50f;
+    public GameObject explosionPrefab;
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        Explode();
+    }
+
+    private void Explode()
+    {
+        Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius);
+
+        foreach (Collider collider in colliders)
+        {
+            // Check if the collider belongs to the player or any other object you want to damage
+            if (collider.CompareTag("Player"))
+            {
+                // Apply damage to the player
+                FPSControls playerControls = collider.GetComponent<FPSControls>();
+                if (playerControls != null)
+                {
+                    playerControls.OnDamaged(explosionDamage);
+                }
+            }
+        }
+
+        // Optionally: Instantiate explosion particle effects or play explosion sound
+        GameObject explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+        // Destroy the explosion particle effects after a delay
+        Destroy(explosion, 1.5f); // Adjust the time according to your needs
+
+        // Destroy the missile after exploding
+        Destroy(gameObject);
     }
 }

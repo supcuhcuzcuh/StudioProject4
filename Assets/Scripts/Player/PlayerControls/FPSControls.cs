@@ -13,6 +13,7 @@ public class FPSControls : Entity   //Main Controller for all player movements, 
     private GunController gunController;
     private TimeTravelControl timetravelControl;
     private PlayerAnimatorController playeranimatorController;
+    [SerializeField] RayDetector Ray;
 
     [SerializeField]
     private PerlinNoiseShake perlinNoiseShake;
@@ -60,13 +61,18 @@ public class FPSControls : Entity   //Main Controller for all player movements, 
         gunController.HandleShooting();
         //timetravelControl.TimeTravel();
         //playeranimatorController.PlayerAnimationUpdate();
+
+        if (Ray.IsDetected())
+        {
+            Debug.Break();
+            OnDamaged(900);
+        }
     }
 
     private void FixedUpdate()
     {
         movementControl.Movement();
     }
-
 
     public override void OnDamaged(float _damage)
     {

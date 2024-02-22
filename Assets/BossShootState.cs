@@ -24,12 +24,17 @@ public class BossShootState : State
     // Reference to the turret barrel transform
     public Transform turretBarrel;
 
-
     public Transform Firepos;
 
 
+    [SerializeField] private Entity BossHp;
 
-    //public BossShooting shootin;
+    [SerializeField] private BossDeathState Deathstate;
+
+    [SerializeField] private AudioClip shoot;
+
+    [SerializeField] private AudioSource Placetoplay;
+
     public override State PlayCurrentState()
     {
         // Calculate direction to the player
@@ -41,11 +46,18 @@ public class BossShootState : State
         {
             // Shoot towards the player
             Shoot();
+            Placetoplay.PlayOneShot(shoot);
         }
 
         // Update the cooldown timer
         timeSinceLastShot += Time.deltaTime;
 
+        float Bosshealth = BossHp.GetHealth();
+        if (Bosshealth <= 0)
+        {
+            return Deathstate;
+
+        }
         return this;
     }
 
@@ -54,27 +66,35 @@ public class BossShootState : State
         // Calculate the rotation needed to look at the player
         Quaternion targetRotation = Quaternion.LookRotation(targetDirection);
 
-        // Smoothly rotate the turret barrel towards the player using lerp
-        turretBarrel.rotation = Quaternion.Lerp(turretBarrel.rotation, targetRotation, turretRotationSpeed * Time.deltaTime);
+        // Get the relative rotation to the target rotation
+        Quaternion relativeRotation = targetRotation * Quaternion.Inverse(turretBarrel.rotation);
+
+        // Separate the relative rotation into its Euler angles
+        Vector3 relativeEulerAngles = relativeRotation.eulerAngles;
+
+        // Calculate the clamped rotation on the x-axis (tilt)
+        float clampedXRotation = Mathf.Clamp(relativeEulerAngles.x, -maxDownRotation, maxUpRotation);
+
+        // Create a new quaternion with the clamped x-axis rotation and original y and z rotations
+        Quaternion clampedRotation = Quaternion.Euler(clampedXRotation, relativeEulerAngles.y, relativeEulerAngles.z);
+
+        // Apply the smoothed rotation to the turret barrel
+        turretBarrel.rotation = Quaternion.Slerp(turretBarrel.rotation, targetRotation * clampedRotation, turretRotationSpeed * Time.deltaTime);
     }
 
     private void Shoot()
     {
-        // Instantiate the projectile at the boss's position
-        GameObject projectile = Instantiate(projectilePrefab, Firepos.position, Quaternion.identity);
+       // Instantiate the projectile at the boss's position
+    GameObject projectile = Instantiate(projectilePrefab, Firepos.position, turretBarrel.rotation);
 
-        // Get the rigidbody component of the projectile
-        Rigidbody projectileRigidbody = projectile.GetComponent<Rigidbody>();
+    // Get the rigidbody component of the projectile
+    Rigidbody projectileRigidbody = projectile.GetComponent<Rigidbody>();
 
-        // Calculate direction to the player
-        Vector3 shootDirection = (playerTransform.position - transform.position).normalized;
+    // Apply impulse force in the forward direction of the turret barrel
+    float projectileSpeed = 10.0f; // You can adjust the speed as needed
+    projectileRigidbody.AddForce(turretBarrel.forward * projectileSpeed, ForceMode.Impulse);
 
-        // Apply impulse force towards the player
-        float projectileSpeed = 10.0f; // You can adjust the speed as needed
-        projectileRigidbody.AddForce(shootDirection * projectileSpeed, ForceMode.Impulse);
-
-        //shootin.FireWeapon();
-        // Reset the cooldown timer
-        timeSinceLastShot = 0.0f;
+    // Reset the cooldown timer
+    timeSinceLastShot = 0.0f;
     }
 }
