@@ -31,6 +31,7 @@ public class Homingmissile : MonoBehaviour
             // Calculate the rotation to face the movement direction
             Quaternion toRotation = Quaternion.LookRotation(rb.velocity.normalized);
 
+            rb.AddForce(transform.forward * 10 * Time.deltaTime, ForceMode.Acceleration);
             // Apply rotation gradually
             transform.rotation = Quaternion.Slerp(transform.rotation, toRotation, 40 * Time.deltaTime);
             elapsedtim += Time.deltaTime;

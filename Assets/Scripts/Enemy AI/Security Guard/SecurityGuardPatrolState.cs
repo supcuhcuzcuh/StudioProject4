@@ -52,6 +52,7 @@ public class SecurityGuardPatrolState : State
         }
         else
         {
+
             if (_damageInPatrolTracker)
             {
                 _damageInPatrolTracker = false;

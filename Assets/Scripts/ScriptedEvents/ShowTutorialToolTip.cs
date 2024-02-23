@@ -5,14 +5,14 @@ using UnityEngine;
 public class ShowTutorialToolTip : ScriptedEvent
 {
     [SerializeField]
-    private string toolTipText;
+    protected string toolTipText;
 
-    [SerializeField] 
-    private ToolTipManager tooltipManager;
-
+    [SerializeField]
+    protected ToolTipManager tooltipManager;
 
     protected override void TriggerScriptedEvent(Collider col)
     {
         tooltipManager.ShowToolTip(toolTipText);
     }
+
 }

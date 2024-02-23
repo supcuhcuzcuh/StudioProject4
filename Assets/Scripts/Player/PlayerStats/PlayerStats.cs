@@ -15,6 +15,8 @@ public class PlayerStats : ScriptableObject
 
     //public int startingAmmo;
 
+    public bool canTimeTravel;
+
     public enum PLAYERSTATES
     {
         IDLE,

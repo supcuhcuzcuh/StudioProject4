@@ -2,17 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Projectile : RevisedProjectile
+public class Projectile : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        
+        // Destroy the missile after exploding
+        Destroy(gameObject,5.0f);
     }
-
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter(Collider other)
     {
-        
+        // Check if the collider belongs to the player or any other object you want to damage
+        if (other.CompareTag("Player"))
+        {
+            // Apply damage to the player
+            FPSControls playerControls = other.GetComponent<FPSControls>();
+            if (playerControls != null)
+            {
+                playerControls.OnDamaged(10);
+                Destroy(gameObject);
+            }
+        }
+
+    
     }
 }

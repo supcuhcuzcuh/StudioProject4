@@ -16,8 +16,15 @@ public class Cooldownstate : State
     private float lerpingDuration = 3f; // Adjust the duration for lerping to +20 degrees
 
     public Transform bossHead;
+    [SerializeField] private Entity BossHp;
 
     public GameObject thebarrel;
+
+    private bool playonce = false;
+    [SerializeField] private AudioClip Shutdown;
+    [SerializeField] private BossDeathState Deathstate;
+
+    [SerializeField] private AudioSource Placetoplay;
     private void Start()
     {
         initialPosition = bossHead.position;
@@ -26,12 +33,18 @@ public class Cooldownstate : State
 
     public override State PlayCurrentState()
     {
+        if (!playonce )
+        {
+            playonce = true;
+            Placetoplay.PlayOneShot(Shutdown);
+           
+        }
         // Lerping the x rotation axis to +20 degrees
         float lerpProgress = Mathf.Clamp01((Time.time - startTime) / lerpingDuration);
         Quaternion initialRotation = bossHead.rotation; // Store the initial rotation
         Quaternion targetRotation = Quaternion.Euler(20, initialRotation.eulerAngles.y, initialRotation.eulerAngles.z);
         bossHead.rotation = Quaternion.Lerp(initialRotation, targetRotation, lerpProgress);
-
+     
         // Set the material color to red during the lerping phase
         bossHeadRenderer.material.color = Color.red;
 
@@ -55,10 +68,16 @@ public class Cooldownstate : State
                 bossHead.rotation = initialRotation;
                 // Set the material color to red during the cooldown phase
                 bossHeadRenderer.material.color = Color.black;
+                playonce = false;
                 return returnBossshoot;
             }
         }
+        float Bosshealth = BossHp.GetHealth();
+        if (Bosshealth <= 0)
+        {
+            return Deathstate;
 
+        }
         return this;
     }
 

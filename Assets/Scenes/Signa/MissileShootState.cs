@@ -21,14 +21,23 @@ public class MissileShootState : State
     public float maxUpRotation = 20.0f;
     public float maxDownRotation = 20.0f;
 
+
+    private float ShotsFired;
     // Reference to the turret barrel transform
     public Transform turretBarrel;
 
 
     public Transform Firepos;
 
+    [SerializeField] private Entity BossHp;
 
+    [SerializeField] private BossDeathState Deathstate;
 
+    [SerializeField] private Cooldownstate Cdstate;
+
+    [SerializeField] private AudioClip shoot;
+
+    [SerializeField] private AudioSource Placetoplay;
     //public BossShooting shootin;
     public override State PlayCurrentState()
     {
@@ -41,10 +50,26 @@ public class MissileShootState : State
         {
             // Shoot towards the player
             Shoot();
+            Placetoplay.clip = shoot;
+            Placetoplay.PlayOneShot(shoot);
         }
 
         // Update the cooldown timer
         timeSinceLastShot += Time.deltaTime;
+
+        float Bosshealth = BossHp.GetHealth();
+        if (Bosshealth <= 0)
+        {
+            return Deathstate;
+
+        }
+
+        if (ShotsFired >= 10)
+        {
+            ShotsFired = 0;
+            return Cdstate;
+
+        }
 
         return this;
     }
@@ -78,11 +103,11 @@ public class MissileShootState : State
         // Calculate direction to the player
         Vector3 shootDirection = turretBarrel.forward.normalized;
 
-        // Apply impulse force towards the player
-        float projectileSpeed = 30.0f; // You can adjust the speed as needed
+        float projectileSpeed = 5.0f; // You can adjust the speed as needed
         projectileRigidbody.AddForce(shootDirection * projectileSpeed, ForceMode.Impulse);
 
         //shootin.FireWeapon();
+        ShotsFired += 1;
         // Reset the cooldown timer
         timeSinceLastShot = 0.0f;
     }

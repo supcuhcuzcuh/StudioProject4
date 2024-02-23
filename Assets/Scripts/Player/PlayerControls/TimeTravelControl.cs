@@ -16,6 +16,9 @@ public class TimeTravelControl : MonoBehaviour
     bool inCollision = false;
     bool deviceOut = false;
 
+    [SerializeField]
+    private PlayerStats playerStats;
+
     [SerializeField] Camera altTimelineCam;
 
     [Header("Shader Stuff")]
@@ -25,8 +28,7 @@ public class TimeTravelControl : MonoBehaviour
 
     private List<ITimeTravelResponse> ontimetravelResponses = new List<ITimeTravelResponse>();
     private List<ITimeTravelResponse> offtimetravelResponses = new List<ITimeTravelResponse>();
-
-   
+  
     bool activatetimeTravelAnim = false;
     
     bool thumbDownAnim = false;
@@ -38,8 +40,6 @@ public class TimeTravelControl : MonoBehaviour
     [SerializeField] private TwoBoneIKConstraint armMover;
     [SerializeField] private TwoBoneIKConstraint thumbMover2;
 
-    [SerializeField] private GameObject flickTarget;
-
     [SerializeField] private ToolTipManager tooltipManager;
 
     // Start is called before the first frame update
@@ -50,7 +50,7 @@ public class TimeTravelControl : MonoBehaviour
 
     public void TimeTravel()
     {    
-        if (Input.GetKeyDown(KeyCode.F) && pressandHold == null)
+        if (Input.GetKeyDown(KeyCode.F) && pressandHold == null && playerStats.canTimeTravel == true)
         {
             if(deviceOut == false)
             {

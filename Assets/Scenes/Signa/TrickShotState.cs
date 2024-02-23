@@ -27,6 +27,11 @@ public class TrickShotState : State
 
     [SerializeField] private GameObject Theparticle;
 
+
+    [SerializeField] private Entity BossHp;
+
+    [SerializeField] private BossDeathState Deathstate;
+
     public override State PlayCurrentState()
     {
         if (!hasStartedRotation)
@@ -53,6 +58,13 @@ public class TrickShotState : State
                 hasRotatedOnce = true;
                 totalRotation = 0f; // Reset totalRotation for future use if needed
             }
+        }
+
+        float Bosshealth = BossHp.GetHealth();
+        if (Bosshealth <= 0)
+        {
+            return Deathstate;
+
         }
 
         return this;
