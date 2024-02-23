@@ -6,13 +6,20 @@ public abstract class ScriptedEvent : MonoBehaviour
 {
     protected abstract void TriggerScriptedEvent(Collider col);
     protected bool triggered = false;
+    [SerializeField]
+    protected bool oneTimeEvent = true;
 
     void OnTriggerEnter(Collider col)
     {
         if(triggered == false)
         {
             TriggerScriptedEvent(col);
-            triggered = true;
+
+            if(oneTimeEvent == true)
+            {
+                triggered = true;
+            }
+          
         }
         
     }
