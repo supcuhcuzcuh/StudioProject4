@@ -47,6 +47,7 @@ public class SecurityGuardPatrolState : State
         }
         if (playerDetector.IsDetected())
         {
+            Debug.Log("A");
             destinationTracker.enabled = false;
             return alertState; // The returned state will play in Update
         }

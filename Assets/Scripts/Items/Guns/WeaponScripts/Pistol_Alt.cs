@@ -68,7 +68,7 @@ public class Pistol_Alt : HitscanWeapon
         if (isAiming == false)
         {
             recoilMultiplier = 0.5f;
-            Vector3 targetPos = new Vector3(0, -0.15f, 0.6f);
+            Vector3 targetPos = new Vector3(-0.05f, -0.5f, 1.0f);
             Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, 30.0f, 4 * Time.deltaTime);
             transform.forward = Vector3.Lerp(transform.forward, Camera.main.transform.forward, 4 * Time.deltaTime); 
             transform.localPosition = Vector3.Lerp(transform.localPosition, targetPos, 4 * Time.deltaTime); 

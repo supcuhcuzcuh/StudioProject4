@@ -103,7 +103,9 @@ public class GunController : MonoBehaviour , ISprintResponse
                             child.gameObject.layer = 6;
                         }
                         currWeapon.gameObject.layer = 6;
-                        
+
+                        gameObject.layer = 7;
+
                         _onSwapEvent.Invoke();
                     }
                 }
