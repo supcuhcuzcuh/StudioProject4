@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class InteractableController : MonoBehaviour
 {
+    [HideInInspector] public Transform playerTransform;
     [HideInInspector] public float interactRange;
 
     private Transform camTransform;

@@ -64,9 +64,9 @@ Shader "Custom/MainMenu"
                 float4 result;
 
                 // Flicker
-                if (sin(15.0f + _Time.y * timeScale * 3) > 0.98f ||
-                    sin(15.0f + _Time.y * timeScale * 3) < 0.82f &&
-                    sin(15.0f + _Time.y * timeScale * 6) > 0.808f)
+                if (sin(15.0f + _Time.y * timeScale) > 0.98f ||
+                    sin(15.0f + _Time.y * timeScale) < 0.82f &&
+                    sin(15.0f + _Time.y * timeScale * 2) > 0.808f)
                     result = tex2D(_SecondaryTex, i.uv);
                 else
                     result = tex2D(_MainTex, i.uv);

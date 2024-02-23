@@ -10,6 +10,7 @@ public class SceneChangerButton : ButtonUI
 
     public override void OnClick()
     {
+        base.OnClick();
         SceneManager.LoadScene(sceneName);
     }
 }

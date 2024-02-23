@@ -5,7 +5,8 @@ using UnityEngine;
 public class QuitGameButton : ButtonUI
 {
     override public void OnClick()
-    {   
+    {
+        base.OnClick();
         Application.Quit();
     }
 }
