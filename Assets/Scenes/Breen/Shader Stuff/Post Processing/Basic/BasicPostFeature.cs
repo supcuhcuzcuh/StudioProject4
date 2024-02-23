@@ -29,7 +29,7 @@ public class BasicPostFeature : ScriptableRendererFeature
         int tintId = Shader.PropertyToID("_Temp");
         private RenderTargetIdentifier src, tint;
 
-        [HideInInspector] public bool isActive = false;
+        [HideInInspector] public bool isActive = true;
 
         private float sizeSet;
         private bool isInit = false;
@@ -59,13 +59,13 @@ public class BasicPostFeature : ScriptableRendererFeature
 
             if (!isInit)
             {
-                sizeSet = (float)basicPost.initialCircleSize;
+                sizeSet = 0;
                 isInit = true;
             }
 
             if (!isActive)
             {
-                sizeSet = (float)basicPost.initialCircleSize;
+                sizeSet = 0;
 
                 mat.SetFloat("size", sizeSet);
             }
@@ -73,15 +73,15 @@ public class BasicPostFeature : ScriptableRendererFeature
             if (isActive)
             {
                 // Reset
-                if (mat.GetFloat("size") <= 0)
+                if (mat.GetFloat("size") >= (float)basicPost.initialCircleSize)
                 {
-                    sizeSet = (float)basicPost.initialCircleSize;
                     isActive = false;
+                    sizeSet = 0;
                 }
                 // Expand
                 else
                 {
-                    sizeSet -= (Time.deltaTime * (float)basicPost.timeScale);
+                    sizeSet += (Time.deltaTime * (float)basicPost.timeScale);
                 }
 
                 mat.SetFloat("size", sizeSet);
