@@ -83,9 +83,8 @@ public class GunController : MonoBehaviour , ISprintResponse
                 RaycastHit hit;
                 if (Physics.Raycast(rayOrigin, Camera.main.transform.forward, out hit, 1000))
                 {
-                    GameObject hitObject = hit.collider.gameObject;
-                    Debug.Log(hitObject.name);
-                    if (hitObject.tag == "Weapon")
+                    GameObject hitObject = hit.collider.gameObject;                   
+                    if (hitObject.tag == "Weapon" || hitObject.tag == "ENEMY_WEAPON")
                     {
                         Camera.main.transform.DetachChildren();
                         if (currWeapon != null)
@@ -97,32 +96,14 @@ public class GunController : MonoBehaviour , ISprintResponse
                         currWeapon.GetComponent<HitscanWeapon>().dirShoot = Camera.main.transform;
 
                         currWeapon.SetWeapon();
-                        rightArmMover.weight = 1;
-                        rightFingers.weight = 1;
-                        rightArmTarget.position = currWeapon.handPosition.position;
-                        rightArmTarget.SetParent(currWeapon.gameObject.transform);
 
                         var children = GetComponentsInChildren<Transform>();
                         foreach (var child in children)
                         {
-                            child.gameObject.layer = 0;
+                            child.gameObject.layer = 6;
                         }
-                        currWeapon.gameObject.layer = 0;
+                        currWeapon.gameObject.layer = 6;
                         
-                        _onSwapEvent.Invoke();
-                    }
-                    else if (hitObject.tag == "ENEMY_WEAPON")
-                    {
-                        Camera.main.transform.DetachChildren();
-                        if (currWeapon != null)
-                        {
-                            currWeapon.UnsetWeapon();
-                            currWeapon = null;
-                        }
-                        currWeapon = hitObject.GetComponent<Weapon>();
-                        currWeapon.GetComponent<HitscanWeapon>().dirShoot = Camera.main.transform;
-
-                        currWeapon.SetWeapon();
                         _onSwapEvent.Invoke();
                     }
                 }

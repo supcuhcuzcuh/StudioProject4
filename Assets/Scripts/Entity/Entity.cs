@@ -17,6 +17,11 @@ public abstract class Entity : MonoBehaviour
         return health;
     }
 
+    public float GetMaxHealth()
+    {
+        return maxHealth;
+    }
+
     public void SetHealth(float _health)
     {
         health = _health;
@@ -24,7 +29,7 @@ public abstract class Entity : MonoBehaviour
 
     public virtual void Death()
     {
-        Destroy(gameObject);
+        //Destroy(gameObject);
     }
 
     public void AddHealth(float _health)

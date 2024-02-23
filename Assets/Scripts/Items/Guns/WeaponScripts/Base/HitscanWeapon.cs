@@ -16,30 +16,12 @@ public abstract class HitscanWeapon : Weapon
 
     protected void DoHitscan()
     {
-       // Vector3 rayOrigin = Camera.main.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0.0f));
-
+      
         RaycastHit hit;
-
-        //if (Physics.Raycast(rayOrigin, Camera.main.transform.forward, out hit, weaponRange, layermask))
-        //{
-        //    HitscanHit(hit);
-        //}
-        //else
-        //{
-        //    HitscanMiss(rayOrigin);
-        //}
-
-
-        //if (Physics.Raycast(muzzlePosition.transform.position, muzzlePosition.transform.up, out hit, weaponRange, layermask))
-        //{
-        //    HitscanHit(hit);
-        //}
-        //else
-        //{
-        //    HitscanMiss(muzzlePosition.transform.position);
-        //}
+       
         if (Physics.Raycast(dirShoot.position, dirShoot.forward, out hit, weaponRange, layermask))
         {
+            Debug.Log(hit.collider.gameObject);
             HitscanHit(hit);
         }
         else

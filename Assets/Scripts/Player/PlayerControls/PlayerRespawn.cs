@@ -12,6 +12,7 @@ public class PlayerRespawn : MonoBehaviour
     public void Respawn()
     {
         player.transform.position = respawnPoints[spawnIndex].transform.position;
+        player.GetComponent<FPSControls>().SetHealth(player.GetComponent<FPSControls>().GetMaxHealth());
     }
 
     public void SetNextSpawnPoint()

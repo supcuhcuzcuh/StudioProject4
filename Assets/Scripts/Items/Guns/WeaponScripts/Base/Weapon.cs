@@ -116,6 +116,7 @@ public abstract class Weapon : MonoBehaviour, IShootResponse
 
     public virtual void SetWeapon()
     {
+        Debug.Log("Set Weapon");
         transform.parent = Camera.main.transform;
         transform.localPosition = setWeaponPosition;
         transform.forward = Camera.main.transform.forward;

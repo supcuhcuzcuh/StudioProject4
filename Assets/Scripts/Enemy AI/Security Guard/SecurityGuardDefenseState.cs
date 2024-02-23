@@ -17,9 +17,9 @@ public class SecurityGuardDefenseState : State
 
     private float _nextTimeToShoot;
 
-    [Header("DEBUG")]
-    public TMPro.TMP_Text distFromPlayerText;
-    public TMPro.TMP_Text enemyAmmoText;
+    //[Header("DEBUG")]
+    //public TMPro.TMP_Text distFromPlayerText;
+    //public TMPro.TMP_Text enemyAmmoText;
 
     private void Start()
     {
@@ -28,10 +28,10 @@ public class SecurityGuardDefenseState : State
     public override State PlayCurrentState()
     {
         float distFromPlayer = Vector3.Distance(target.transform.position, root.transform.position);
-        if (distFromPlayerText.text != null)
-        {
-            distFromPlayerText.text = "DISTANCE FROM PLAYER: " + distFromPlayer;
-        }
+        //if (distFromPlayerText.text != null)
+        //{
+        //    distFromPlayerText.text = "DISTANCE FROM PLAYER: " + distFromPlayer;
+        //}
 
         if (enemy.GetHealth() <= 0.0f)
         {
@@ -71,7 +71,7 @@ public class SecurityGuardDefenseState : State
             //    return patrolState;
             //}
             enemy.enemyAnimator.SetBool("isDefense", true);
-            enemyAmmoText.text = "ENEMY AMMO: " + enemy.enemyWeapon.clipSizeCurr;
+            //enemyAmmoText.text = "ENEMY AMMO: " + enemy.enemyWeapon.clipSizeCurr;
             var targetPos = target.transform.position;
             targetPos.y = transform.position.y;
             transform.root.LookAt(targetPos);
