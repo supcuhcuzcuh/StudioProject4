@@ -4,3 +4,8 @@ Assets/Animations/Enemy/Online/Rifle[[:space:]]Turn.fbx filter=lfs diff=lfs merg
 Assets/Animations/Enemy/Online/Rifle[[:space:]]Idle(5).fbx filter=lfs diff=lfs merge=lfs -text
 Assets/Animations/Enemy/Online/Rifle[[:space:]]Walk(1).fbx filter=lfs diff=lfs merge=lfs -text
 Assets/Animations/Enemy/Online/Rifle[[:space:]]Walk(1).fbx filter=lfs diff=lfs merge=lfs -text
+Assets filter=lfs diff=lfs merge=lfs -text
+Assets/Animations/B4[[:space:]]Enemy/Online/Rifle[[:space:]]Hit[[:space:]]To[[:space:]]Back.fbx filter=lfs diff=lfs merge=lfs -text
+Assets/Animations/B4[[:space:]]Enemy/Online/Rifle[[:space:]]Idle(5).fbx filter=lfs diff=lfs merge=lfs -text
+Assets/Animations/B4[[:space:]]Enemy/Online/Rifle[[:space:]]Walk(1).fbx filter=lfs diff=lfs merge=lfs -text
+Assets/Animations/B4[[:space:]]Enemy/Online/Rifle[[:space:]]Turn.fbx filter=lfs diff=lfs merge=lfs -text

@@ -8,18 +8,19 @@ public class SecurityGuardPatrolState : State
 {
     [HideInInspector] public UnityEvent damageInPatrol;
     [SerializeField] private RayDetector playerDetector;
+    [SerializeField] private float fieldOfView;
 
     [Header("Potential States Of Transition")]
     public SecurityGuardAlertState alertState;
     public SecurityGuardDefenseState defenseState;
-
-    private WaypointsTracker _destinationTracker;
-    private NavMeshAgent _agent;
+        
+    [SerializeField] private WaypointsTracker destinationTracker;
+    [SerializeField] private NavMeshAgent agent;
     private bool _damageInPatrolTracker = false;
+
+    private float _timer;
     private void Start()
     {
-        _destinationTracker = transform.root.GetComponent<WaypointsTracker>();
-
         if (damageInPatrol == null)
         {
             damageInPatrol = new UnityEvent();
@@ -27,39 +28,38 @@ public class SecurityGuardPatrolState : State
 
         damageInPatrol.AddListener(delegate { DamagedWhilePatrol(); });
 
-        _agent = transform.root.GetComponent<NavMeshAgent>();
+        agent = transform.root.GetComponent<NavMeshAgent>();
     }
     public override State PlayCurrentState()
     {
-        if (transform.root.GetComponent<BaseEnemy>().GetHealth() <= 0.0f)
+        _timer += Time.deltaTime * 200;
+        playerDetector.toStart.localRotation = Quaternion.Euler( 0f , Mathf.PingPong(_timer, fieldOfView *  2) - fieldOfView, 0);
+
+
+        if (enemy.GetHealth() <= 0.0f)
         {
-            transform.root.GetComponent<BaseEnemy>().SetHealth(0.0f);
-            _agent.enabled = false;
-            _destinationTracker.enabled = false;
-            transform.root.GetComponent<BaseEnemy>().enemyWeapon.transform.parent = null;
-            transform.root.GetComponent<BaseEnemy>().EnableWeaponPhysics();
+            enemy.SetHealth(0.0f);  
+            agent.enabled = false;
+            destinationTracker.enabled = false;
+            enemy.enemyWeapon.transform.parent = null;
+            enemy.EnableWeaponPhysics();
             return deadState;
         }
-        //if (playerDetector.IsDetected())    
-        //{
-        //    _destinationTracker.enabled = false;
-        //    return alertState; // The returned state will play in Update
-        //}
-        if (playerDetector.IsSurroundingDetected())
+        if (playerDetector.IsDetected())
         {
-            _destinationTracker.enabled = false;
-
+            destinationTracker.enabled = false;
             return alertState; // The returned state will play in Update
         }
         else
         {
             if (_damageInPatrolTracker)
             {
+                _damageInPatrolTracker = false;
                 return defenseState;
             }
 
-            _destinationTracker.enabled = true;
-            _destinationTracker.ActivateWaypoints();  
+            destinationTracker.enabled = true;
+            destinationTracker.ActivateWaypoints();  
             return this;
         }
     }

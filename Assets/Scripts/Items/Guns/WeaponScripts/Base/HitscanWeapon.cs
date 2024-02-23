@@ -10,6 +10,7 @@ public abstract class HitscanWeapon : Weapon
     protected float hitForce;
 
     [SerializeField] protected LayerMask layermask;
+    public Transform dirShoot;
 
     //[SerializeField] protected Vector3 startFrom;
 
@@ -37,7 +38,7 @@ public abstract class HitscanWeapon : Weapon
         //{
         //    HitscanMiss(muzzlePosition.transform.position);
         //}
-        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, weaponRange, layermask))
+        if (Physics.Raycast(dirShoot.position, dirShoot.forward, out hit, weaponRange, layermask))
         {
             HitscanHit(hit);
         }

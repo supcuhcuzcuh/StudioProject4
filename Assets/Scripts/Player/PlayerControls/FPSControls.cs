@@ -89,5 +89,4 @@ public class FPSControls : Entity   //Main Controller for all player movements, 
     {
         playerRespawn.Respawn();
     }
-
 }

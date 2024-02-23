@@ -17,13 +17,4 @@ public class SecurityGuardEnemy : BaseEnemy
             healthText.text = "Guard Health: " + health;
         }
     }
-
-    void TakeHit()
-    {
-        hitsToDie -= 1;
-        if (hitsToDie <= 0)
-        {
-            Debug.Log("ENEMY IS DEAD");
-        }
-    }
 }
