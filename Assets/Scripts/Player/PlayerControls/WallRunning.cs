@@ -27,6 +27,9 @@ public class WallRunning : MonoBehaviour
     private bool wallLeft;
     private bool wallRight;
 
+    private bool jumpFromWallRight;
+    private bool jumpFromWallLeft;
+
     [Header("References")]
     public Transform orientation;
     public Transform cameraTransform; // Reference to your camera transform
@@ -44,6 +47,7 @@ public class WallRunning : MonoBehaviour
 
     private void Update()
     {
+        StateMachine();
         // Check for wall jump input
         if (Input.GetButtonDown("Jump"))
         {
@@ -56,39 +60,44 @@ public class WallRunning : MonoBehaviour
         {
              CheckForWall();
         }
+        
     }
 
     private void FixedUpdate()
-    {
-        StateMachine();
+    {  
         if (pm)
         {
             WallRunningMovement();
             // Rotate the camera based on wall running direction
             //RotateCamera();
-        }
-       
+        }     
     }
 
     private void CheckForWall()
     {
-        if (Physics.Raycast(transform.position, Camera.main.transform.right, out rightWallhit, wallCheckDistance))
+        if(!jumpFromWallRight)
         {
-            if (rightWallhit.collider.gameObject.tag == "Wall")
+            if (Physics.Raycast(transform.position, Camera.main.transform.right, out rightWallhit, wallCheckDistance))
             {
-                wallRight = true;
+                if (rightWallhit.collider.gameObject.tag == "Wall")
+                {
+                    wallRight = true;
+                }
             }
         }
 
-        if (Physics.Raycast(transform.position, -Camera.main.transform.right, out leftWallhit, wallCheckDistance))
+        if (!jumpFromWallLeft)
         {
-            if (leftWallhit.collider.gameObject.tag == "Wall")
+            if (Physics.Raycast(transform.position, -Camera.main.transform.right, out leftWallhit, wallCheckDistance))
             {
-                wallLeft = true;
+                if (leftWallhit.collider.gameObject.tag == "Wall")
+                {
+                    wallLeft = true;
+                }
             }
         }
 
-        Debug.Log("Left: " + wallLeft + " Right: " + wallRight);
+        //Debug.Log("Left: " + wallLeft + " Right: " + wallRight);
     }
 
     private bool AboveGround()
@@ -135,7 +144,7 @@ public class WallRunning : MonoBehaviour
         {
             if (!pm)
             {
-                Debug.Log("Start wall run");
+                //Debug.Log("Start wall run");
                 StartWallRun();         
             }
         }
@@ -145,7 +154,7 @@ public class WallRunning : MonoBehaviour
         {
             if (pm)
             {
-                Debug.Log("Stop wall run");
+                //Debug.Log("Stop wall run");
                 StopWallRun();      
             }
         }
@@ -185,14 +194,26 @@ public class WallRunning : MonoBehaviour
     {
         pm = false; // Disable wall running state
         rb.useGravity = true;
-
+        
+       
         // Calculate wall jump direction (opposite of the wall normal)
         Vector3 wallNormal = wallRight ? rightWallhit.normal : leftWallhit.normal;
         Vector3 wallJumpDirection = wallNormal; // Opposite direction
 
-        Debug.Log("Jumped");
+        //Debug.Log("Jumped");
         // Apply wall jump force
-        rb.AddForce(wallJumpDirection * wallRunForce * 1.5f, ForceMode.Impulse); // Adjust the multiplier as needed
+        rb.AddForce((wallJumpDirection * wallRunForce * 2.0f) + (transform.up * 2.5f), ForceMode.Impulse); // Adjust the multiplier as needed
+
+        if (wallRight == true)
+        {
+            jumpFromWallRight = true;
+            wallRight = false;
+        }
+        else if (wallLeft == true)
+        {
+            jumpFromWallLeft = true;
+            wallLeft = false;
+        }
         playerStats.currAdditionalState = PlayerStats.ADDITIONALPLAYERSTATES.JUMP;
     }
 
@@ -200,7 +221,6 @@ public class WallRunning : MonoBehaviour
     {
         pm = false;
         rb.useGravity = true;
-
         playerStats.currAdditionalState = PlayerStats.ADDITIONALPLAYERSTATES.NONE;
     }
 
@@ -208,9 +228,15 @@ public class WallRunning : MonoBehaviour
     {
         if(col.gameObject.tag == "Wall")
         {
-            Debug.Log("Leave wall");         
-            wallLeft = false;
-            wallRight = false;
+            //Debug.Log("Leave wall");         
+            
+            wallLeft = false;           
+            wallRight = false;         
+        }
+        else
+        {
+            jumpFromWallLeft = false;
+            jumpFromWallRight = false;
         }
     }
 

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
+using UnityEngine.Animations.Rigging;
 
 public interface IShootResponse
 {
@@ -18,6 +19,10 @@ public class GunController : MonoBehaviour , ISprintResponse
         private System.Action _onReloadEvent = null;
         private System.Action _onSwapEvent = null;
         private System.Action _onGrenadeEvent = null;
+
+        [SerializeField] private TwoBoneIKConstraint rightArmMover;
+        [SerializeField] private Rig rightFingers;
+        [SerializeField] private Transform rightArmTarget;
 
         public Weapon currWeapon;
 
@@ -62,12 +67,13 @@ public class GunController : MonoBehaviour , ISprintResponse
                     
                 }
 
-                if (Input.GetKeyDown(KeyCode.Q))    //Qnequip Weapon
-                {
-                    Camera.main.transform.DetachChildren();
-                    currWeapon.UnsetWeapon();
-                    currWeapon = null;
-                }
+                //if (Input.GetKeyDown(KeyCode.Q))    //Qnequip Weapon
+                //{
+                //    Camera.main.transform.DetachChildren();
+                //    currWeapon.UnsetWeapon();
+                //    currWeapon = null;
+
+                //}
             }
            
 
@@ -89,6 +95,18 @@ public class GunController : MonoBehaviour , ISprintResponse
                         currWeapon = hitObject.GetComponent<Weapon>();
 
                         currWeapon.SetWeapon();
+                        rightArmMover.weight = 1;
+                        rightFingers.weight = 1;
+                        rightArmTarget.position = currWeapon.handPosition.position;
+                        rightArmTarget.SetParent(currWeapon.gameObject.transform);
+
+                        var children = GetComponentsInChildren<Transform>();
+                        foreach (var child in children)
+                        {
+                            child.gameObject.layer = 0;
+                        }
+                        currWeapon.gameObject.layer = 0;
+                        
                         _onSwapEvent.Invoke();
                     }
                 else if (hitObject.tag == "ENEMY_WEAPON")

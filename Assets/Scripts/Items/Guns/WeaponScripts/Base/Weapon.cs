@@ -18,6 +18,7 @@ public abstract class Weapon : MonoBehaviour, IShootResponse
     public float reloadSpeed = 1.0f;
     public bool isReloading = false;
 
+    public Transform handPosition;
     [SerializeField] protected PlayerStats playerStat;
     protected bool isAiming;
 
@@ -37,6 +38,13 @@ public abstract class Weapon : MonoBehaviour, IShootResponse
     [SerializeField]
     private ParticleEffectManager particleEffectManager;
 
+    private void Start()
+    {
+        audioManager = GetComponent<AudioManager>();
+        particleEffectManager = GetComponent<ParticleEffectManager>();
+        Init();
+    }
+
     public void OnMouse1()
     {
         if (clipSizeCurr > 0)
@@ -44,7 +52,7 @@ public abstract class Weapon : MonoBehaviour, IShootResponse
             clipSizeCurr -= 1;
             FireWeapon();
             audioManager.PlaySoundEffect("Shot");
-            particleEffectManager.PlayParticleEffect("MuzzleFlash", muzzlePosition.position, muzzlePosition);
+            particleEffectManager.PlayParticleEffect("MuzzleFlash", muzzlePosition.position);
         }
         else
         {
@@ -108,7 +116,6 @@ public abstract class Weapon : MonoBehaviour, IShootResponse
 
     public virtual void SetWeapon()
     {
-        Debug.Log("TRANSFORM PARENT IS : " + transform.parent);
         transform.parent = Camera.main.transform;
         transform.localPosition = setWeaponPosition;
         transform.forward = Camera.main.transform.forward;

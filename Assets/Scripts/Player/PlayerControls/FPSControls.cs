@@ -14,8 +14,9 @@ public class FPSControls : Entity   //Main Controller for all player movements, 
     private TimeTravelControl timetravelControl;
     private InteractableController interactableController;
     private Sliding sliding;
-   
 
+    [SerializeField]
+    private PlayerRespawn playerRespawn;
     [SerializeField]
     private PerlinNoiseShake perlinNoiseShake;
     [SerializeField]
@@ -78,6 +79,15 @@ public class FPSControls : Entity   //Main Controller for all player movements, 
     {
         health -= _damage;
         playerStatsUIManager.UpdateHealthUI(health.ToString());
+        if (health <= 0)
+        {
+            Death();
+        }
+    }
+
+    public override void Death()
+    {
+        playerRespawn.Respawn();
     }
 
 }

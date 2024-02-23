@@ -105,9 +105,10 @@ public class Sliding : MonoBehaviour
         if (playerStats.currAdditionalState == PlayerStats.ADDITIONALPLAYERSTATES.SLIDE)
         {
             playerStats.currAdditionalState = PlayerStats.ADDITIONALPLAYERSTATES.NONE;
+            animator.SetInteger("Crouch", 0);
         }
         sliding = false;
-        animator.SetInteger("Crouch", 0);
+        
     }
 
 

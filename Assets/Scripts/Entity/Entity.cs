@@ -22,6 +22,11 @@ public abstract class Entity : MonoBehaviour
         health = _health;
     }
 
+    public virtual void Death()
+    {
+        Destroy(gameObject);
+    }
+
     public void AddHealth(float _health)
     {
         if(health + _health > maxHealth)
@@ -37,5 +42,9 @@ public abstract class Entity : MonoBehaviour
     public virtual void OnDamaged(float damage)
     {
         health -= damage;
+        if(health <= 0)
+        {
+            Death();
+        }
     }
 }
