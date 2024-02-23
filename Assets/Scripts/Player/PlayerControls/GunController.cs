@@ -108,14 +108,14 @@ public class GunController : MonoBehaviour , ISprintResponse
                     }
                 }
             }
-            if (Input.GetKeyDown(KeyCode.G) && playerStats.playerGrenades != 0) //Throw grenade
-            {               
-                playerStats.playerGrenades -= 1;
-                _onGrenadeEvent.Invoke();
-                GameObject newGrenade = Instantiate(grenade, transform.position, transform.rotation);
-                newGrenade.GetComponent<Rigidbody>().AddForce(( (Camera.main.transform.forward * 10f) + (Camera.main.transform.up * 6f) ), ForceMode.Impulse);
-                newGrenade.GetComponent<Grenade>().StartGrenadeTimer();
-            }
+            //if (Input.GetKeyDown(KeyCode.G) && playerStats.playerGrenades != 0) //Throw grenade
+            //{               
+            //    playerStats.playerGrenades -= 1;
+            //    _onGrenadeEvent.Invoke();
+            //    GameObject newGrenade = Instantiate(grenade, transform.position, transform.rotation);
+            //    newGrenade.GetComponent<Rigidbody>().AddForce(( (Camera.main.transform.forward * 10f) + (Camera.main.transform.up * 6f) ), ForceMode.Impulse);
+            //    newGrenade.GetComponent<Grenade>().StartGrenadeTimer();
+            //}
             
         }
 
