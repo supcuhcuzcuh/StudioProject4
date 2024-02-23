@@ -78,6 +78,7 @@ public class GunController : MonoBehaviour , ISprintResponse
                 if (Physics.Raycast(rayOrigin, Camera.main.transform.forward, out hit, 1000))
                 {
                     GameObject hitObject = hit.collider.gameObject;
+                    Debug.Log(hitObject.name);
                     if (hitObject.tag == "Weapon")
                     {
                         Camera.main.transform.DetachChildren();
@@ -87,24 +88,26 @@ public class GunController : MonoBehaviour , ISprintResponse
                             currWeapon = null;
                         }                        
                         currWeapon = hitObject.GetComponent<Weapon>();
+                        currWeapon.GetComponent<HitscanWeapon>().dirShoot = Camera.main.transform;
 
                         currWeapon.SetWeapon();
                         _onSwapEvent.Invoke();
                     }
-                else if (hitObject.tag == "ENEMY_WEAPON")
-                {
-                    Camera.main.transform.DetachChildren();
-                    if (currWeapon != null)
+                    else if (hitObject.tag == "ENEMY_WEAPON")
                     {
-                        currWeapon.UnsetWeapon();
-                        currWeapon = null;
-                    }
-                    currWeapon = hitObject.GetComponent<Weapon>();
+                        Camera.main.transform.DetachChildren();
+                        if (currWeapon != null)
+                        {
+                            currWeapon.UnsetWeapon();
+                            currWeapon = null;
+                        }
+                        currWeapon = hitObject.GetComponent<Weapon>();
+                        currWeapon.GetComponent<HitscanWeapon>().dirShoot = Camera.main.transform;
 
-                    currWeapon.SetWeapon();
-                    _onSwapEvent.Invoke();
+                        currWeapon.SetWeapon();
+                        _onSwapEvent.Invoke();
+                    }
                 }
-            }
             }
             if (Input.GetKeyDown(KeyCode.G) && playerStats.playerGrenades != 0) //Throw grenade
             {               

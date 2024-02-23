@@ -5,6 +5,7 @@ using UnityEngine.AI;
 
 public class SecurityGuardAlertState : State
 {
+    [SerializeField] private GameObject root;
     [Header("Target to detect during raycast")]
     [SerializeField] private RayDetector playerDetector;
     [SerializeField] private GameObject target;
@@ -18,43 +19,52 @@ public class SecurityGuardAlertState : State
     public SecurityGuardDefenseState defenseState;
     public bool isOutOfSight;
 
-    private WaypointsTracker _destinationTracker;
+    [SerializeField] private WaypointsTracker destinationTracker;
+    [SerializeField] private Rigidbody rb;
 
     private void Start()
     {
         _timer = 0;
-        _destinationTracker = transform.root.GetComponent<WaypointsTracker>();
     }
     public override State PlayCurrentState()
     {
-        if (transform.root.GetComponent<BaseEnemy>().GetHealth() <= 0.0f)
+        if (enemy.GetHealth() <= 0.0f)
         {
-            transform.root.GetComponent<BaseEnemy>().enemyWeapon.transform.parent = null;
-            transform.root.GetComponent<BaseEnemy>().EnableWeaponPhysics();
+            enemy.enemyWeapon.transform.parent = null;
+            enemy.EnableWeaponPhysics();
             return deadState;
         }
-        //if (!playerDetector.IsDetected())
-        //{
-
-        //    _timer = 0.0f;
-        //    transform.root.GetComponent<BaseEnemy>().enemyAnimator.SetBool("isAlert", false);
-        //    return patrolState;
-        //}
-        if (!playerDetector.IsSurroundingDetected())
+        if (!playerDetector.IsDetected())
         {
             _timer = 0.0f;
-            transform.root.GetComponent<BaseEnemy>().enemyAnimator.SetBool("isAlert", false);
+            enemy.enemyAnimator.SetBool("isAlert", false);
+            enemy.enemyAnimator.CrossFade("Guard_Walk", 0.5f);
             return patrolState;
         }
+        //if (!playerDetector.IsSurroundingDetected())
+        //{
+        //    _timer = 0.0f;
+        //    enemy.enemyAnimator.SetBool("isAlert", false);
+        //    return patrolState;
+        //}
         else
         {
-            transform.root.GetComponent<BaseEnemy>().enemyAnimator.SetBool("isAlert", true);
+            float distFromPlayer = Vector3.Distance(target.transform.position, root.transform.position);
+            enemy.enemyAnimator.SetBool("isAlert", true);
             _timer += Time.deltaTime * 2.0f;
-            _destinationTracker.agent.ResetPath(); // Stop current path
-            transform.root.GetComponent<Rigidbody>().velocity = Vector3.zero;
+            destinationTracker.agent.ResetPath(); // Stop current path
+            rb.velocity = Vector3.zero;
             if (_timer >= toDefenseTime)    
             {
-                transform.root.GetComponent<BaseEnemy>().enemyAnimator.SetBool("isDefense", true);
+                if (distFromPlayer > 5.0f)
+                {
+                    enemy.enemyAnimator.SetBool("isStandShooting", true);
+                }
+                else
+                {
+                    enemy.enemyAnimator.SetBool("isDefense", true);
+                    //enemy.enemyAnimator.SetBool("isAlert", false);
+                }   
                 return defenseState;
             }
             return this;

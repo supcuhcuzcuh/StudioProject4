@@ -9,8 +9,8 @@ public abstract class BaseEnemy :  Entity
     public Animator enemyAnimator;
 
     [Header("Base Enemy Variables")]
-    //public float health;
-    public float hitsToDie;
+    ////public float health;
+    //public float hitsToDie;
 
     [SerializeField] private SecurityGuardPatrolState _patrolState;
     private StateManager _stateMachine;

@@ -79,5 +79,4 @@ public class FPSControls : Entity   //Main Controller for all player movements, 
         health -= _damage;
         playerStatsUIManager.UpdateHealthUI(health.ToString());
     }
-
 }

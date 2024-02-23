@@ -27,7 +27,6 @@ public class StateManager : MonoBehaviour
         if (currentState == _deadState)
         {
             _thisComponent.enabled = false;
-            Debug.Break();
         }
         else
         {

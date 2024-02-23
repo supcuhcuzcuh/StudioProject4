@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6030487325530898448}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Assault_Rifle_Muzzle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -47,7 +47,7 @@ GameObject:
   - component: {fileID: 6030487326878818277}
   - component: {fileID: 6030487326878818278}
   - component: {fileID: 4341125296935648288}
-  m_Layer: 6
+  m_Layer: 13
   m_Name: Assault_Rifle_Parent
   m_TagString: Weapon
   m_Icon: {fileID: 0}
@@ -61,8 +61,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6030487326878818280}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.84, z: -0.09000015}
+  m_LocalRotation: {x: -0.5, y: 0.5, z: 0.5, w: 0.5}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -70,7 +70,7 @@ Transform:
   - {fileID: 6030487325530898448}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 90, z: 0}
 --- !u!114 &6030487326878818279
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -427,6 +427,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Assault_Rifle_Model
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 46f41875d6de88548bedde7321134240,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 46f41875d6de88548bedde7321134240, type: 3}

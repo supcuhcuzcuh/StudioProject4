@@ -97,6 +97,5 @@ public class PlayerStatsUIManager : MonoBehaviour, IShootResponse
     public void UpdateHealthUI(string _health)
     {
         playerHealthCount.text = _health;
-      
     }
 }

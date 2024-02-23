@@ -4328,7 +4328,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &955146031
 GameObject:
@@ -5305,6 +5305,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70c208820b1766546954facc43aa62f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!54 &1279194643 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 4630609073577004628, guid: 3a1a880e125ebc945b50d4722dea3538,
+    type: 3}
+  m_PrefabInstance: {fileID: 2084089089}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1283237165
 GameObject:
   m_ObjectHideFlags: 0
@@ -7823,6 +7829,11 @@ PrefabInstance:
       propertyPath: playerStatsUIManager
       value: 
       objectReference: {fileID: 1529400954}
+    - target: {fileID: 4630609073577004654, guid: 3a1a880e125ebc945b50d4722dea3538,
+        type: 3}
+      propertyPath: rb
+      value: 
+      objectReference: {fileID: 1279194643}
     - target: {fileID: 5530613316632514566, guid: 3a1a880e125ebc945b50d4722dea3538,
         type: 3}
       propertyPath: currWeapon
@@ -7949,16 +7960,6 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 1279194620}
-    - target: {fileID: 4060764752719546610, guid: a88414a18742f5d428b49796496a6c0a,
-        type: 3}
-      propertyPath: enemyAmmoText
-      value: 
-      objectReference: {fileID: 1687895614}
-    - target: {fileID: 4060764752719546610, guid: a88414a18742f5d428b49796496a6c0a,
-        type: 3}
-      propertyPath: distFromPlayerText
-      value: 
-      objectReference: {fileID: 520988530}
     - target: {fileID: 4060764752719546611, guid: a88414a18742f5d428b49796496a6c0a,
         type: 3}
       propertyPath: toCompare

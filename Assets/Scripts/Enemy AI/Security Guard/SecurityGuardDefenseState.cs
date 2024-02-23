@@ -2,6 +2,8 @@ using UnityEngine;
 using System.Threading.Tasks;
 public class SecurityGuardDefenseState : State
 {
+    [SerializeField] private GameObject root;
+    [SerializeField] private RayDetector playerDetector;
     [SerializeField] private WaitForReload reloadEvent;
     [Header("Target / Player")]
     [SerializeField] private GameObject target;
@@ -10,8 +12,7 @@ public class SecurityGuardDefenseState : State
     public SecurityGuardPatrolState patrolState;
     public bool isDead = false;
 
-    private BaseEnemy _enemyRef;
-    private WaypointsTracker _destinationTracker;
+    [SerializeField] private WaypointsTracker destinationTracker;
     private RayDetector _rayDetector;
 
     private float _nextTimeToShoot;
@@ -22,80 +23,95 @@ public class SecurityGuardDefenseState : State
 
     private void Start()
     {
-        _enemyRef = transform.root.GetComponent<BaseEnemy>();
-        _destinationTracker = transform.root.GetComponent<WaypointsTracker>();
         _rayDetector = GetComponent<RayDetector>();
     }
     public override State PlayCurrentState()
     {
-        float distFromPlayer = Vector3.Distance(target.transform.position, transform.root.transform.position);
+        float distFromPlayer = Vector3.Distance(target.transform.position, root.transform.position);
         if (distFromPlayerText.text != null)
         {
             distFromPlayerText.text = "DISTANCE FROM PLAYER: " + distFromPlayer;
         }
 
-        if (transform.root.GetComponent<BaseEnemy>().GetHealth() <= 0.0f)
+        if (enemy.GetHealth() <= 0.0f)
         {
-            transform.root.GetComponent<BaseEnemy>().SetHealth(0.0f);
-            transform.root.GetComponent<BaseEnemy>().enemyAnimator.SetBool("isDefense", false);
-            transform.root.GetComponent<BaseEnemy>().enemyWeapon.transform.parent = null;
-            transform.root.GetComponent<BaseEnemy>().EnableWeaponPhysics();
+            enemy.SetHealth(0.0f);
+            enemy.enemyAnimator.SetBool("isDefense", false);
+            enemy.enemyWeapon.transform.parent = null;
+            enemy.EnableWeaponPhysics();
             return deadState;
         }
-        else if (distFromPlayer > 25.0f)
+        if (distFromPlayer > 13.0f)
         {
-            transform.root.GetComponent<BaseEnemy>().enemyAnimator.SetBool("isDefense", false);
+            enemy.enemyAnimator.SetBool("isDefense", false);
+            enemy.enemyAnimator.SetBool("isStandShooting", false);
+            enemy.enemyAnimator.SetBool("isAlert", false);
+            enemy.enemyAnimator.SetBool("isReload", false);
+            enemy.enemyAnimator.SetBool("isPatrol", true);
+            enemy.enemyAnimator.CrossFade("Guard_Walk", 0.5f);
+            destinationTracker.ActivateWaypoints();
+            //enemy.enemyAnimator.SetBool("isAlert", false);
+            //enemy.enemyAnimator.SetBool("isDefense", false);
+            //enemy.enemyAnimator.CrossFade("Guard_Walk", 0.5f);
+            //destinationTracker.ActivateWaypoints();
             return patrolState;
         }
         else
         {
-            Debug.Log(transform.root.GetComponent<BaseEnemy>().enemyWeapon.clipSizeCurr);
-            enemyAmmoText.text = "ENEMY AMMO: " + transform.root.GetComponent<BaseEnemy>().enemyWeapon.clipSizeCurr;
+            //if (!playerDetector.IsDetected())
+            //{
+            //    enemy.enemyAnimator.SetBool("isDefense", false);
+            //    enemy.enemyAnimator.SetBool("isStandShooting", false);
+            //    enemy.enemyAnimator.SetBool("isAlert", false);
+            //    enemy.enemyAnimator.SetBool("isReload", false);
+            //    enemy.enemyAnimator.SetBool("isPatrol", true);
+            //    enemy.enemyAnimator.CrossFade("Guard_Walk", 0.5f);
+            //    //enemy.enemyAnimator.SetBool("isAlert", false);
+            //    destinationTracker.ActivateWaypoints();
+            //    return patrolState;
+            //}
+            enemy.enemyAnimator.SetBool("isDefense", true);
+            enemyAmmoText.text = "ENEMY AMMO: " + enemy.enemyWeapon.clipSizeCurr;
             var targetPos = target.transform.position;
             targetPos.y = transform.position.y;
             transform.root.LookAt(targetPos);
             Debug.Log("TARGET IS : " + target.name);
-            _destinationTracker.agent.SetDestination(target.transform.position);
 
-            transform.root.GetComponent<BaseEnemy>().enemyAnimator.SetBool("isDefense", true);
+            destinationTracker.agent.SetDestination(target.transform.position);
 
-            if (_rayDetector)
-            {
-                Debug.Log("SHOOTING PLAYING");
-            }
-
-            if (_enemyRef != null)
-            {
-                _enemyRef.rb.velocity = Vector3.zero;
+            if (enemy != null)
+            {       
+                enemy.rb.velocity = Vector3.zero;
             }
 
             if (distFromPlayer < 5.0f) // Check if enemy close to play, then play stand shooting animation
             {
-                _destinationTracker.agent.ResetPath(); // Stop enemy from moving
+                destinationTracker.agent.ResetPath(); // Stop enemy from moving 
 
                 if ( Time.time > _nextTimeToShoot)  //Main action for shooting
                 {
                     // set cooldown delay
                     if (!reloadEvent.isReloading)
                     {
-                        transform.root.GetComponent<BaseEnemy>().enemyWeapon.OnMouse1();
+                        enemy.enemyWeapon.OnMouse1();
                     }
-                    if (transform.root.GetComponent<BaseEnemy>().enemyWeapon.clipSizeCurr <= 0)
+                    if (enemy.enemyWeapon.clipSizeCurr <= 0)
                     {
-                        transform.root.GetComponent<BaseEnemy>().enemyAnimator.SetTrigger("isReload");
-                        transform.root.GetComponent<BaseEnemy>().enemyWeapon.clipSizeCurr = transform.root.GetComponent<BaseEnemy>().enemyStats.playerAmmo;
-                        Debug.Log("ENENMY STAT PLAYER AMMO IS : " + transform.root.GetComponent<BaseEnemy>().enemyStats.playerAmmo);
+                        enemy.enemyAnimator.SetTrigger("isReload");
+                        enemy.enemyWeapon.clipSizeCurr = enemy.enemyStats.playerAmmo;
+                        Debug.Log("ENENMY STAT PLAYER AMMO IS : " + enemy.enemyStats.playerAmmo);
                     }
-                    _nextTimeToShoot = Time.time + transform.root.GetComponent<BaseEnemy>().enemyWeapon.cooldownWindow;
+                    _nextTimeToShoot = Time.time + enemy.enemyWeapon.cooldownWindow;
                 }
 
-                transform.root.GetComponent<BaseEnemy>().enemyAnimator.SetBool("isStandShooting", true);
+                enemy.enemyAnimator.SetBool("isStandShooting", true);
             }   
             else 
             {
-                transform.root.GetComponent<BaseEnemy>().enemyAnimator.SetBool("isStandShooting", false);
+                enemy.enemyAnimator.SetBool("isStandShooting", false);
             }
             return this;
+ 
         }
     }
 }
